@@ -117,7 +117,8 @@ classes (`.quoteblock`, `.verseblock`). */
 /* blockquote {} */
 
 /* LISTS: Square bullets for ul. Dotted decimal counters for ol
- (1., 1.1., ...). Both indented in whole character cells. */
+ (1., 1.1., ...). Top-level markers sit flush with the left margin, aligned
+ with regular paragraphs (as in The Monospace Web); only nested lists indent. */
 
 ul, ol {
   margin: 0 0 var(--line-height);
@@ -126,7 +127,6 @@ ul, ol {
 
 ul {
   list-style-type: square;
-  padding-left: 2ch;
 }
 
 ol {

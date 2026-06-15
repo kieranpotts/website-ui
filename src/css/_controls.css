@@ -143,3 +143,41 @@ label select,
 label textarea {
   width: 100%;
 }
+
+/* DISCLOSURE (details / summary)
+ *
+ * A collapsible region in a bordered box. The summary is the always-visible
+ * toggle; its marker is a triangle that points right when closed and down when
+ * open. When open, the summary is separated from the revealed content by one
+ * line of the grid. */
+details {
+  margin-bottom: var(--line-height);
+  padding: calc(var(--line-height) - var(--border-thickness)) 1ch;
+  border: var(--border-thickness) solid var(--color\=border);
+}
+
+summary {
+  /* `_resets.css` sets summary to `display: block`, which removes its marker
+  box; restore `list-item` so the disclosure triangle (below) can render. */
+  display: list-item;
+  font-weight: var(--font-weight\=medium);
+  cursor: pointer;
+}
+
+details[open] summary {
+  margin-bottom: var(--line-height);
+}
+
+/* Replace the native disclosure triangle with grid-friendly glyphs. */
+details ::marker {
+  content: "▶ ";
+}
+
+details[open] ::marker {
+  content: "▼ ";
+}
+
+/* The last revealed block sits flush with the box's bottom padding. */
+details :last-child {
+  margin-bottom: 0;
+}

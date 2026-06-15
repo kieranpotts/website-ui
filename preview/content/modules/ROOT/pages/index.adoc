@@ -418,44 +418,32 @@ https://owickstrom.github.io/the-monospace-web/[The Monospace Web^] to exercise
 interactive and grid-aligned UI. They are emitted as raw HTML via AsciiDoc
 passthrough blocks, since AsciiDoc has no native syntax for form controls.
 
-=== Disclosure widget
-
-++++
-<details>
-  <summary>A short summary of the contents</summary>
-  <p>Hidden gems.</p>
-</details>
-++++
-
 === Tree component
 
-A filesystem listing drawn with box-drawing borders:
+A filesystem listing drawn with literal box-drawing characters:
 
-++++
-<ul class="tree">
-  <li>
-    <p style="margin: 0;"><strong>/dev/nvme0n1p2</strong></p>
-    <ul>
-      <li>usr
-        <ul>
-          <li>local</li>
-          <li>share</li>
-          <li>bin</li>
-          <li>games
-            <ul>
-              <li>solitaire</li>
-              <li>chess</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>media</li>
-      <li>run</li>
-      <li>tmp</li>
-    </ul>
-  </li>
-</ul>
-++++
+[listing]
+....
+/dev/nvme0n1p2
+├── usr
+│   ├── local
+│   ├── share
+│   ├── libexec
+│   ├── include
+│   ├── sbin
+│   ├── src
+│   ├── lib64
+│   ├── lib
+│   ├── bin
+│   ├── games
+│   │   ├── solitaire
+│   │   ├── snake
+│   │   └── tic-tac-toe
+│   └── media
+├── media
+├── run
+└── tmp
+....
 
 === Buttons
 
@@ -511,6 +499,22 @@ A filesystem listing drawn with box-drawing borders:
     <textarea placeholder="Type your message..."></textarea>
   </label>
 </form>
+++++
+
+=== Disclosure widget
+
+A `details`/`summary` pair: a collapsible region the reader can open and close.
+The first one is collapsed; the second is open by default.
+
+++++
+<details>
+  <summary>A short summary of the contents</summary>
+  <p>Hidden gems. This content is revealed when the disclosure is opened.</p>
+</details>
+<details open>
+  <summary>This one starts open</summary>
+  <p>Its contents are visible until the reader collapses it.</p>
+</details>
 ++++
 
 === Grids
