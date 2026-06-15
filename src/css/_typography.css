@@ -1,191 +1,47 @@
 /**
- * Typography
+ * TYPOGRAPHY
+ *
+ * This layer sets the base typographic styles, independent of the location
+ * of text within the layout or within reusable components. For this reason,
+ * this layer sets only bare element selectors: h1, p, ul, table...
+ *
+ * Both a vertical and horizontal rhythm is established based around font size:
+ *
+ *   - VERTICAL RHYTHM: The `--line-height` property sets the box height for
+ *     lines of text, nd every vertical margin is a multiple of it: 1x, 1.5x,
+ *     2x. The owl selector (`* + *`) is used to add consistent spacing between
+ *     sibling elements: every flow element is given, by default, a top margin
+ *     equivalent to the space of one line of text. Specific elements may
+ *     override with larger multiples. The result is text that sits on a
+ *     consistent baseline grid.
+ *
+ *   - HORIZONTAL GRID: Because the body text is rendered in a monospace font,
+ *     a horizontal rhythm can be established by using `ch` (one character width)
+ *     for horizontal measures. Indents and padding align to whole character
+ *     cells. In `_layout.css`, the width of the main content is also snapped
+ *     to a whole number of characters.
  */
 
-/* Sans-serif fonts */
+/* BASE TEXT */
 
 body {
   font-family: var(--font-family\=default);
   font-weight: var(--font-weight\=normal);
-  line-height: 1.6;
+  line-height: var(--line-height);
 }
 
-/*h1, h2,*/ h3, h4, h5, h6,
-b, strong, dfn, optgroup {
+/* Consecutive flow elements are separated by exactly one line. Elements that
+need more breathing room override `margin-top`, below. */
+* + * {
+  margin-top: var(--line-height);
+}
+
+strong, b, dfn {
   font-weight: var(--font-weight\=bold);
 }
 
-optgroup option {
-  font-weight: var(--font-weight\=normal);
-}
-
-svg text {
-  /* Labels in inline graphics are always bold. */
-  font-weight: var(--font-weight\=bold);
-}
-
-h1 { font-size: var(--font-size\=xxl); }
-h2 { font-size: var(--font-size\=xl); }
-h3 { font-size: var(--font-size\=lg); }
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-}
-
-h1 { letter-spacing: -0.05rem; }
-
-h1:not(:last-child) { margin-bottom: calc(var(--spacing) / 4); }
-@media screen and (min-width: 62.5rem) { /* 1000px */
-  h1:not(:last-child) { margin-bottom: calc(var(--spacing) / 2); }
-}
-
-h1 {
-  /* Small visual tweak. */
-  margin-left: -2px;
-}
-
-h2 {
-  margin-top: var(--spacing);
-  margin-bottom: calc(var(--spacing) / 2);
-}
-@media screen and (min-width: 37.5rem) { /* 600px */
-  h2 {
-    margin-top: var(--spacing\@sm);
-    margin-bottom: var(--spacing);
-  }
-}
-@media screen and (min-width: 62.5rem) { /* 1000px */
-  h2 {
-    margin-top: var(--spacing\@lg);
-    margin-bottom: var(--spacing);
-  }
-}
-
-h3 {
-  margin-top: var(--spacing);
-  margin-bottom: calc(var(--spacing) / 2);
-}
-
-h2:first-child, h3:first-child {
-  margin-top: 0;
-}
-
-p:not(:last-child),
-ul:not(:last-child),
-ol:not(:last-child) {
-  margin-bottom: calc(var(--spacing) / 2);
-}
-
-#content > p:first-child {
-  margin-bottom: var(--spacing);
-}
-@media screen and (min-width: 37.5rem) { /* 600px */
-  #content > p:first-child {
-    margin-bottom: var(--spacing\@sm);
-  }
-}
-@media screen and (min-width: 62.5rem) { /* 1000px */
-  #content > p:first-child {
-    margin-bottom: var(--spacing\@lg);
-  }
-}
-
-li {
-  margin-bottom: calc(var(--spacing) / 4);
-  padding-left: 1em;
-  position: relative;
-}
-
-li:last-child {
-  margin-bottom: 0;
-}
-
-li::before {
-  color: var(--color\=bullet);
-  content: '\25aa'; /* em-dash */
-  left: 0;
-  position: absolute;
-}
-
-ol {
-  counter-reset: main-ol-counter;
-  list-style-type: none;
-}
-
-ol li {
-  counter-increment: main-ol-counter;
-}
-
-ol li::before {
-  content: counter(main-ol-counter);
-}
-
-blockquote {
-  margin-bottom: var(--spacing);
-  margin-top: var(--spacing);
-  padding-left: calc(var(--spacing) / 2);
-  padding-right: calc(var(--spacing) / 2);
-}
-@media screen and (min-width: 37.5rem) { /* 600px */
-  blockquote {
-    padding-left: var(--spacing);
-    padding-right: var(--spacing);
-  }
-}
-
-blockquote p:not(:last-child) {
+em, i {
   font-style: italic;
-  margin-bottom: calc(var(--spacing) / 4);
-}
-
-figure {
-  margin-bottom: var(--spacing);
-  margin-top: var(--spacing);
-}
-
-figure img {
-  margin: 0 auto;
-}
-
-figcaption {
-  text-align: center;
-}
-
-figcaption:first-child {
-  margin-bottom: calc(var(--spacing) / 2);
-}
-
-figcaption:last-child {
-  margin-top: calc(var(--spacing) / 2);
-}
-
-table {
-  border-color: var(--color\=border);
-  border-style: solid;
-  border-width: 1px;
-  padding: 0.5rem;
-}
-
-table thead th {
-  border-bottom-width: 2px;
-  font-weight: var(--font-weight\=bold);
-}
-
-hr {
-  margin-top: var(--spacing);
-  margin-bottom: var(--spacing);
-}
-@media screen and (min-width: 37.5rem) { /* 600px */
-  hr {
-    margin-bottom: var(--spacing\@sm);
-    margin-top: var(--spacing\@sm);
-  }
-}
-@media screen and (min-width: 62.5rem) { /* 1000px */
-  hr {
-    margin-bottom: var(--spacing\@lg);
-    margin-top: var(--spacing\@lg);
-  }
 }
 
 small,
@@ -193,30 +49,221 @@ small,
   color: var(--color\=text\|light);
 }
 
+/* Subscript/superscript are nudged so they do not disturb the line box,
+preserving the baseline grid. */
+sub {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  vertical-align: sub;
+  line-height: 0;
+  font-size: 0.75rem;
+}
+
+/* HEADINGS: Uppercase, bold, and spaced in whole lines. h1 occupies a double
+line box, so it still lands on the grid at its larger size. */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight\=bold);
+  line-height: var(--line-height);
+  /* Two lines above, one below — the reference's heading rhythm. */
+  margin: calc(var(--line-height) * 2) 0 var(--line-height);
+}
+
+h1 {
+  font-size: var(--font-size\=xxl);
+  line-height: calc(var(--line-height) * 2);
+  margin-bottom: calc(var(--line-height) * 2);
+  text-transform: uppercase;
+  letter-spacing: -0.05rem;
+}
+
+h2 {
+  font-size: var(--font-size\=xl);
+  text-transform: uppercase;
+}
+
+h3 { font-size: var(--font-size\=lg); }
+
+/* The first heading in the flow should not push down from the top. */
+h1:first-child,
+h2:first-child,
+h3:first-child {
+  margin-top: 0;
+}
+
+/* FLOW BLOCKS */
+
+p {
+  margin-bottom: var(--line-height);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* A horizontal rule rendered as a double line sitting on the grid, rather than
+a hairline. */
+hr {
+  position: relative;
+  display: block;
+  height: var(--line-height);
+  margin: calc(var(--line-height) * 1.5) 0;
+  border: none;
+  color: var(--color\=border);
+}
+
+hr::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(var(--line-height) / 2 - var(--border-thickness));
+  left: 0;
+  width: 100%;
+  height: 0;
+  border-top: calc(var(--border-thickness) * 3) double currentColor;
+}
+
+blockquote {
+  margin: var(--line-height) 0;
+  padding-left: 2ch;
+  border-left: var(--border-thickness) solid var(--color\=border);
+}
+
+blockquote p:not(:last-child) {
+  font-style: italic;
+}
+
+/* LISTS: Square bullets for ul. Dotted decimal counters for ol
+ (1., 1.1., ...). Both indented in whole character cells. */
+
+ul, ol {
+  margin: 0 0 var(--line-height);
+  padding: 0;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 2ch;
+}
+
+ol {
+  list-style-type: none;
+  counter-reset: item;
+}
+
+/* Nested lists indent a further three cells
+and carry no extra vertical gap. */
+ol ul,
+ol ol,
+ul ol,
+ul ul {
+  margin: 0;
+  padding-left: 3ch;
+}
+
+ol li::before {
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+  font-weight: var(--font-weight\=medium);
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li::marker {
+  line-height: 0;
+}
+
+/* IMAGES & FIGURES */
+
+img, video {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+img {
+  /* Alt text, shown if the image fails to load, reads as a caption. */
+  font-style: italic;
+  color: var(--color\=text\|light);
+}
+
+figure {
+  margin: calc(var(--line-height) * 2) 3ch;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+figcaption {
+  display: block;
+  font-style: italic;
+  margin-top: var(--line-height);
+  text-align: center;
+}
+
+/* TABLES: Full-width, snapped to whole cells, with the grid's border thickness
+on every edge and padding computed so cell text stays on the line grid. */
+
+table {
+  position: relative;
+  top: calc(var(--line-height) / 2);
+  width: calc(round(down, 100%, 1ch));
+  border-collapse: collapse;
+  margin: 0 0 calc(var(--line-height) * 2);
+}
+
+th, td {
+  border: var(--border-thickness) solid var(--color\=border);
+  padding:
+    calc(var(--line-height) / 2)
+    calc(1ch - var(--border-thickness) / 2)
+    calc(var(--line-height) / 2 - var(--border-thickness));
+  line-height: var(--line-height);
+  vertical-align: top;
+  text-align: left;
+}
+
+table tbody tr:first-child > * {
+  padding-top: calc(var(--line-height) / 2 - var(--border-thickness));
+}
+
+th {
+  font-weight: var(--font-weight\=bold);
+}
+
+/* LINKS */
+
 a {
   color: var(--color\=hyperlink\|default);
   text-decoration: underline;
   text-decoration-color: var(--color\=hyperlink\|underline);
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
 }
 
 a:visited { color: var(--color\=hyperlink\|visited); }
 a:hover { color: var(--color\=hyperlink\|hover); }
 a:focus { color: var(--color\=hyperlink\|focus); }
-a:active { color: var(--color\=hyperlink\|active); /* outline: none; */ }
+a:active { color: var(--color\=hyperlink\|active); }
 
-/* Monospace fonts */
+/* CODE */
 
-/* Inline code uses the same font as surrounding text. */
 pre {
   font-family: var(--font-family\=monospace);
+  margin: var(--line-height) 0;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
-pre, code {
-  font-weight: var(--font-weight\=bold);
+/* Code inside a figure aligns to the figure's own margins. */
+figure pre {
+  margin: 0;
 }
 
-pre {
-  line-height: 1.2;
+code {
+  font-weight: var(--font-weight\=medium);
 }

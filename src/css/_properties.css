@@ -1,8 +1,24 @@
 /**
- * Custom properties.
+ * CUSTOM PROPERTIES (DESIGN TOKENS)
+ *
+ * The single source of truth for the theme's colors, fonts, grid unit, and
+ * spacing. Other layers consume these via var() and should not hard-code
+ * equivalent literals.
+ *
+ * Naming convention: tokens read as `--<group>=<name>|<part>`, with `=` and `|`
+ * escaped (`\=`, `\|`) since they are not normally valid in identifiers. The
+ * `\@<bp>` suffix denotes a breakpoint-specific value (eg. `\@sm`). This makes
+ * a token's group/role/variant legible at-a-glance, and groups related tokens
+ * together alphabetically.
+ *
+ * The :root block also sets the font-rendering defaults that give JetBrains
+ * Mono its intended appearance.
  */
 
 :root {
+  font-optical-sizing: auto;
+  font-variant-numeric: tabular-nums lining-nums;
+
 
   /* Colors */
 
@@ -36,10 +52,6 @@
 
   /* Fonts */
 
-  /* The iA Writer font family consists of proportional fonts that _look_ like
-  monospace fonts. We must use a true monospace font for preformatted text
-  and code blocks. https: //ia.net/topics/in-search-of-the-perfect-writing-font */
-
   --font-family\=default: 'JetBrains Mono', ui-monospace, monospace;
   --font-family\=monospace: 'JetBrains Mono', ui-monospace, monospace;
 
@@ -68,6 +80,16 @@
 
   --font-size\=monospace\|block: 1.6rem;
   --font-size\=monospace\|inline: 100%;
+
+  /* Grid rhythm: `--line-height` is the single vertical rhythm unit. Every
+  vertical margin is  a multiple of it. It is expressed in `rem`, so it scales
+  with the responsive root font-size ladder below. It means the vertical rhythm
+  stays consistent through breakpoints (just proportionally larger with the base
+  font size). `--border-thickness` is the grid's hairline, used by rules,
+  tables, and form controls. */
+
+  --line-height: 2.5rem;
+  --border-thickness: 2px;
 
   /* Spacing */
 

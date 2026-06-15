@@ -1,8 +1,27 @@
 /**
- * Layout
+ * LAYOUT
  */
 
-.MAIN {}
+/*
+ * PAGE CENTERING: `round(down, 100%, 1ch)` snaps the column to a whole number
+ * of character cells, so content aligns to the monospace grid – see
+ * `_typography.css` for an explanation.
+ */
+
+body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.MAIN {
+  position: relative;
+  width: 100%;
+  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  padding: var(--line-height, 1.6rem) 2ch;
+  overflow-x: hidden;
+}
 
 .HEADER {}
 
