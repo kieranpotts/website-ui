@@ -57,3 +57,25 @@
   font-style: normal;
   font-display: swap;
 }
+
+/*
+ * Inconsolata (monospace). The family ships no italic faces, so italics are
+ * left to the browser's synthesised oblique. Currently used for both body and
+ * code (see the font tokens in site.css).
+ */
+
+@font-face {
+  font-family: Inconsolata;
+  src: url("../font/Inconsolata-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inconsolata;
+  src: url("../font/Inconsolata-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

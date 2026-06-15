@@ -2,8 +2,8 @@
  * site.css — the theme's single entry stylesheet.
  *
  * Deliberately minimal: a clean, readable single-column reading layout built
- * from a blank slate, typeset in iA Writer. Add component styles below the
- * base layer as the design develops.
+ * from a blank slate. Add component styles below the base layer as the design
+ * develops. (Currently typeset in Inconsolata — see the font tokens.)
  */
 
 @import url("fonts.css");
@@ -13,8 +13,11 @@
  * ======================================================================== */
 
 :root {
-  --font-body: "iA Writer Quattro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "iA Writer Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Trying Inconsolata everywhere (body + code). To revert to the iA Writer
+     pairing, restore "iA Writer Quattro" for body and "iA Writer Mono" for the
+     mono stack. */
+  --font-body: Inconsolata, ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-mono: Inconsolata, ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --color-fg: #1a1a1a;
   --color-fg-muted: #6a6a6a;

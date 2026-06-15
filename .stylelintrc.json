@@ -6,7 +6,7 @@
     "comment-empty-line-before": null,
     "value-keyword-case": [
       "lower",
-      { "ignoreKeywords": ["BlinkMacSystemFont", "Menlo", "Consolas", "optimizeLegibility"] }
+      { "ignoreKeywords": ["Inconsolata", "Menlo", "Consolas", "optimizeLegibility"] }
     ],
     "no-descending-specificity": null
   }
