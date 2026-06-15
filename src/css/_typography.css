@@ -30,10 +30,11 @@ body {
   line-height: var(--line-height);
 }
 
+/* TODO: Temporarily disabled. */
 /* Consecutive flow elements are separated by exactly one line. Elements that
 need more breathing room override `margin-top`, below. */
 * + * {
-  margin-top: var(--line-height);
+  /*margin-top: var(--line-height);*/
 }
 
 strong, b, dfn {
