@@ -1,0 +1,3 @@
+* xref:index.adoc[Home]
+* xref:sub/page.adoc[A nested section]
+** xref:sub/deep.adoc[A deeper page]

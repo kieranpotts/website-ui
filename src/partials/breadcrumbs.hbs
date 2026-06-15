@@ -1,0 +1,25 @@
+{{!--
+  Breadcrumb trail. Two deliberate departures from a stock breadcrumb:
+  1. The leading component-title crumb is dropped (it duplicated the brand).
+  2. On the home page the trail is suppressed entirely, and the wrapping <nav>
+     is omitted, so no empty element is emitted.
+  The full trail is shown without collapsing: deeply nested pages render every
+  ancestor as a clickable link (internal crumbs that resolve to a URL).
+--}}
+{{#unless page.home}}
+{{#if page.breadcrumbs}}
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    {{#each page.breadcrumbs}}
+    <li>
+    {{~#if (and ./url (eq ./urlType 'internal'))~}}
+    <a href="{{{relativize ./url}}}">{{{./content}}}</a>
+    {{~else~}}
+    {{{./content}}}
+    {{~/if~}}
+    </li>
+    {{/each}}
+  </ul>
+</nav>
+{{/if}}
+{{/unless}}

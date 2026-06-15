@@ -1,0 +1,45 @@
+= Website UI Preview
+:page-home: true
+
+This page exercises the theme's typography and components so the UI can be
+developed standalone.
+
+== Headings and prose
+
+A short paragraph with _italic_, *bold*, and `inline code`. A link to an
+xref:sub/page.adoc[internal page] and to https://kieranpotts.com[an external
+site].
+
+=== A third-level heading
+
+[quote]
+A block quotation, set apart with a rule and muted text.
+
+== Lists
+
+* First item
+* Second item
+** Nested item
+* Third item
+
+. Ordered one
+. Ordered two
+
+== Code
+
+[source,js]
+----
+function greet (name) {
+  return `Hello, ${name}!`
+}
+----
+
+== Table
+
+[cols="1,2"]
+|===
+| Key | Value
+
+| Alpha | The first entry
+| Beta  | The second entry
+|===

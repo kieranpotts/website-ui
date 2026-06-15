@@ -1,0 +1,59 @@
+/*
+ * iA Writer typeface family.
+ *
+ * - Quattro (proportional) for body text.
+ * - Mono for code.
+ * - Duo is bundled but unused by default; available if a monospaced-but-wider
+ *   look is wanted later.
+ *
+ * Files live in ../font/ relative to this stylesheet's published location
+ * (_/css/site.css -> _/font/*.woff2).
+ */
+
+@font-face {
+  font-family: "iA Writer Quattro";
+  src: url("../font/iAWriterQuattroS-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "iA Writer Quattro";
+  src: url("../font/iAWriterQuattroS-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "iA Writer Quattro";
+  src: url("../font/iAWriterQuattroS-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "iA Writer Quattro";
+  src: url("../font/iAWriterQuattroS-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "iA Writer Mono";
+  src: url("../font/iAWriterMonoS-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "iA Writer Mono";
+  src: url("../font/iAWriterMonoS-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

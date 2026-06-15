@@ -1,0 +1,33 @@
+#
+# Standalone preview playbook. Builds a small sample site using this theme's
+# unzipped sources, so the UI can be developed without the website repo.
+#
+#   gulp preview   (bundles, then builds this into preview-output/)
+#
+site:
+  title: Website UI Preview
+  start_page: preview::index.adoc
+
+content:
+  sources:
+  # This repo is checked out as a git worktree (its `.git` is a pointer file),
+  # which isomorphic-git cannot read as a local source. So, as in the website
+  # repo, we point at the sibling bare repo and the worktree's branch. The
+  # sample content must therefore be committed to be picked up; that is fine —
+  # the content is stable, and theme edits only require re-running the bundle.
+  - url: ../.bare
+    branches: default
+    start_path: preview/content
+
+ui:
+  bundle:
+    # Resolved relative to this playbook file (the project root).
+    url: ./dist/ui-bundle.zip
+    snapshot: true
+
+output:
+  clean: true
+  dir: preview-output
+
+runtime:
+  fetch: false

@@ -15,6 +15,9 @@ dist/*
 !dist/.keep
 !dist/README.adoc
 
+# Standalone theme preview output (gulp preview).
+preview-output/
+
 # Managed packages.
 node_modules/*
 
