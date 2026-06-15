@@ -72,6 +72,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+  /* Four lines above (double the other headings) to set the page title apart. */
+  margin-top: calc(var(--line-height) * 4);
   font-size: var(--font-size\=xxl);
   text-transform: uppercase;
   letter-spacing: -0.05rem;

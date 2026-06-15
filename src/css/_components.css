@@ -4,10 +4,13 @@
 
 /* NAVBAR
  *
- * The primary site navigation: a boxed bar (matching the 2px-bordered motif of
- * tables and form controls) with the brand on the left and the menu inline on
- * the right. The box is snapped to whole character cells so its edges land on
- * the monospace grid. On narrow widths the menu wraps below the brand.
+ * The primary site navigation, laid out inside the full-width header band (see
+ * `.HEADER` in `_layout.css`). The brand sits on the left and the menu inline
+ * on the right. The bar carries no border of its own – the header band's bottom
+ * rule sets the header off from the document. Its content is centered and
+ * constrained to the same column as `.MAIN`, with matching side padding, so the
+ * brand and menu line up with the body content beneath. On narrow widths the
+ * menu wraps below the brand.
  *
  * Markup: <nav.NavBar> > <a.NavBar__Brand> + <ul.NavBar__Menu> */
 
@@ -18,9 +21,10 @@
   justify-content: space-between;
   column-gap: 2ch;
   row-gap: calc(var(--line-height) / 2);
-  width: calc(round(down, 100%, 1ch));
-  padding: calc(var(--line-height) / 2 - var(--border-thickness)) 2ch;
-  border: var(--border-thickness) solid var(--color\=border);
+  width: 100%;
+  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  margin: 0 auto;
+  padding: calc(var(--line-height) / 2) 2ch;
 }
 
 /* The brand is the site title: bold and uppercase like a heading, but with no
@@ -51,4 +55,95 @@ item after the first; flex layout plus this reset keeps them on one line. */
 
 .NavBar__Menu a {
   text-transform: uppercase;
+}
+
+/* FLOATING TABLE OF CONTENTS
+ *
+ * An on-page contents list, built and scrollspy-highlighted by `50-toc.js`,
+ * which fills the empty `<aside class="TOC">` rendered by `toc.hbs`.
+ *
+ * It is a desktop-only affordance, floated into the gutter to the right of the
+ * centered `.MAIN` column. It is hidden by default (and on any page where the
+ * script found too few headings, via `:empty`); it is only revealed at wide
+ * viewports where the right gutter can hold it without overlapping the content.
+ *
+ * It is `position: fixed`, so it floats over the page and tracks the viewport
+ * as the reader scrolls. It is pinned to the right edge of the content column:
+ * `left: calc(50% + 40ch + 4ch)` clears the centered column (half of the 80ch
+ * column = 40ch) plus a 4ch gap. The reveal breakpoint (90rem) is chosen so
+ * that, at that width, the column plus both gutters leaves room for the list. */
+
+.TOC {
+  display: none;
+}
+
+@media screen and (min-width: 90rem) {
+  /* Reveal only when the page actually has a contents list (the aside is left
+  empty on pages with too few headings) and there is gutter room. */
+  .TOC:not(:empty) {
+    display: block;
+    position: fixed;
+    top: var(--line-height);
+    left: calc(50% + 40ch + 4ch);
+    width: 36ch;
+    max-height: calc(100vh - var(--line-height) * 2);
+    padding-left: 2ch;
+    border-left: var(--border-thickness) solid var(--color\=border);
+    overflow-y: auto;
+    font-size: var(--font-size\=sm);
+    line-height: var(--line-height);
+  }
+}
+
+/* The small-caps label above the list. */
+.TOC__Title {
+  margin-bottom: calc(var(--line-height) / 2);
+  color: var(--color\=text\|light);
+  font-weight: var(--font-weight\=bold);
+  text-transform: uppercase;
+}
+
+/* The list is bulletless and flush-left; it resets the bare `ul` styling
+(square bullets, margins) from `_typography.css`. */
+.TOC__List,
+.TOC__List ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Nested (h3) entries indent two cells under their section. */
+.TOC__List ul {
+  padding-left: 2ch;
+}
+
+/* The owl selector in `_typography.css` would space items a full line apart;
+the TOC is denser, so reset it and let the list's own line-height set the gap. */
+.TOC__List li {
+  margin: 0;
+}
+
+/* Entries read as quiet, ink-light text with no underline at rest; the accent
+underline and hover styling are reserved for the active entry. */
+.TOC__List a {
+  display: block;
+  color: var(--color\=text\|light);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.TOC__List a:hover {
+  color: var(--color\=text\|default);
+}
+
+/* The entry for the heading currently in view: full-ink text with the signature
+accent marking it, so the reader's place stands out. */
+.TOC__List .is-active > a {
+  color: var(--color\=text\|default);
+  text-decoration: underline;
+  text-decoration-color: var(--color\=accent);
+  text-decoration-thickness: var(--border-thickness);
+  text-underline-offset: 0.3em;
 }

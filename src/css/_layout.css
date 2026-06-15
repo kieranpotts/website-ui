@@ -23,10 +23,15 @@ body {
   overflow-x: hidden;
 }
 
-/* The header sits above the document, separated by one line of the grid. Its
-internal chrome (the boxed nav bar) lives in `_components.css`. */
+/* The header is a full-width band across the top of the viewport, set off from
+the document by a single bottom rule. It sits outside the centered `.MAIN`
+column, so it spans edge to edge; its inner content (the nav bar) is itself
+constrained to the content column – see `_components.css`. The band carries no
+bottom margin; the one line of space above the breadcrumb is supplied by
+`.MAIN`'s top padding. */
 .HEADER {
-  margin-bottom: var(--line-height);
+  width: 100%;
+  border-bottom: var(--border-thickness) solid var(--color\=border);
 }
 
 .DOCUMENT {}
