@@ -308,17 +308,30 @@ sidebar's title sits inside it. Both are bold, not the default italic. */
   color: var(--color\=text\|light);
 }
 
-/* IMAGE BLOCKS
+/* IMAGE BLOCKS & INLINE IMAGES
  *
  * `.imageblock` wraps a block image; `.image` is the inline-image span. The
- * `<img>` itself is styled in `_typography.css`; here we center the block and
- * its caption. */
+ * `<img>` is styled `display:block; width:100%` in `_typography.css` (right for
+ * block images); here we center the block and its caption. */
 .imageblock {
   margin: calc(var(--line-height) * 2) 0;
 }
 
 .imageblock > .title {
   text-align: center;
+}
+
+/* An inline image flows within text, so reset the block defaults and let it
+size to its intrinsic / attribute dimensions instead of filling the column. */
+.image {
+  display: inline;
+}
+
+.image > img {
+  display: inline;
+  width: auto;
+  max-width: 100%;
+  vertical-align: baseline;
 }
 
 /* INLINE TEXT ROLES
