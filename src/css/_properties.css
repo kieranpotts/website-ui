@@ -13,29 +13,51 @@
  *
  * The :root block also sets the font-rendering defaults that give JetBrains
  * Mono its intended appearance.
+ *
+ * COLOR & DARK MODE: Color is built in two tiers. A small set of *base palette*
+ * tokens (`--base=*`) holds the only literal colors in the theme – an ink,
+ * a muted ink, a page, and a muted-page tone. Light/dark mode is implemented
+ * by flipping just those four values in a single `@media (prefers-color-scheme:
+ * dark)` block (see the end of this file). Every *semantic* color token below
+ * (`--color=*`) derives from the base palette, so the whole UI inverts from one
+ * place and no other layer needs a dark-mode rule. (The two accent tokens –
+ * selection and focus outline – are fixed hues that read on either background.)
  */
 
 :root {
   font-optical-sizing: auto;
   font-variant-numeric: tabular-nums lining-nums;
 
+  /* Honour the user's OS light/dark preference, and let UA-rendered chrome
+  (form controls, scrollbars) follow it. */
+  color-scheme: light dark;
 
-  /* Colors */
+  /* Base palette (light mode). The only literal colors in the theme; flipped
+  for dark mode at the foot of this file. */
 
-  --color\=page\|background: hsl(0, 0%, 100%);
-  --color\=header\|background: hsl(0, 0%, 96%);
+  --base\=ink: hsl(0, 0%, 15%);          /* primary text, borders, bullets */
+  --base\=ink\|muted: hsl(0, 0%, 50%);   /* secondary/light text */
+  --base\=ink\|faint: hsl(0, 0%, 75%);   /* placeholder text */
+  --base\=page: hsl(0, 0%, 100%);        /* page background */
+  --base\=page\|muted: hsl(0, 0%, 96%);  /* tinted surfaces: header, code */
 
-  --color\=text\|default: hsl(0, 0%, 15%);
-  --color\=text\|light: hsl(0, 0%, 50%);
-  --color\=text\|placeholder: hsl(0, 0%, 75%);
+  /* Semantic colors. These name a *role* and derive from the base palette, so
+  they invert automatically in dark mode. */
 
-  --color\=border: hsl(0, 0%, 15%);
-  --color\=bullet: hsl(0, 0%, 15%);
+  --color\=page\|background: var(--base\=page);
+  --color\=header\|background: var(--base\=page\|muted);
 
-  --color\=text\|pre\|background: hsl(0, 0%, 96%);
+  --color\=text\|default: var(--base\=ink);
+  --color\=text\|light: var(--base\=ink\|muted);
+  --color\=text\|placeholder: var(--base\=ink\|faint);
+
+  --color\=border: var(--base\=ink);
+  --color\=bullet: var(--base\=ink);
+
+  --color\=text\|pre\|background: var(--base\=page\|muted);
   --color\=text\|pre\|foreground: inherit;
 
-  --color\=text\|code\|background: hsl(0, 0%, 92%);
+  --color\=text\|code\|background: var(--base\=page\|muted);
   --color\=text\|code\|foreground: inherit;
 
   --color\=hyperlink\|default: inherit;
@@ -96,5 +118,24 @@
   --spacing: 4rem;
   --spacing\@sm: 6rem;
   --spacing\@lg: 8rem;
+
+}
+
+/* DARK MODE
+ *
+ * The whole inversion happens here: flip the four base palette tones and every
+ * semantic `--color=*` token follows, because each derives from the base
+ * palette via var(). The ink/page roles swap and the three-step ink ladder is
+ * mirrored, so the text hierarchy (default > light > placeholder) is preserved.
+ * Accent tokens (selection, outline) are deliberately not overridden. */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --base\=ink: hsl(0, 0%, 90%);          /* primary text, borders, bullets */
+    --base\=ink\|muted: hsl(0, 0%, 60%);   /* secondary/light text */
+    --base\=ink\|faint: hsl(0, 0%, 35%);   /* placeholder text */
+    --base\=page: hsl(0, 0%, 8%);          /* page background */
+    --base\=page\|muted: hsl(0, 0%, 14%);  /* tinted surfaces: header, code */
+  }
 
 }

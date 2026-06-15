@@ -1,10 +1,7 @@
 @charset "UTF-8";
 
 /**
- * Custom AsciiDoc style sheet.
- *
- * NOTE, the "default" Asciidoctor v2 style sheet is here:
- * https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css
+ * Main entry point to the website's stylesheet.
  *
  * The stylesheet is split layers, imported in order of increasing specificity
  * and reach. Earlier layers set far-reaching defaults. Later layers narrow to
