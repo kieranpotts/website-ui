@@ -1,12 +1,7 @@
-{{!--
-  Top header bar. This site has no versioned releases and only a few top-level
-  sections, so all primary navigation lives here (the left nav sidebar is
-  intentionally omitted; see body.hbs).
---}}
-<header class="header">
-  <nav class="navbar" aria-label="primary">
-    <a class="navbar-brand" href="{{{relativize '/'}}}">{{site.title}}</a>
-    <ul class="navbar-menu">
+<header class="HEADER">
+  <nav class="NavBar" aria-label="primary">
+    <a class="NavBar__Brand" href="{{{relativize '/'}}}">{{site.title}}</a>
+    <ul class="NavBar__Menu">
       <li><a href="{{{relativize '/'}}}">Home</a></li>
       <li><a href="{{{relativize '/thoughts/'}}}">Thoughts</a></li>
       <li><a href="{{{relativize '/garden/'}}}">Garden</a></li>

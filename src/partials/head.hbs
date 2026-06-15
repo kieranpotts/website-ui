@@ -2,15 +2,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{#if page.title}}{{{page.title}}} :: {{/if}}{{site.title}}</title>
 {{#if page.description}}
-<meta name="description" content="{{page.description}}">
+  <meta name="description" content="{{page.description}}">
 {{/if}}
 {{#if page.keywords}}
-<meta name="keywords" content="{{page.keywords}}">
+  <meta name="keywords" content="{{page.keywords}}">
 {{/if}}
 {{#if (and site.url page.canonicalUrl)}}
-<link rel="canonical" href="{{page.canonicalUrl}}">
+  <link rel="canonical" href="{{page.canonicalUrl}}">
 {{/if}}
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
 {{#if page.home}}
-<meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow">
 {{/if}}

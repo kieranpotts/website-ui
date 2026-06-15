@@ -1,0 +1,72 @@
+/**
+ * Custom properties.
+ */
+
+:root {
+
+  /* Colors */
+
+  --color\=page\|background: hsl(0, 0%, 100%);
+  --color\=header\|background: hsl(0, 0%, 96%);
+
+  --color\=text\|default: hsl(0, 0%, 15%);
+  --color\=text\|light: hsl(0, 0%, 50%);
+  --color\=text\|placeholder: hsl(0, 0%, 75%);
+
+  --color\=border: hsl(0, 0%, 15%);
+  --color\=bullet: hsl(0, 0%, 15%);
+
+  --color\=text\|pre\|background: hsl(0, 0%, 96%);
+  --color\=text\|pre\|foreground: inherit;
+
+  --color\=text\|code\|background: hsl(0, 0%, 92%);
+  --color\=text\|code\|foreground: inherit;
+
+  --color\=hyperlink\|default: inherit;
+  --color\=hyperlink\|visited: inherit;
+  --color\=hyperlink\|hover: inherit;
+  --color\=hyperlink\|focus: inherit;
+  --color\=hyperlink\|active: inherit;
+  --color\=hyperlink\|underline: inherit;
+
+  --color\=text\|selection: hsl(50, 100%, 50%);
+  --color\=outline: hsl(200, 100%, 50%);
+
+  --color\=video: var(--color\=text\|default);
+
+  /* Fonts */
+
+  /* The iA Writer font family consists of proportional fonts that _look_ like
+  monospace fonts. We must use a true monospace font for preformatted text
+  and code blocks. https: //ia.net/topics/in-search-of-the-perfect-writing-font */
+
+  --font-family\=default: 'JetBrains Mono', ui-monospace, monospace;
+  --font-family\=monospace: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Font sizes */
+
+  --font-size\=root: 9px;
+  --font-size\=root\@xs: 9.5px;   /* 400px */
+  --font-size\=root\@sm: 10px;    /* 600px */
+  --font-size\=root\@md: 10.5px;  /* 800px */
+  --font-size\=root\@lg: 11px;    /* 1000px */
+  --font-size\=root\@xl: 11.5px;  /* 1200px */
+  --font-size\=root\@xxl: 12px;   /* 1400px */
+
+  --font-size\=xxl: 3rem;
+  --font-size\=xl:  2.2rem;
+  --font-size\=lg:  1.6rem;
+  --font-size\=md:  1.6rem; /* default */
+  --font-size\=sm:  1.4rem;
+  --font-size\=xs:  1.2rem;
+
+  --font-size\=monospace\|block: 1.6rem;
+  --font-size\=monospace\|inline: 100%;
+
+  /* Spacing */
+
+  --spacing: 4rem;
+  --spacing\@sm: 6rem;
+  --spacing\@lg: 8rem;
+
+}

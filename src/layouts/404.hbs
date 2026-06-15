@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{or site.lang 'en'}}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page not found :: {{site.title}}</title>
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
-<meta name="robots" content="noindex">
-</head>
-<body class="status-page status-404">
-{{> header}}
-<main class="content">
-  <article class="doc">
-    <h1>Page not found</h1>
-    <p>The page you requested does not exist.</p>
-    <p><a href="{{{or site.homeUrl (siteRootPath)}}}">Return home</a></p>
-  </article>
-</main>
-{{> footer}}
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found :: {{site.title}}</title>
+    <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
+    <meta name="robots" content="noindex">
+  </head>
+  <body>
+    <main class="MAIN">
+      {{> header}}
+      <article class="DOCUMENT">
+        <h1 class="title"">Page not found</h1>
+        <p>The page you requested does not exist.</p>
+        <p><a href="{{{or site.homeUrl (siteRootPath)}}}">Return home</a></p>
+      </article>
+      {{> footer}}
+    </main>
+  </body>
 </html>

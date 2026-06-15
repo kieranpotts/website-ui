@@ -1,0 +1,222 @@
+/**
+ * Typography
+ */
+
+/* Sans-serif fonts */
+
+body {
+  font-family: var(--font-family\=default);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/*h1, h2,*/ h3, h4, h5, h6,
+b, strong, dfn, optgroup {
+  font-weight: 800;
+}
+
+optgroup option {
+  font-weight: 500;
+}
+
+svg text {
+  /* Labels in inline graphics are always bold. */
+  font-weight: 800;
+}
+
+h1 { font-size: var(--font-size\=xxl); }
+h2 { font-size: var(--font-size\=xl); }
+h3 { font-size: var(--font-size\=lg); }
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+
+h1 { letter-spacing: -0.05rem; }
+
+h1:not(:last-child) { margin-bottom: calc(var(--spacing) / 4); }
+@media screen and (min-width: 62.5rem) { /* 1000px */
+  h1:not(:last-child) { margin-bottom: calc(var(--spacing) / 2); }
+}
+
+h1 {
+  /* Small visual tweak. */
+  margin-left: -2px;
+}
+
+h2 {
+  margin-top: var(--spacing);
+  margin-bottom: calc(var(--spacing) / 2);
+}
+@media screen and (min-width: 37.5rem) { /* 600px */
+  h2 {
+    margin-top: var(--spacing\@sm);
+    margin-bottom: var(--spacing);
+  }
+}
+@media screen and (min-width: 62.5rem) { /* 1000px */
+  h2 {
+    margin-top: var(--spacing\@lg);
+    margin-bottom: var(--spacing);
+  }
+}
+
+h3 {
+  margin-top: var(--spacing);
+  margin-bottom: calc(var(--spacing) / 2);
+}
+
+h2:first-child, h3:first-child {
+  margin-top: 0;
+}
+
+p:not(:last-child),
+ul:not(:last-child),
+ol:not(:last-child) {
+  margin-bottom: calc(var(--spacing) / 2);
+}
+
+#content > p:first-child {
+  margin-bottom: var(--spacing);
+}
+@media screen and (min-width: 37.5rem) { /* 600px */
+  #content > p:first-child {
+    margin-bottom: var(--spacing\@sm);
+  }
+}
+@media screen and (min-width: 62.5rem) { /* 1000px */
+  #content > p:first-child {
+    margin-bottom: var(--spacing\@lg);
+  }
+}
+
+li {
+  margin-bottom: calc(var(--spacing) / 4);
+  padding-left: 1em;
+  position: relative;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+li::before {
+  color: var(--color\=bullet);
+  content: '\25aa'; /* em-dash */
+  left: 0;
+  position: absolute;
+}
+
+ol {
+  counter-reset: main-ol-counter;
+  list-style-type: none;
+}
+
+ol li {
+  counter-increment: main-ol-counter;
+}
+
+ol li::before {
+  content: counter(main-ol-counter);
+}
+
+blockquote {
+  margin-bottom: var(--spacing);
+  margin-top: var(--spacing);
+  padding-left: calc(var(--spacing) / 2);
+  padding-right: calc(var(--spacing) / 2);
+}
+@media screen and (min-width: 37.5rem) { /* 600px */
+  blockquote {
+    padding-left: var(--spacing);
+    padding-right: var(--spacing);
+  }
+}
+
+blockquote p:not(:last-child) {
+  font-style: italic;
+  margin-bottom: calc(var(--spacing) / 4);
+}
+
+figure {
+  margin-bottom: var(--spacing);
+  margin-top: var(--spacing);
+}
+
+figure img {
+  margin: 0 auto;
+}
+
+figcaption {
+  text-align: center;
+}
+
+figcaption:first-child {
+  margin-bottom: calc(var(--spacing) / 2);
+}
+
+figcaption:last-child {
+  margin-top: calc(var(--spacing) / 2);
+}
+
+table {
+  border-color: var(--color\=border);
+  border-style: solid;
+  border-width: 1px;
+  padding: 0.5rem;
+}
+
+table thead th {
+  border-bottom-width: 2px;
+  font-weight: 800;
+}
+
+hr {
+  margin-top: var(--spacing);
+  margin-bottom: var(--spacing);
+}
+@media screen and (min-width: 37.5rem) { /* 600px */
+  hr {
+    margin-bottom: var(--spacing\@sm);
+    margin-top: var(--spacing\@sm);
+  }
+}
+@media screen and (min-width: 62.5rem) { /* 1000px */
+  hr {
+    margin-bottom: var(--spacing\@lg);
+    margin-top: var(--spacing\@lg);
+  }
+}
+
+small,
+.small {
+  color: var(--color\=text\|light);
+}
+
+a {
+  color: var(--color\=hyperlink\|default);
+  text-decoration: underline;
+  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+a:visited { color: var(--color\=hyperlink\|visited); }
+a:hover { color: var(--color\=hyperlink\|hover); }
+a:focus { color: var(--color\=hyperlink\|focus); }
+a:active { color: var(--color\=hyperlink\|active); /* outline: none; */ }
+
+/* Monospace fonts */
+
+/* Inline code uses the same font as surrounding text. */
+pre {
+  font-family: var(--font-family\=monospace);
+}
+
+pre, code {
+  font-weight: 800;
+}
+
+pre {
+  line-height: 1.2;
+}

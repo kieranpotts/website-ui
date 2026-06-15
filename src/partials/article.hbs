@@ -1,9 +1,4 @@
-{{!--
-  Antora supplies the page title separately from the body (page.contents holds
-  the converted AsciiDoc *below* the document title). Render the title here as
-  the page's H1, unless the page opts out via the noheader/notitle roles.
---}}
 {{#unless page.noheader}}
-<h1 class="page">{{{page.title}}}</h1>
+  <h1 class="title">{{{page.title}}}</h1>
 {{/unless}}
 {{{page.contents}}}
