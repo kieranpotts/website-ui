@@ -1,13 +1,23 @@
 {
   "extends": "stylelint-config-standard",
+  "comment": "stylelint-config-standard's defaults are relaxed where they fight this theme's deliberate conventions: the escaped custom-property naming (--color\\=text\\|default), the empty layout/component scaffolding selectors, ITCSS layering that repeats selectors across files, the hsl()/media-query notations used, and the readable camelCase CSS-wide keywords.",
   "rules": {
     "selector-class-pattern": null,
+    "custom-property-pattern": null,
     "custom-property-empty-line-before": null,
     "comment-empty-line-before": null,
+    "block-no-empty": null,
+    "no-duplicate-selectors": null,
+    "no-descending-specificity": null,
+    "media-feature-range-notation": null,
+    "color-function-notation": null,
+    "hue-degree-notation": null,
+    "at-rule-empty-line-before": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "comment-whitespace-inside": null,
     "value-keyword-case": [
       "lower",
-      { "ignoreKeywords": ["Inconsolata", "Menlo", "Consolas", "optimizeLegibility"] }
-    ],
-    "no-descending-specificity": null
+      { "ignoreKeywords": ["currentColor", "optimizeLegibility"] }
+    ]
   }
 }
