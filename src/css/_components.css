@@ -2,8 +2,53 @@
  * COMPONENTS
  */
 
-.NavBar {}
+/* NAVBAR
+ *
+ * The primary site navigation: a boxed bar (matching the 2px-bordered motif of
+ * tables and form controls) with the brand on the left and the menu inline on
+ * the right. The box is snapped to whole character cells so its edges land on
+ * the monospace grid. On narrow widths the menu wraps below the brand.
+ *
+ * Markup: <nav.NavBar> > <a.NavBar__Brand> + <ul.NavBar__Menu> */
 
-.NavBar__Brand {}
+.NavBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 2ch;
+  row-gap: calc(var(--line-height) / 2);
+  width: calc(round(down, 100%, 1ch));
+  padding: calc(var(--line-height) / 2 - var(--border-thickness)) 2ch;
+  border: var(--border-thickness) solid var(--color\=border);
+}
 
-.NavBar__Menu {}
+/* The brand is the site title: bold and uppercase like a heading, but with no
+underline (it overrides the bare-link styling from `_typography.css`). */
+.NavBar__Brand {
+  font-weight: var(--font-weight\=bold);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* The menu is a horizontal, bulletless list. It resets the bare `ul` styling
+(square bullets, padding, bottom margin) from `_typography.css`. */
+.NavBar__Menu {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2ch;
+  row-gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The owl selector in `_typography.css` would add a top margin to every list
+item after the first; flex layout plus this reset keeps them on one line. */
+.NavBar__Menu > li {
+  margin: 0;
+}
+
+.NavBar__Menu a {
+  text-transform: uppercase;
+}

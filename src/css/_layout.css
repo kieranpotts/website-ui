@@ -23,7 +23,11 @@ body {
   overflow-x: hidden;
 }
 
-.HEADER {}
+/* The header sits above the document, separated by one line of the grid. Its
+internal chrome (the boxed nav bar) lives in `_components.css`. */
+.HEADER {
+  margin-bottom: var(--line-height);
+}
 
 .DOCUMENT {}
 
