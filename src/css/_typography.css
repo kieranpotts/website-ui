@@ -6,22 +6,22 @@
 
 body {
   font-family: var(--font-family\=default);
-  font-weight: 500;
+  font-weight: var(--font-weight\=normal);
   line-height: 1.6;
 }
 
 /*h1, h2,*/ h3, h4, h5, h6,
 b, strong, dfn, optgroup {
-  font-weight: 800;
+  font-weight: var(--font-weight\=bold);
 }
 
 optgroup option {
-  font-weight: 500;
+  font-weight: var(--font-weight\=normal);
 }
 
 svg text {
   /* Labels in inline graphics are always bold. */
-  font-weight: 800;
+  font-weight: var(--font-weight\=bold);
 }
 
 h1 { font-size: var(--font-size\=xxl); }
@@ -168,7 +168,7 @@ table {
 
 table thead th {
   border-bottom-width: 2px;
-  font-weight: 800;
+  font-weight: var(--font-weight\=bold);
 }
 
 hr {
@@ -214,7 +214,7 @@ pre {
 }
 
 pre, code {
-  font-weight: 800;
+  font-weight: var(--font-weight\=bold);
 }
 
 pre {
