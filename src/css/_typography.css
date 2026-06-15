@@ -66,14 +66,12 @@ line box, so it still lands on the grid at its larger size. */
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight\=bold);
   line-height: var(--line-height);
-  /* Two lines above, one below — the reference's heading rhythm. */
+  /* Two lines above, one below. */
   margin: calc(var(--line-height) * 2) 0 var(--line-height);
 }
 
 h1 {
   font-size: var(--font-size\=xxl);
-  line-height: calc(var(--line-height) * 2);
-  margin-bottom: calc(var(--line-height) * 2);
   text-transform: uppercase;
   letter-spacing: -0.05rem;
 }
@@ -85,24 +83,14 @@ h2 {
 
 h3 { font-size: var(--font-size\=lg); }
 
-/* The first heading in the flow should not push down from the top. */
-h1:first-child,
-h2:first-child,
-h3:first-child {
-  margin-top: 0;
-}
-
 /* FLOW BLOCKS */
 
 p {
-  margin-bottom: calc(var(--line-height) * 1);
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
 }
 
-/* A horizontal rule rendered as a double line sitting on the grid, rather than
-a hairline. */
 hr {
   position: relative;
   display: block;
@@ -200,7 +188,6 @@ figure {
 figcaption {
   display: block;
   font-style: italic;
-  margin-top: var(--line-height);
   text-align: center;
 }
 
