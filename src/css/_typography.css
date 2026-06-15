@@ -95,7 +95,7 @@ h3:first-child {
 /* FLOW BLOCKS */
 
 p {
-  margin-bottom: var(--line-height);
+  margin-bottom: calc(var(--line-height) * 1);
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
