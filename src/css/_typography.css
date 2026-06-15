@@ -147,7 +147,14 @@ ul ul {
 ol li::before {
   content: counters(item, ".") ". ";
   counter-increment: item;
+  /* The accent tints the number; the item text stays ink (set below). */
+  color: var(--color\=accent);
   font-weight: var(--font-weight\=medium);
+}
+
+/* Keep the ordered-list item text ink; only its `::before` counter is tinted. */
+ol > li {
+  color: var(--color\=text\|default);
 }
 
 li {
@@ -155,7 +162,9 @@ li {
   padding: 0;
 }
 
+/* The square bullet (ul) is tinted with the accent; list text stays ink. */
 li::marker {
+  color: var(--color\=accent);
   line-height: 0;
 }
 

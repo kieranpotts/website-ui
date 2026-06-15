@@ -40,6 +40,7 @@
   --base\=ink\|faint: hsl(0, 0%, 75%);   /* placeholder text */
   --base\=page: hsl(0, 0%, 100%);        /* page background */
   --base\=page\|muted: hsl(0, 0%, 96%);  /* tinted surfaces: header, code */
+  --base\=accent: hsl(176, 100%, 36%);   /* signature color (#00b7ac) */
 
   /* Semantic colors. These name a *role* and derive from the base palette, so
   they invert automatically in dark mode. */
@@ -60,14 +61,21 @@
   --color\=text\|code\|background: var(--base\=page\|muted);
   --color\=text\|code\|foreground: inherit;
 
+  /* The signature accent. Used for subtle structural marks (list markers, the
+  blockquote rule, footnote markers), link underlines, link hover/focus text,
+  and the selection highlight. Everything else stays monochrome. */
+  --color\=accent: var(--base\=accent);
+
+  /* Links: ink-colored text with an accent underline at rest; the text itself
+  turns accent on hover/focus. */
   --color\=hyperlink\|default: inherit;
   --color\=hyperlink\|visited: inherit;
-  --color\=hyperlink\|hover: inherit;
-  --color\=hyperlink\|focus: inherit;
-  --color\=hyperlink\|active: inherit;
-  --color\=hyperlink\|underline: inherit;
+  --color\=hyperlink\|hover: var(--color\=accent);
+  --color\=hyperlink\|focus: var(--color\=accent);
+  --color\=hyperlink\|active: var(--color\=accent);
+  --color\=hyperlink\|underline: var(--color\=accent);
 
-  --color\=text\|selection: hsl(50, 100%, 50%);
+  --color\=text\|selection: var(--color\=accent);
   --color\=outline: hsl(200, 100%, 50%);
 
   --color\=video: var(--color\=text\|default);
@@ -132,7 +140,8 @@
  * semantic `--color=*` token follows, because each derives from the base
  * palette via var(). The ink/page roles swap and the three-step ink ladder is
  * mirrored, so the text hierarchy (default > light > placeholder) is preserved.
- * Accent tokens (selection, outline) are deliberately not overridden. */
+ * The accent is also brightened a little to keep its punch against the near-
+ * black page; the focus-outline accent is left as-is. */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -141,6 +150,7 @@
     --base\=ink\|faint: hsl(0, 0%, 35%);   /* placeholder text */
     --base\=page: hsl(0, 0%, 8%);          /* page background */
     --base\=page\|muted: hsl(0, 0%, 14%);  /* tinted surfaces: header, code */
+    --base\=accent: hsl(176, 70%, 50%);    /* brighter teal for dark bg */
   }
 
 }

@@ -155,6 +155,12 @@ sup.footnoteref {
   font-size: 100%; /* override the generic `sup` shrink (`_resets.css`) */
 }
 
+/* Tint the marker link with the accent (the `[ ]` brackets stay ink). */
+sup.footnote > a,
+sup.footnoteref > a {
+  color: var(--color\=accent);
+}
+
 /* The endnote list at the page foot: separated by a rule, normal body size. */
 #footnotes {
   margin-top: calc(var(--line-height) * 2);
@@ -283,7 +289,8 @@ than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 .verseblock {
   margin: var(--line-height) 0;
   padding-left: 2ch;
-  border-left: var(--border-thickness) solid var(--color\=border);
+  /* The quotation rule carries the signature accent. */
+  border-left: var(--border-thickness) solid var(--color\=accent);
 }
 
 .quoteblock blockquote {

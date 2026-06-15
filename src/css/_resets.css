@@ -253,7 +253,7 @@ address {
 
 ::selection {
   background: var(--color\=text\|selection);
-  color: var(--color\=text\|default);
+  color: var(--color\=page\|background);
   text-shadow: none;
 }
 
