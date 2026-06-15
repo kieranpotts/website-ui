@@ -1,184 +1,411 @@
-= The Monospace Web: a Theme Preview
-:page-description: A single rich page exercising a broad range of AsciiDoc constructs for theming the Antora UI.
+= AsciiDoc Reference Guide
+:page-description: A comprehensive page exercising AsciiDoc elements for theming the Antora UI.
 
-This single page exercises a broad range of AsciiDoc constructs so the theme
-can be designed against realistic content. It deliberately mixes prose,
-images, code, tables, lists, and block elements.
+[.lead]
+This page demonstrates every major AsciiDoc element and feature. It serves as a comprehensive reference and testing ground for the theme. This opening paragraph has been given the "lead" role, which is typically used for introductory text.
 
-== Prose and inline formatting
-
-A paragraph of ordinary prose to establish the body rhythm. The quick brown fox
-jumps over the lazy dog; the quick brown fox jumps over the lazy dog; the quick
-brown fox jumps over the lazy dog. We repeat ourselves to get a few lines of
-wrapping so the line-height and measure can be judged honestly.
-
-Inline styles: *bold*, _italic_, *_bold italic_*, `monospace`, +++<u>underline</u>+++,
-[.line-through]#strikethrough#, ^superscript^, ~subscript~, and a `code span`
-with some `--flags` in it. Here is a keyboard shortcut: kbd:[Ctrl+C], and a
-button reference: btn:[OK]. A menu path: menu:File[Save As... > PDF].
-
-Some text with a footnote.footnote:[Footnotes render as superscript references
-with the note collected at the foot of the document.] And a second
-footnote.footnote:[The second note, to check spacing between multiple notes.]
-
-Highlighted text: #marked text#, and a passthrough of an emoji: &#9733;.
-
-=== Links and cross references
-
-An external link: https://owickstrom.github.io/the-monospace-web/[The Monospace
-Web^]. A bare URL: https://kieranpotts.com. A mailto link:
-mailto:code@kieranpotts.com[email me]. And an internal anchor back to
-<<Prose and inline formatting,the prose section>>.
-
-== Images
-
-A block image with a caption:
-
-.A wide sample image, full content width
-image::sample-wide.png[A wide gradient sample, 1200, 675]
-
-An inline image sits in the text line image:sample-square.png[avatar, 24, 24]
-like so, flowing with the words around it.
-
-A smaller, explicitly sized block image, centered:
+This is the default paragraph style. Consectetur esse do anim mollit quis occaecat aute consectetur veniam cillum ut reprehenderit. Ipsum enim ipsum veniam labore nostrud aliquip ea cillum minim commodo sint commodo cillum magna. Dolore tempor id occaecat tempor reprehenderit exercitation reprehenderit do incididunt enim magna cupidatat laboris.
 
 [.text-center]
-image::sample-square.png[Square sample, 200, 200]
+This demonstrates how to center a paragraph of text. Consectetur aute tempor aliquip dolor. Officia nostrud id laborum laborum exercitation enim labore culpa qui. Velit sint ipsum cupidatat veniam sunt culpa.
 
-An SVG diagram:
+_There is a thematic break between the next two paragraphs._
 
-.A simple build pipeline
-image::diagram.svg[Build pipeline diagram, 600, 240]
+Mollit ea minim commodo anim id eiusmod deserunt qui laborum Lorem in fugiat id. Eu et et tempor sit nostrud irure veniam pariatur. Veniam magna quis dolor excepteur deserunt ea tempor laborum Lorem est veniam fugiat cillum elit. Ipsum exercitation ut ea in nostrud nostrud cupidatat tempor. Cupidatat in enim qui Lorem dolor laborum sint sunt sint veniam non.
 
+---
+
+Mollit est velit anim adipisicing. Magna pariatur dolore Lorem aute enim duis et mollit est adipisicing. Laborum dolor voluptate amet veniam. Mollit voluptate quis voluptate Lorem reprehenderit dolor adipisicing veniam mollit laboris reprehenderit qui esse laborum. Qui enim dolore mollit reprehenderit esse.
+
+== Inline text formatting
+
+This is *bold text*. This is _italic text_. This is `monospace text`. This is #highlighted text#. This is [.underline]#underlined text# and this is [.line-through]#strikethrough text#. This is http://example.com/[hyperlinked text]. This is ^superscript^ text and this is ~subscript~ text.
+
+=== Links and cross-references
+
+https://asciidoctor.org[Website link]
+
+mailto:support@example.com[Email link]
+
+Internal cross-reference: <<lists-section>>
+
+<<custom-anchor,Internal cross-reference with custom text>>
+
+=== Special characters and symbols
+
+Copyright (C), Registered (R), Trademark (TM)
+
+Arrows: -> <- => <=
+
+Em dash -- and ellipsis...
+
+== Quotes and citations
+
+"`Double curved quotes`" and '`single curved quotes`'.
+
+[%unbreakable]
+--
+[verse, William Blake, Songs of Innocence]
+____
+Tiger, tiger, burning bright
+In the forests of the night,
+What immortal hand or eye
+Could frame thy fearful symmetry?
+____
+--
+
+Cupidatat quis ex consequat nulla mollit. Veniam magna enim magna ipsum aliquip fugiat incididunt do nisi officia ipsum. Irure tempor mollit quis quis. Fugiat cupidatat cillum adipisicing exercitation qui esse ad sit nisi do proident enim nostrud.
+
+[quote, Winston Churchill]
+The best argument against democracy is a five-minute conversation with the average voter.
+
+Culpa ea mollit aliqua velit dolor proident. Enim deserunt pariatur in esse non id adipisicing elit culpa. Incididunt consectetur amet consequat cillum.
+
+== Headings and sections
+
+Cillum pariatur est occaecat sunt. Magna irure sunt cillum cillum do. Ea nulla deserunt qui est est qui commodo voluptate ad eu sint sunt Lorem ipsum. Et nisi ipsum proident ea pariatur. Reprehenderit officia anim est proident eu quis.
+
+=== Level 3 heading
+
+Commodo quis mollit laborum excepteur nisi ad laborum cillum duis dolor aliquip. Ad adipisicing pariatur aliqua eiusmod ea labore laborum labore culpa dolore. Eu minim nulla nostrud tempor ullamco sunt elit.
+
+==== Level 4 heading
+
+Veniam voluptate voluptate do ullamco deserunt reprehenderit consectetur ea sit eiusmod. Ipsum incididunt commodo sunt culpa deserunt quis dolore nulla do incididunt deserunt. Magna quis labore pariatur quis culpa occaecat reprehenderit.
+
+===== Level 5 heading
+
+Consequat nisi cupidatat cillum cillum voluptate eiusmod. Proident dolor in tempor nulla sunt eu anim officia. Eiusmod culpa enim reprehenderit dolor dolore sint aliquip velit dolor exercitation reprehenderit aliquip Lorem.
+
+[[custom-anchor]]
+=== Section with a custom anchor
+
+This section has a custom anchor that is referenced from elsewhere on this page.
+
+[[lists-section]]
 == Lists
 
-Unordered list:
+An unordered list with multiple levels:
 
-* First item
-* Second item with a longer line that should wrap onto a second visual line so
-  list wrapping and hanging indentation can be evaluated
-* Third item
-** Nested first
-** Nested second
-*** Deeply nested
+* First level item
+** Second level item
+*** Third level item
+**** Fourth level item
+***** Fifth level item
+****** Sixth level item
 
-Ordered list:
+An unordered list with long paragraphs of text, and a title:
 
-. Step one
-. Step two
-.. Sub-step a
-.. Sub-step b
-. Step three
+.List title
+* Amet consectetur enim quis adipisicing tempor veniam ipsum nulla. Elit est enim eu do proident mollit quis elit et Lorem ex culpa irure pariatur. Tempor irure aliqua aute elit elit dolor ad deserunt fugiat eiusmod duis minim deserunt.
+* Enim eu enim est esse et eu ipsum non laborum est. Eiusmod adipisicing aute ullamco officia cupidatat elit sunt.
+* Nisi proident Lorem fugiat non nulla labore esse nisi consequat duis in. Officia eu aliquip ipsum tempor. Dolore excepteur et non aliqua dolor sunt magna.
 
-A checklist:
+An unordered list with continuation lines and multiple paragraphs:
 
-* [x] Done item
-* [ ] Pending item
-* [ ] Another pending item
+* Ut esse tempor deserunt cillum veniam irure quis et commodo.
+  This line is a continuation of the prior one. Do occaecat pariatur reprehenderit laboris anim id tempor do irure.
 
-Description list:
+* This list item is composed of multiple paragraphs. Excepteur voluptate adipisicing pariatur voluptate ipsum est dolor ex mollit anim. Nostrud incididunt pariatur consectetur velit mollit amet et.
++
+Minim enim exercitation nisi est consequat reprehenderit. Sit pariatur labore minim reprehenderit cillum amet commodo dolore consequat et eiusmod id. Culpa cupidatat laborum enim dolore.
 
-Source:: The AsciiDoc and asset files for a page.
-Build:: The Antora pipeline that converts sources into HTML.
-Site:: The published static output.
+An ordered list:
 
-== Code
+. First item
+.. Nested item
+... Deeply nested item
+. Second item
+. Third item
+. Fourth item
 
-Inline `code` within a sentence, and a fenced source block with syntax
-highlighting and callouts:
+.A mixed list
+. Ordered item
+* Unordered sub-item
+* Another unordered sub-item
+. Another ordered item
 
-[source,javascript]
-----
-function greet (name) { // <1>
-  return `Hello, ${name}!` // <2>
-}
+=== Checklist
 
-console.log(greet('world'))
-----
-<1> A function declaration.
-<2> A template literal.
+* [*] Completed task
+* [x] Another completed task
+* [ ] Incomplete task
+* [*] Task with details
++
+Additional information about this task.
 
-A plain listing block (no language):
+=== Description lists
 
-----
-$ npm run bundle
-[13:45] Starting 'bundle'...
-[13:45] Finished 'bundle' after 99 ms
-----
+CPU:: Central Processing Unit
+RAM:: Random Access Memory
+SSD:: Solid State Drive
 
-A literal block:
+=== Question and answer lists
 
- This is a literal block.
-   Indentation is preserved exactly.
+[qanda]
+What is AsciiDoc?::
+AsciiDoc is a lightweight markup language for authoring notes, documentation, articles, books, ebooks, slideshows, web pages, man pages and blogs.
+
+Why use AsciiDoc?::
+AsciiDoc is highly configurable and extensible, with excellent toolchain support and multiple output formats.
 
 == Tables
 
-A simple table:
+=== Simple table
 
-[cols="1,2,1"]
 |===
-| Key | Description | Value
+|Name |Age |City
 
-| alpha | The first entry | 1
-| beta  | The second entry, with a longer description that wraps | 2
-| gamma | The third entry | 3
-|===
+|John Doe
+|30
+|New York
 
-A table with a header and footer and aligned columns:
+|Jane Smith
+|25
+|London
 
-[cols="<,^,>", options="header,footer"]
-|===
-| Left | Center | Right
-
-| a | b | c
-| dd | ee | ff
-
-| Total | | 99
+|Bob Johnson
+|35
+|Tokyo
 |===
 
-== Block elements
+=== Advanced tables
 
-A block quotation:
+.Table with striped rows, column-width controls, and a footer
+[cols="1,2,1,2",options="footer",stripes=even]
+|===
+|Column 1 Header |Column 2 Header |Column 3 Header |Column 4 Header
 
-[quote,Oskar Wickström,The Monospace Web]
-____
-When was the last time you saw a beautiful monospace web page? One where the
-text lines up, top to bottom, left to right?
-____
+|Cell 1,1
+|Cell 1,2 with more content
+|Cell 1,3
+|Cell 1,4
 
-An admonition of each type:
+|Cell 2,1
+|Cell 2,2
+|Cell 2,3
+|Cell 2,4 with even more content that might wrap
 
-NOTE: This is a note admonition.
+|Cell 3,1
+|Cell 3,2
+|Cell 3,3
+|Cell 3,4
 
-TIP: This is a tip admonition.
+4+|Footer: Summary or totals go here
+|===
 
-IMPORTANT: This is an important admonition.
+.Table with cell-level formatting
+[cols="2,1,1,3", options="header"]
+|===
+|Product |Price |Stock |Description
 
-WARNING: This is a warning admonition.
+|*Laptop*
+|$999
+|15
+|High-performance laptop with _excellent_ specifications
 
-CAUTION: This is a caution admonition.
+|`Keyboard`
+|$79
+|50
+|Mechanical keyboard with RGB lighting
 
-A sidebar:
+|[.line-through]#Mouse#
+|[.line-through]#$29#
+|0
+|Out of stock - wireless mouse
+|===
 
-.A sidebar title
-****
-Sidebars hold tangential content. This one has a *bold* word and a
-`code span` to check inline styles inside block contexts.
-****
+.Table with merged cells
+|===
+|Name 2+|Details
 
-An example block:
+|John
+|Age: 30
+|City: NYC
 
-.An example block
+|Jane
+2+|Age: 25, City: London
+|===
+
+== Code and verbatim blocks
+
+=== Inline code
+
+Use the `print()` function to output text in Python.
+
+The configuration file is located at `/etc/nginx/nginx.conf`.
+
+=== Code blocks with syntax highlighting
+
+[source,python]
+----
+def fibonacci(n):
+    """Generate Fibonacci sequence up to n terms."""
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+
+    sequence = [0, 1]
+    for i in range(2, n):
+        sequence.append(sequence[i-1] + sequence[i-2])
+
+    return sequence
+
+# Example usage
+fib_sequence = fibonacci(10)
+print(f"First 10 Fibonacci numbers: {fib_sequence}")
+----
+
+A `[source]` block with callouts:
+
+[source,javascript]
+----
+function createUser(name, email) {
+    return {
+        name: name,           // <1>
+        email: email,         // <2>
+        id: generateId(),     // <3>
+        createdAt: new Date()
+    };
+}
+----
+<1> User's display name
+<2> User's email address
+<3> Generate unique identifier
+
+=== Listing blocks
+
+----
+This is a listing block.
+It preserves line breaks and spacing.
+Often used for code without syntax highlighting.
+----
+
+=== Literal blocks
+
+....
+This is a literal block.
+Everything here is displayed exactly as typed.
+    Including    spacing    and
+        indentation.
+....
+
+Literal text written using the indentation style:
+
+    $ ls -la
+    total 64
+    drwxr-xr-x  8 user  staff   256 Jul  1 12:00 .
+    drwxr-xr-x 15 user  staff   480 Jul  1 11:45 ..
+    -rw-r--r--  1 user  staff  1024 Jul  1 12:00 document.adoc
+
+== Admonitions
+
+NOTE: This is a note admonition. It provides additional information that might be helpful.
+
+TIP: This is a tip admonition. It offers helpful suggestions or best practices.
+
+IMPORTANT: This is an important admonition. It highlights crucial information that shouldn't be missed.
+
+.Optional title
+[CAUTION]
 ====
-Example blocks group related content. They can contain paragraphs, lists, and
-other blocks.
-
-* a list inside an example
-* a second item
+This is a caution admonition with a title. It advises careful consideration or action.
 ====
 
-A horizontal rule follows:
+[WARNING]
+====
+This is a complex warning admonition with multiple paragraphs and formatted text. Warning admonitions are used to alert readers to potential issues or risks.
 
-'''
+It can contain:
 
-And a final paragraph after the rule, to confirm spacing resumes correctly.
+* Lists
+* *Formatted text*
+* `Code snippets`
+* And other AsciiDoc elements
+====
+
+== Sidebars and special blocks
+
+.Sidebar title
+****
+This is a sidebar block. Sidebars are used to present information that supplements the main content but can be read independently.
+
+Sidebars can contain:
+
+* All standard AsciiDoc formatting
+* Tables, lists, and code blocks
+* Images and other media
+****
+
+.Single-paragraph sidebar
+[sidebar]
+Aute consequat et ullamco occaecat est sint mollit enim in. Sit dolore labore velit minim aliquip ullamco eu reprehenderit velit in sunt et aliqua commodo.
+
+=== Example blocks
+
+.Title
+====
+This is an https://docs.asciidoctor.org/asciidoc/latest/blocks/example-blocks/[example block]. It's used to showcase examples of concepts discussed in the main content. It may contain *complex formatting*.
+
+[source]
+----
+$ echo "Hello, World!"
+Hello, World!
+----
+====
+
+== Images and media
+
+=== Block images
+
+.Earthrise, photographed from lunar orbit
+image::earthrise.jpg[Earthrise over the lunar horizon]
+
+.A simple build pipeline (SVG)
+image::diagram.svg[Build pipeline diagram, 600, 240]
+
+=== Inline images
+
+This paragraph contains an inline image image:picture.png[Picture, 16, 16] within the text, flowing with the words around it.
+
+== User interface elements
+
+Press kbd:[Ctrl+C] to copy and kbd:[Ctrl+V] to paste.
+
+Click the btn:[Save] button to save your changes.
+
+Navigate to menu:File[Save As] to save with a different name.
+
+Select menu:Edit[Find > Replace] to open the find and replace dialog.
+
+== Keyboard shortcuts
+
+|===
+|Action |Windows |macOS |Linux
+
+|Copy
+|kbd:[Ctrl+C]
+|kbd:[Cmd+C]
+|kbd:[Ctrl+C]
+
+|Paste
+|kbd:[Ctrl+V]
+|kbd:[Cmd+V]
+|kbd:[Ctrl+V]
+
+|Save
+|kbd:[Ctrl+S]
+|kbd:[Cmd+S]
+|kbd:[Ctrl+S]
+|===
+
+== Footnotes
+
+This sentence has a footnote.footnote:[This is the footnote text.]
+
+This sentence has a footnote with an ID.footnote:fn1[This footnote can be referenced again.]
+
+This sentence references the previous footnote again.footnote:fn1[]
+
+The footnotes are printed at the end of the page (ie. they are implemented as endnotes).
