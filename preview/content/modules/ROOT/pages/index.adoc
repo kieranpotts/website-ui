@@ -1,5 +1,6 @@
 = AsciiDoc Reference Guide
 :page-description: A comprehensive page exercising AsciiDoc elements for theming the Antora UI.
+:experimental:
 
 [.lead]
 This page demonstrates every major AsciiDoc element and feature. It serves as a comprehensive reference and testing ground for the theme. This opening paragraph has been given the "lead" role, which is typically used for introductory text.

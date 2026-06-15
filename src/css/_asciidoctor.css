@@ -164,6 +164,68 @@ sup.footnoteref {
   margin-bottom: var(--line-height);
 }
 
+/* UI MACROS (kbd, btn, menu)
+ *
+ * The experimental UI macros (`kbd:[]`, `btn:[]`, `menu:[]`) need the document
+ * attribute `:experimental:` to be processed. Asciidoctor's default styling is
+ * borrowed here but translated to the theme: the grid's border thickness, the
+ * token palette, and a CSS caret glyph in place of the Font Awesome icon.
+ *
+ *   kbd:[Ctrl+C]      -> <span.keyseq><kbd>Ctrl</kbd>+<kbd>C</kbd></span>
+ *   btn:[Save]        -> <b.button>Save</b>
+ *   menu:File[Save]   -> <span.menuseq><b.menu>File</b><i.caret></i><b.menuitem>Save</b></span>
+ */
+
+/* A keystroke, drawn as a small bordered keycap. */
+kbd {
+  display: inline-block;
+  margin: 0 0.2ch;
+  padding: 0 0.5ch;
+  border: var(--border-thickness) solid var(--color\=border);
+  background: var(--color\=header\|background);
+  font-family: var(--font-family\=monospace);
+  line-height: calc(var(--line-height) - var(--border-thickness) * 2);
+  white-space: nowrap;
+}
+
+/* In a key sequence the separators (`+`) sit between caps; trim the outer caps'
+margins so the sequence aligns with the surrounding text. */
+.keyseq kbd:first-child {
+  margin-left: 0;
+}
+
+.keyseq kbd:last-child {
+  margin-right: 0;
+}
+
+/* A UI button reference: the label wrapped in square brackets, like the boxed
+buttons elsewhere in the theme but inline within prose. */
+b.button::before {
+  content: "[";
+  padding-right: 0.25ch;
+}
+
+b.button::after {
+  content: "]";
+  padding-left: 0.25ch;
+}
+
+/* A menu path (File > Save As). The caret between items uses a glyph rather
+than the Font Awesome icon Asciidoctor emits (which we have no font for). */
+.menuseq b {
+  font-weight: var(--font-weight\=medium);
+}
+
+.menuseq .caret {
+  font-style: normal;
+}
+
+.menuseq .caret::before {
+  content: "›";
+  margin: 0 0.5ch;
+  font-weight: var(--font-weight\=normal);
+}
+
 /* ADMONITIONS (note, tip, important, caution, warning)
  *
  * Asciidoctor emits a two-cell table: an `.icon` cell (a Font Awesome `<i>`,
