@@ -1,0 +1,11 @@
+= Part One: Detail
+:page-description: A nested page beneath Part One, for testing a deep breadcrumb trail.
+
+This page sits one level below xref:part-one.adoc[Part One]. The breadcrumb
+trail above should therefore read *Home › Part One › Part One: Detail*.
+
+Minim enim exercitation nisi est consequat reprehenderit. Sit pariatur labore
+minim reprehenderit cillum amet commodo dolore consequat et eiusmod id.
+
+See xref:part-one-detail-deeper.adoc[the deeper detail page] for one more level
+of nesting.

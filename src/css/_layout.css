@@ -31,7 +31,39 @@ internal chrome (the boxed nav bar) lives in `_components.css`. */
 
 .DOCUMENT {}
 
-.BREADCRUMBS {}
+/* BREADCRUMBS
+ *
+ * The trail to the current page, shown above the document title. An inline,
+ * bulletless list with a "/" between items. Light and small, like the footer,
+ * so it reads as secondary to the page content.
+ *
+ * Markup: <nav.BREADCRUMBS> > <ul> > <li>{a|text}</li>... */
+.BREADCRUMBS {
+  margin-bottom: var(--line-height);
+  color: var(--color\=text\|light);
+  font-size: var(--font-size\=sm);
+}
+
+.BREADCRUMBS ul {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1ch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Reset the owl-selector top margin so items stay on one line. */
+.BREADCRUMBS li {
+  margin: 0;
+}
+
+/* A "/" separator before every item except the first. */
+.BREADCRUMBS li + li::before {
+  content: "/";
+  margin-right: 1ch;
+  color: var(--color\=text\|light);
+}
 
 /* The footer closes the page, separated from the document by a rule and two
 lines of the grid. Its text is light and small, like a colophon. */

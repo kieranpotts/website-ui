@@ -1,0 +1,8 @@
+= Part One
+:page-description: First top-level section, for testing navigation and breadcrumbs.
+
+This is the landing page for *Part One*. It exists to test the NavBar links and
+the breadcrumb trail. Excepteur voluptate adipisicing pariatur voluptate ipsum
+est dolor ex mollit anim.
+
+See xref:part-one-detail.adoc[the detail page] for a deeper level of nesting.
