@@ -111,15 +111,10 @@ hr::after {
   border-top: calc(var(--border-thickness) * 3) double currentColor;
 }
 
-blockquote {
-  margin: var(--line-height) 0;
-  padding-left: 2ch;
-  border-left: var(--border-thickness) solid var(--color\=border);
-}
+/* Quote/verse blocks are styled in `_asciidoctor.css` against their wrapper
+classes (`.quoteblock`, `.verseblock`). */
 
-blockquote p:not(:last-child) {
-  font-style: italic;
-}
+/* blockquote {} */
 
 /* LISTS: Square bullets for ul. Dotted decimal counters for ol
  (1., 1.1., ...). Both indented in whole character cells. */
