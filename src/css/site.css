@@ -6,7 +6,7 @@
  * base layer as the design develops.
  */
 
-@import "fonts.css";
+@import url("fonts.css");
 
 /* ===========================================================================
  * Design tokens.
@@ -39,7 +39,7 @@
 
 html {
   font-size: 100%;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {

@@ -1,0 +1,51 @@
+#
+# Build the UI bundle and publish it as a release asset.
+#
+# Triggered by pushing a version tag (e.g. v0.1.0). The workflow builds
+# dist/ui-bundle.zip and attaches it to a GitHub release for that tag. The
+# website pins a specific release URL in its site-ci.yml playbook.
+#
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish the UI bundle
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install Node.js using the version pinned in .nvmrc.
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the UI bundle
+        run: npm run bundle
+
+      # Create (or update) the release for the pushed tag and attach the
+      # bundle. --generate-notes fills in commit-based release notes.
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            dist/ui-bundle.zip \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes
