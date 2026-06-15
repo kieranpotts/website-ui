@@ -18,11 +18,13 @@ const fs = require('fs-extra')
 const postcss = require('gulp-postcss')
 const postcssImport = require('postcss-import')
 const terser = require('gulp-terser')
-const zip = require('gulp-vinyl-zip')
+// gulp-zip v6 is ESM-only; under CommonJS require() the function is the default export.
+const zip = require('gulp-zip').default
 
 const SRC = 'src'
 const DIST = 'dist'
-const BUNDLE = `${DIST}/ui-bundle.zip`
+const BUNDLE_NAME = 'ui-bundle.zip'
+const BUNDLE = `${DIST}/${BUNDLE_NAME}`
 
 // Files copied into the bundle verbatim (no transformation).
 const STATIC_GLOBS = [
@@ -66,7 +68,8 @@ function statics () {
 // Zip the assembled DIST tree (minus the zip itself) into ui-bundle.zip.
 function pack () {
   return src([`${DIST}/**/*`, `!${BUNDLE}`], { base: DIST, encoding: false })
-    .pipe(zip.dest(BUNDLE))
+    .pipe(zip(BUNDLE_NAME))
+    .pipe(dest(DIST))
 }
 
 const bundle = series(clean, parallel(css, js, vendorJs, statics), pack)
