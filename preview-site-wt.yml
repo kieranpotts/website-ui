@@ -1,0 +1,17 @@
+site:
+  title: WT Test
+  start_page: preview::index.adoc
+content:
+  sources:
+  - url: .
+    branches: HEAD
+    start_path: preview/content
+ui:
+  bundle:
+    url: ./dist/ui-bundle.zip
+    snapshot: true
+output:
+  clean: true
+  dir: wt-test-out
+runtime:
+  fetch: false

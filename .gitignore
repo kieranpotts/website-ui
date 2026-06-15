@@ -18,26 +18,13 @@ dist/*
 # Standalone theme preview output (gulp preview).
 preview-output/
 
+# Throwaway git snapshot of preview content, so the working tree can be
+# previewed without committing (gulp previewSrc).
+.preview-src/
+
 # Managed packages.
 node_modules/*
-
-# Logs.
-*.log
-
-# Test coverage.
-coverage/*
-
-# ESLint.
-.eslintcache
 
 # Pre-commit.
 .pre-commit
 
-# Terraform.
-.terraform/
-*.tfstate
-*.tfstate.backup
-*.local.hcl
-terraform.tfvars
-*.auto.tfvars
-*.auto.tfvars.json

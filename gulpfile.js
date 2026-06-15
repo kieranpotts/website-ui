@@ -74,8 +74,38 @@ function pack () {
 
 const bundle = series(clean, parallel(css, js, vendorJs, statics), pack)
 
-// Standalone preview: build the sample site in preview/ against the unzipped
-// src/ tree so the theme can be iterated without rebuilding the zip.
+// Snapshot the live preview content into a throwaway git repo so Antora can
+// read the *current working tree* without a manual commit.
+//
+// Antora's content aggregator (isomorphic-git) reads committed git objects, and
+// it cannot open this checkout directly because it is a git WORKTREE — its
+// `.git` is a pointer file, not a real directory. So each preview run copies
+// preview/content into `.preview-src/` (a plain `git init` repo with a real
+// `.git`) and commits a snapshot; preview-site.yml then points Antora there.
+// The net effect: uncommitted edits to preview/content appear in the preview
+// immediately. `.preview-src/` is gitignored and disposable.
+async function previewSrc () {
+  const { execFileSync } = require('child_process')
+  const dir = '.preview-src'
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { stdio: 'ignore' })
+
+  await fs.remove(`${dir}/content`)
+  await fs.ensureDir(dir)
+  if (!(await fs.pathExists(`${dir}/.git`))) {
+    git('init', '-q')
+    git('config', 'user.email', 'preview@localhost')
+    git('config', 'user.name', 'preview')
+    git('config', 'commit.gpgsign', 'false')
+  }
+  await fs.copy('preview/content', `${dir}/content`)
+  git('add', '-A')
+  // `--allow-empty` so an unchanged snapshot still produces a commit to read.
+  git('commit', '-q', '--allow-empty', '-m', 'snapshot')
+}
+
+// Standalone preview: build the sample site against the unzipped src/ tree (via
+// the freshly built bundle) so the theme can be iterated without the website
+// repo. Reads content from the .preview-src snapshot (see previewSrc).
 async function preview () {
   const generateSite = require('@antora/site-generator')
   await generateSite(['--playbook', 'preview-site.yml', '--stacktrace'], process.env)
@@ -93,6 +123,6 @@ exports.clean = clean
 exports.css = css
 exports.js = series(js, vendorJs)
 exports.bundle = bundle
-exports.preview = series(bundle, preview)
+exports.preview = series(bundle, previewSrc, preview)
 exports.lint = lint
 exports.default = bundle

@@ -10,14 +10,15 @@ site:
 
 content:
   sources:
-  # This repo is checked out as a git worktree (its `.git` is a pointer file),
-  # which isomorphic-git cannot read as a local source. So, as in the website
-  # repo, we point at the sibling bare repo and the worktree's branch. The
-  # sample content must therefore be committed to be picked up; that is fine —
-  # the content is stable, and theme edits only require re-running the bundle.
-  - url: ../.bare
-    branches: dev
-    start_path: preview/content
+  # Read from the .preview-src snapshot, not preview/content directly: this repo
+  # is a git worktree (its `.git` is a pointer file) which Antora's aggregator
+  # cannot open. The `gulp previewSrc` task copies the *current* preview/content
+  # working tree into .preview-src (a plain git repo) and commits it before each
+  # build, so uncommitted content edits appear in the preview without a manual
+  # commit. See gulpfile.js.
+  - url: ./.preview-src
+    branches: HEAD
+    start_path: content
 
 ui:
   bundle:
