@@ -1,0 +1,128 @@
+/**
+ * CONTROLS
+ *
+ * Interactive form controls — buttons, text inputs, checkboxes, radios,
+ * selects, and textareas.
+ *
+ * Every control is sized in whole grid units: borders use `--border-thickness`,
+ * heights are multiples of `--line-height`, and horizontal padding/width are in
+ * `ch` so controls sit on the same character grid as the body text.
+ */
+
+/* The horizontal scrollbar is given the grid's line height. */
+::-webkit-scrollbar {
+  height: var(--line-height);
+}
+
+/* Shared control box: a hairline border, grid-aligned padding, two lines tall.
+`appearance: none` strips native chrome so the box renders identically across
+browsers. */
+input, button, select, textarea {
+  margin: 0;
+  height: calc(var(--line-height) * 2);
+  width: auto;
+  padding:
+    calc(var(--line-height) / 2 - var(--border-thickness))
+    calc(1ch - var(--border-thickness));
+  border: var(--border-thickness) solid var(--color\=text\|default);
+  background: var(--color\=page\|background);
+  color: var(--color\=text\|default);
+  font: inherit;
+  font-weight: inherit;
+  line-height: normal;
+  overflow: visible;
+  appearance: none;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+}
+
+/* A textarea spans multiple lines, so it is not pinned to the two-line height. */
+textarea {
+  height: auto;
+  min-height: calc(var(--line-height) * 4);
+  resize: vertical;
+}
+
+/* Text-like inputs fill the available width, snapped to whole characters. */
+input,
+select,
+textarea {
+  width: calc(round(down, 100%, 1ch));
+}
+
+/* Checkboxes and radios are compact toggles drawn from the box itself: a 2ch
+square (or circle), filled with a solid block when checked. */
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline-grid;
+  place-content: center;
+  vertical-align: top;
+  width: 2ch;
+  height: var(--line-height);
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked::before,
+input[type="radio"]:checked::before {
+  content: "";
+  width: 1ch;
+  height: calc(var(--line-height) / 2);
+  background: var(--color\=text\|default);
+}
+
+input[type="radio"],
+input[type="radio"]::before {
+  border-radius: 100%;
+}
+
+/* Focus thickens the border rather than drawing a separate outline, keeping
+the control on the grid. */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  --border-thickness: 3px;
+}
+
+::placeholder {
+  color: var(--color\=text\|light);
+  opacity: 1;
+}
+
+/* Buttons read as uppercase actions and depress slightly when activated. */
+button {
+  text-transform: uppercase;
+  font-weight: var(--font-weight\=medium);
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+button:hover {
+  background: var(--color\=header\|background);
+}
+
+button:active {
+  transform: translate(2px, 2px);
+}
+
+/* Labels are block-level and grid-wide, so stacked label/control pairs align. */
+label {
+  display: block;
+  width: calc(round(down, 100%, 1ch));
+  height: auto;
+  margin: 0;
+  line-height: var(--line-height);
+  font-weight: var(--font-weight\=medium);
+}
+
+/* A control nested inside its label fills the label's width. */
+label input,
+label select,
+label textarea {
+  width: 100%;
+}
