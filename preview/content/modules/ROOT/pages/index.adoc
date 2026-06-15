@@ -1,45 +1,184 @@
-= Website UI Preview
-:page-home: true
+= The Monospace Web: a Theme Preview
+:page-description: A single rich page exercising a broad range of AsciiDoc constructs for theming the Antora UI.
 
-This page exercises the theme's typography and components so the UI can be
-developed standalone.
+This single page exercises a broad range of AsciiDoc constructs so the theme
+can be designed against realistic content. It deliberately mixes prose,
+images, code, tables, lists, and block elements.
 
-== Headings and prose
+== Prose and inline formatting
 
-A short paragraph with _italic_, *bold*, and `inline code`. A link to an
-xref:sub/page.adoc[internal page] and to https://kieranpotts.com[an external
-site].
+A paragraph of ordinary prose to establish the body rhythm. The quick brown fox
+jumps over the lazy dog; the quick brown fox jumps over the lazy dog; the quick
+brown fox jumps over the lazy dog. We repeat ourselves to get a few lines of
+wrapping so the line-height and measure can be judged honestly.
 
-=== A third-level heading
+Inline styles: *bold*, _italic_, *_bold italic_*, `monospace`, +++<u>underline</u>+++,
+[.line-through]#strikethrough#, ^superscript^, ~subscript~, and a `code span`
+with some `--flags` in it. Here is a keyboard shortcut: kbd:[Ctrl+C], and a
+button reference: btn:[OK]. A menu path: menu:File[Save As... > PDF].
 
-[quote]
-A block quotation, set apart with a rule and muted text.
+Some text with a footnote.footnote:[Footnotes render as superscript references
+with the note collected at the foot of the document.] And a second
+footnote.footnote:[The second note, to check spacing between multiple notes.]
+
+Highlighted text: #marked text#, and a passthrough of an emoji: &#9733;.
+
+=== Links and cross references
+
+An external link: https://owickstrom.github.io/the-monospace-web/[The Monospace
+Web^]. A bare URL: https://kieranpotts.com. A mailto link:
+mailto:code@kieranpotts.com[email me]. And an internal anchor back to
+<<Prose and inline formatting,the prose section>>.
+
+== Images
+
+A block image with a caption:
+
+.A wide sample image, full content width
+image::sample-wide.png[A wide gradient sample, 1200, 675]
+
+An inline image sits in the text line image:sample-square.png[avatar, 24, 24]
+like so, flowing with the words around it.
+
+A smaller, explicitly sized block image, centered:
+
+[.text-center]
+image::sample-square.png[Square sample, 200, 200]
+
+An SVG diagram:
+
+.A simple build pipeline
+image::diagram.svg[Build pipeline diagram, 600, 240]
 
 == Lists
 
-* First item
-* Second item
-** Nested item
-* Third item
+Unordered list:
 
-. Ordered one
-. Ordered two
+* First item
+* Second item with a longer line that should wrap onto a second visual line so
+  list wrapping and hanging indentation can be evaluated
+* Third item
+** Nested first
+** Nested second
+*** Deeply nested
+
+Ordered list:
+
+. Step one
+. Step two
+.. Sub-step a
+.. Sub-step b
+. Step three
+
+A checklist:
+
+* [x] Done item
+* [ ] Pending item
+* [ ] Another pending item
+
+Description list:
+
+Source:: The AsciiDoc and asset files for a page.
+Build:: The Antora pipeline that converts sources into HTML.
+Site:: The published static output.
 
 == Code
 
-[source,js]
+Inline `code` within a sentence, and a fenced source block with syntax
+highlighting and callouts:
+
+[source,javascript]
 ----
-function greet (name) {
-  return `Hello, ${name}!`
+function greet (name) { // <1>
+  return `Hello, ${name}!` // <2>
 }
+
+console.log(greet('world'))
+----
+<1> A function declaration.
+<2> A template literal.
+
+A plain listing block (no language):
+
+----
+$ npm run bundle
+[13:45] Starting 'bundle'...
+[13:45] Finished 'bundle' after 99 ms
 ----
 
-== Table
+A literal block:
 
-[cols="1,2"]
-|===
-| Key | Value
+ This is a literal block.
+   Indentation is preserved exactly.
 
-| Alpha | The first entry
-| Beta  | The second entry
+== Tables
+
+A simple table:
+
+[cols="1,2,1"]
 |===
+| Key | Description | Value
+
+| alpha | The first entry | 1
+| beta  | The second entry, with a longer description that wraps | 2
+| gamma | The third entry | 3
+|===
+
+A table with a header and footer and aligned columns:
+
+[cols="<,^,>", options="header,footer"]
+|===
+| Left | Center | Right
+
+| a | b | c
+| dd | ee | ff
+
+| Total | | 99
+|===
+
+== Block elements
+
+A block quotation:
+
+[quote,Oskar Wickström,The Monospace Web]
+____
+When was the last time you saw a beautiful monospace web page? One where the
+text lines up, top to bottom, left to right?
+____
+
+An admonition of each type:
+
+NOTE: This is a note admonition.
+
+TIP: This is a tip admonition.
+
+IMPORTANT: This is an important admonition.
+
+WARNING: This is a warning admonition.
+
+CAUTION: This is a caution admonition.
+
+A sidebar:
+
+.A sidebar title
+****
+Sidebars hold tangential content. This one has a *bold* word and a
+`code span` to check inline styles inside block contexts.
+****
+
+An example block:
+
+.An example block
+====
+Example blocks group related content. They can contain paragraphs, lists, and
+other blocks.
+
+* a list inside an example
+* a second item
+====
+
+A horizontal rule follows:
+
+'''
+
+And a final paragraph after the rule, to confirm spacing resumes correctly.

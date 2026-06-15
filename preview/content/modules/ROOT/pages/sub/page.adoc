@@ -1,6 +1,0 @@
-= A nested section
-
-This page sits one level deep, so its breadcrumb trail should read
-Preview &rsaquo; A nested section.
-
-See xref:sub/deep.adoc[the deeper page] to check a longer trail.

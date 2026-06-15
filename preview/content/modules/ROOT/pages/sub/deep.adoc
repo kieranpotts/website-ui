@@ -1,4 +1,0 @@
-= A deeper page
-
-The breadcrumb trail here should show the full, uncollapsed path with every
-ancestor rendered as a clickable link.
