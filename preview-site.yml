@@ -16,7 +16,7 @@ content:
   # sample content must therefore be committed to be picked up; that is fine —
   # the content is stable, and theme edits only require re-running the bundle.
   - url: ../.bare
-    branches: default
+    branches: dev
     start_path: preview/content
 
 ui:
