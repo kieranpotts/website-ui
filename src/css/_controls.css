@@ -51,22 +51,26 @@ textarea {
 }
 
 /* Checkboxes and radios are compact toggles drawn from the box itself: a 2ch
-square (or circle), filled with a solid block when checked. */
+*square* (or circle), filled with a solid block when checked. The height is
+pinned to the 2ch width (rather than the line height) so the box stays square
+at this theme's taller line height, and centred on the text line via margin. */
 input[type="checkbox"],
 input[type="radio"] {
   display: inline-grid;
   place-content: center;
   vertical-align: top;
   width: 2ch;
-  height: var(--line-height);
+  height: 2ch;
+  margin-top: calc((var(--line-height) - 2ch) / 2);
   cursor: pointer;
 }
 
+/* The checked mark is a solid block (a dot, for radios) filling half the box. */
 input[type="checkbox"]:checked::before,
 input[type="radio"]:checked::before {
   content: "";
   width: 1ch;
-  height: calc(var(--line-height) / 2);
+  height: 1ch;
   background: var(--color\=text\|default);
 }
 
@@ -90,11 +94,24 @@ textarea:focus {
   opacity: 1;
 }
 
-/* Buttons read as uppercase actions and depress slightly when activated. */
+/* Buttons read as uppercase actions and depress slightly when activated. Unlike
+the full-width text inputs, a button shrinks to its label and sits inline, so
+adjacent buttons line up in a row. */
 button {
+  display: inline-block;
+  width: auto;
+  vertical-align: top;
   text-transform: uppercase;
   font-weight: var(--font-weight\=medium);
   cursor: pointer;
+}
+
+/* Space consecutive inline buttons by one character cell. The owl selector
+(`_typography.css`) adds a top margin between siblings; cancel it so a row of
+buttons stays on one line, and use a left margin instead. */
+button + button {
+  margin-top: 0;
+  margin-left: 1ch;
 }
 
 button::-moz-focus-inner {

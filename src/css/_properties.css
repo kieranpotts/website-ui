@@ -113,6 +113,11 @@
   --line-height: 2.5rem;
   --border-thickness: 2px;
 
+  /* Code blocks get their own, tighter leading: looser than the default
+  single-spaced `pre` (which crowds wrapped/long lines) but tighter than the
+  body's full grid rhythm, which is too airy for dense code. */
+  --line-height\=code: 2rem;
+
   /* Spacing */
 
   --spacing: 4rem;

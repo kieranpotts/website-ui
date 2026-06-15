@@ -170,7 +170,6 @@ img, video {
 
 img {
   /* Alt text, shown if the image fails to load, reads as a caption. */
-  font-style: italic;
   color: var(--color\=text\|light);
 }
 
@@ -182,7 +181,6 @@ figure {
 
 figcaption {
   display: block;
-  font-style: italic;
   text-align: center;
 }
 
@@ -236,6 +234,8 @@ a:active { color: var(--color\=hyperlink\|active); }
 pre {
   font-family: var(--font-family\=monospace);
   margin: var(--line-height) 0;
+  /* Tighter than the body's full grid rhythm, looser than single-spaced. */
+  line-height: var(--line-height\=code);
   white-space: pre;
   overflow-x: auto;
   overflow-y: hidden;

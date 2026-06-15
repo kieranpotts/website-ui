@@ -104,10 +104,6 @@ the question counter below replaces it. */
   font-weight: var(--font-weight\=bold);
 }
 
-.qlist.qanda > ol > li > p:first-child {
-  font-style: italic;
-}
-
 /* CALLOUT LISTS (colist) & CALLOUT NUMBERS (conum)
  *
  * A conum is an inline reference marker (`<i class="conum" data-value="N">`)
@@ -150,11 +146,22 @@ the question counter below replaces it. */
 
 /* FOOTNOTES
  *
- * In-text footnote references (`<sup class="footnote">[N]</sup>`). Keep them
- * out of the line box like sub/superscript so they don't disturb the grid. */
-.footnote,
-.footnoteref {
-  font-size: 0.75rem;
+ * In-text reference markers (`<sup class="footnote">[N]</sup>`) keep their
+ * body-size text and are raised by the `sup` reset, so a `[N]` reads clearly
+ * rather than shrinking to a tiny gloss. The footnote *definitions* printed at
+ * the foot of the page (`#footnotes > div.footnote`) also stay at body size. */
+sup.footnote,
+sup.footnoteref {
+  font-size: 100%; /* override the generic `sup` shrink (`_resets.css`) */
+}
+
+/* The endnote list at the page foot: separated by a rule, normal body size. */
+#footnotes {
+  margin-top: calc(var(--line-height) * 2);
+}
+
+#footnotes hr {
+  margin-bottom: var(--line-height);
 }
 
 /* ADMONITIONS (note, tip, important, caution, warning)
@@ -219,7 +226,6 @@ the question counter below replaces it. */
 
 .quoteblock blockquote {
   margin: 0;
-  font-style: italic;
 }
 
 .verseblock pre.content {
@@ -230,12 +236,10 @@ the question counter below replaces it. */
 .attribution {
   margin-top: var(--line-height);
   color: var(--color\=text\|light);
-  font-style: normal;
 }
 
 .attribution cite {
   display: block;
-  font-style: italic;
 }
 
 /* SIDEBAR & EXAMPLE BLOCKS
@@ -300,11 +304,10 @@ sidebar's title sits inside it. Both are bold, not the default italic. */
 /* BLOCK TITLES
  *
  * Asciidoctor labels many blocks with a `.title` (a caption above the block:
- * image titles, listing titles, table titles...). Render them as a light,
- * italic caption on the line grid. Block-specific overrides above (example,
+ * image titles, listing titles, table titles...). Render them as a light
+ * caption on the line grid. Block-specific overrides above (example,
  * sidebar) take precedence. */
 .title {
-  font-style: italic;
   color: var(--color\=text\|light);
 }
 

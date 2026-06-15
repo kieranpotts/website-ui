@@ -79,3 +79,41 @@ lines of the grid. Its text is light and small, like a colophon. */
 .FOOTER > :first-child {
   margin-top: 0;
 }
+
+/* GRID
+ *
+ * A horizontal layout primitive (from The Monospace Web): it divides its width
+ * into equal cells, one per child, gapped by a single character cell and
+ * snapped so every cell is a whole number of characters wide. Used to lay form
+ * controls and label/control pairs out side by side. The cell count is read
+ * from the number of children via `:has()`. */
+.grid {
+  --grid-cells: 0;
+
+  display: flex;
+  gap: 1ch;
+  width: calc(round(down, 100%, (1ch * var(--grid-cells)) - (1ch * var(--grid-cells) - 1)));
+  margin-bottom: var(--line-height);
+}
+
+/* Each cell takes an equal, character-snapped share of the row. `flex: 0 0`
+fixes the basis so cells do not grow or shrink off the grid. */
+.grid > * {
+  flex: 0 0 calc(round(down, (100% - (1ch * (var(--grid-cells) - 1))) / var(--grid-cells), 1ch));
+}
+
+/* The owl selector (`_typography.css`) would push every cell after the first
+down by a line; in a grid the cells sit on one row, so reset it. */
+.grid > * + * {
+  margin-top: 0;
+}
+
+.grid:has(> :last-child:nth-child(1)) { --grid-cells: 1; }
+.grid:has(> :last-child:nth-child(2)) { --grid-cells: 2; }
+.grid:has(> :last-child:nth-child(3)) { --grid-cells: 3; }
+.grid:has(> :last-child:nth-child(4)) { --grid-cells: 4; }
+.grid:has(> :last-child:nth-child(5)) { --grid-cells: 5; }
+.grid:has(> :last-child:nth-child(6)) { --grid-cells: 6; }
+.grid:has(> :last-child:nth-child(7)) { --grid-cells: 7; }
+.grid:has(> :last-child:nth-child(8)) { --grid-cells: 8; }
+.grid:has(> :last-child:nth-child(9)) { --grid-cells: 9; }
