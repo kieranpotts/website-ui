@@ -11,8 +11,13 @@
  * constrained to the same column as `.MAIN`, with matching side padding, so the
  * brand and menu line up with the body content beneath. On narrow widths the
  * menu wraps below the brand.
+ * On narrow viewports the menu collapses behind a burger button: it is hidden
+ * until the button is pressed, then drops down as a full-width list beneath the
+ * bar (the `is-open` state is toggled by `40-navbar.js`). At >=50rem the button
+ * is hidden and the menu is always shown inline on the right.
  *
- * Markup: <nav.NavBar> > <a.NavBar__Brand> + <ul.NavBar__Menu> */
+ * Markup: <nav.NavBar> > <a.NavBar__Brand> + <button.NavBar__Toggle>
+ *         + <ul.NavBar__Menu#nav-menu> */
 
 .NavBar {
   display: flex;
@@ -35,26 +40,116 @@ underline (it overrides the bare-link styling from `_typography.css`). */
   text-decoration: none;
 }
 
-/* The menu is a horizontal, bulletless list. It resets the bare `ul` styling
-(square bullets, padding, bottom margin) from `_typography.css`. */
-.NavBar__Menu {
+/* BURGER BUTTON: shown only on mobile (hidden at >=50rem, below). Three stacked
+bars in a square that lands on the grid. It resets the full-width block styling
+that `_resets.css` gives bare buttons. */
+.NavBar__Toggle {
   display: flex;
-  flex-wrap: wrap;
-  column-gap: 2ch;
-  row-gap: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--line-height) / 5);
+  /* Pin to the right edge of the bar. `space-between` on the NavBar only
+  separates the brand and button while the menu is hidden, but once the menu
+  drops in (open) it claims its own wrapped row, leaving brand and button as the
+  sole items on the first line; `margin-left: auto` keeps the button hard right
+  in both states, independent of how many siblings share the line. */
+  margin-left: auto;
+  width: auto;
+  height: var(--line-height);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.NavBar__ToggleBar {
+  display: block;
+  width: 3ch;
+  height: var(--border-thickness);
+  background: var(--color\=text\|default);
+}
+
+/* The menu is a bulletless list. It resets the bare `ul` styling (square
+bullets, padding, bottom margin) from `_typography.css`.
+
+Mobile default: a full-width dropdown, hidden until opened. It takes a full row
+of the wrapping flex bar (`flex-basis: 100%`) so it sits beneath the brand and
+button, and stacks its items vertically. */
+.NavBar__Menu {
+  flex-basis: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.NavBar__Menu:not(.is-open) {
+  display: none;
+}
+
+.NavBar__Menu.is-open {
+  display: flex;
+  flex-direction: column;
+  /* Right-align the stacked items, under the burger button. */
+  align-items: flex-end;
+  row-gap: calc(var(--line-height) / 2);
+  margin-top: calc(var(--line-height) / 2);
+}
+
 /* The owl selector in `_typography.css` would add a top margin to every list
-item after the first; flex layout plus this reset keeps them on one line. */
+item after the first; the flex `row-gap` handles spacing instead. */
 .NavBar__Menu > li {
   margin: 0;
 }
 
 .NavBar__Menu a {
   text-transform: uppercase;
+}
+
+/* The social (GitHub) item carries an inline SVG icon rather than a text label.
+The link drops the underline that bare links carry, since the icon is the
+target. */
+.NavBar__Social a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* The icon inherits the link's ink color (overriding the `fill: none` reset)
+and brightens to the accent on hover/focus, matching the link behaviour. The
+glyph is nudged onto the text baseline of the adjacent menu items. */
+.NavBar__Icon {
+  width: 1.6em;
+  height: 1.6em;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.NavBar__Social a:hover .NavBar__Icon,
+.NavBar__Social a:focus .NavBar__Icon {
+  fill: var(--color\=accent);
+}
+
+/* DESKTOP: at >=50rem the burger is hidden and the menu is always shown as an
+inline horizontal list on the right, regardless of the `is-open` state. */
+@media screen and (min-width: 50rem) {
+  .NavBar__Toggle {
+    display: none;
+  }
+
+  .NavBar__Menu,
+  .NavBar__Menu:not(.is-open),
+  .NavBar__Menu.is-open {
+    display: flex;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* Right-align the inline items against the right edge of the bar. */
+    justify-content: flex-end;
+    align-items: baseline;
+    column-gap: 2ch;
+    row-gap: 0;
+    margin-top: 0;
+  }
 }
 
 /* FLOATING TABLE OF CONTENTS
