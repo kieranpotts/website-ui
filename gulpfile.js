@@ -80,9 +80,9 @@ const bundle = series(clean, parallel(css, js, vendorJs, statics), pack)
 // Antora's content aggregator (isomorphic-git) reads committed git objects, and
 // it cannot open this checkout directly because it is a git WORKTREE — its
 // `.git` is a pointer file, not a real directory. So each preview run copies
-// preview/content into `.preview-src/` (a plain `git init` repo with a real
+// srv/ into `.preview-src/` (a plain `git init` repo with a real
 // `.git`) and commits a snapshot; preview-site.yml then points Antora there.
-// The net effect: uncommitted edits to preview/content appear in the preview
+// The net effect: uncommitted edits to srv/ appear in the preview
 // immediately. `.preview-src/` is gitignored and disposable.
 async function previewSrc () {
   const { execFileSync } = require('child_process')
@@ -97,7 +97,7 @@ async function previewSrc () {
     git('config', 'user.name', 'preview')
     git('config', 'commit.gpgsign', 'false')
   }
-  await fs.copy('preview/content', `${dir}/content`)
+  await fs.copy('srv', `${dir}/content`)
   git('add', '-A')
   // `--allow-empty` so an unchanged snapshot still produces a commit to read.
   git('commit', '-q', '--allow-empty', '-m', 'snapshot')

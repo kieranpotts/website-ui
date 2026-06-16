@@ -29,7 +29,7 @@ src/
   font/       iA Writer typeface (woff2).
   ui.yml      Bundle manifest (static_files).
 gulpfile.js   Build tasks (bundle, preview, lint).
-preview-site.yml + preview/content/   Standalone theme preview.
+preview-site.yml + srv/   Standalone theme preview.
 ```
 
 ## Linting

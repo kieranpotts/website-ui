@@ -16,7 +16,7 @@ This processes `src/` and writes `dist/ui-bundle.zip`. CSS is run through PostCS
 npm run preview
 ```
 
-Builds the bundle, then renders a small sample site (`preview/content/`) into
+Builds the bundle, then renders a small sample site (`srv/`) into
 `preview-output/` using [`preview-site.yml`](../preview-site.yml). Open
 `preview-output/index.html`, or serve the directory, to review the theme in
 isolation.

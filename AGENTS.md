@@ -17,7 +17,7 @@ Writer. It is built into `dist/ui-bundle.zip` and consumed by the separate
 
 - `src/`: Theme sources — `layouts/`, `partials/`, `helpers/`, `css/`,
   `font/`, `ui.yml`.
-- `preview/content/` + `preview-site.yml`: Standalone preview site.
+- `srv/` + `preview-site.yml`: Standalone preview site.
 - `dist/`: Build output (`ui-bundle.zip`); git-ignored.
 - `docs/`: Developer/maintainer documentation.
 

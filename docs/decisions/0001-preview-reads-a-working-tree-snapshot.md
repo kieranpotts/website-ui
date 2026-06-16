@@ -7,8 +7,8 @@ Status: Accepted
 ## Context
 
 The standalone theme preview (`npm run preview`, i.e. `gulp preview`) builds a
-sample site from `preview/content/` so the UI can be developed without the
-website repository. We want edits to `preview/content/` to appear in the
+sample site from `srv/` so the UI can be developed without the
+website repository. We want edits to `srv/` to appear in the
 preview **without first committing them** — a fast author loop.
 
 Antora's content aggregator reads content from a Git source. It uses
@@ -40,7 +40,7 @@ We considered three options:
    out on disk and diverges from the worktree workflow used across these
    repositories. Too invasive for a dev-only convenience.
 
-3. **Snapshot the working tree into a throwaway repo.** Copy `preview/content/`
+3. **Snapshot the working tree into a throwaway repo.** Copy `srv/`
    into a plain `git init` repo (real `.git` directory) and read from there.
 
 ## Decision
@@ -50,7 +50,7 @@ Adopt option 3. A `previewSrc` Gulp task, run before each preview build:
 - ensures a disposable, git-ignored `.preview-src/` directory exists, with a
   plain `git init` repository (a real `.git` directory, which isomorphic-git
   _can_ read);
-- copies the current `preview/content/` working tree into it;
+- copies the current `srv/` working tree into it;
 - commits a snapshot (`--allow-empty`, so an unchanged copy still yields a
   commit for the aggregator to read).
 
@@ -58,12 +58,12 @@ Adopt option 3. A `previewSrc` Gulp task, run before each preview build:
 (`branches: HEAD`, `start_path: content`). The `gulp preview` pipeline is
 `bundle → previewSrc → preview`.
 
-The net effect: uncommitted edits to `preview/content/` appear in the preview
+The net effect: uncommitted edits to `srv/` appear in the preview
 immediately, with no manual commit.
 
 ## Consequences
 
-- **Fast author loop.** Editing `preview/content/` and re-running
+- **Fast author loop.** Editing `srv/` and re-running
   `npm run preview` reflects the change with no commit step.
 - **Scope.** This only ever affected _content_. Theme sources under `src/`
   (CSS, templates, helpers) are read straight from the working tree by the
