@@ -17,7 +17,7 @@
  * these files from colliding without needing an IIFE.
  */
 {
-  const COLLAPSE_THRESHOLD = 15
+  const COLLAPSE_THRESHOLD = 20
 
   const init = () => {
     const aside = document.querySelector('.TOC')

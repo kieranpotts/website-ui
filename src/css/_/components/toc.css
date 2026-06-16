@@ -1,55 +1,55 @@
 
-/* FLOATING TABLE OF CONTENTS: An on-page contents list, built and
-scrollspy-highlighted by `50-toc.js`, which fills the empty
-`<aside class="TOC">` rendered by `toc.hbs`.
-
-It is a desktop-only affordance, floated into the gutter to the right of the
-centered `.MAIN` column. It is hidden by default (and on any page where the
-script found too few headings, via `:empty`); it is only revealed at wide
-viewports where the right gutter can hold it without overlapping the content.
-
-It is `position: fixed`, so it floats over the page and tracks the viewport
-as the reader scrolls. It is pinned to the right edge of the content column:
-`left: calc(50% + 40ch + 4ch)` clears the centered column (half of the 80ch
-column = 40ch) plus a 4ch gap. The reveal breakpoint (1440px) is chosen so
-that, at that width, the column plus both gutters leaves room for the list. */
+/**
+ * FLOATING TABLE OF CONTENTS
+ *
+ * An on-page contents list with scrollspy – implemented in `50-toc.js`, which
+ * reads the rendered page contents and fills the empty `<aside class="TOC">`
+ * rendered by `toc.hbs`.
+ */
 
 .TOC {
   display: none;
 }
 
+/* Reveal the TOC only on screens where there is enough
+empty space in the gutter – between the content and the
+right edge of the page. */
 @media screen and (min-width: 1440px) {
 
-  /* Reveal only when the page actually has a contents list (the aside is left
-  empty on pages with too few headings) and there is gutter room. */
-
+  /* Reveal only when the page actually has a contents list.
+  The JS leaves the TOC empty on pages with too few headings. */
   .TOC:not(:empty) {
     border-left: var(--border-thickness) solid var(--color\=border);
     display: block;
     font-size: var(--font-size\=sm);
-    left: calc(50% + 40ch + 4ch);
     line-height: var(--line-height);
     max-height: calc(100vh - var(--line-height) * 2);
+
+    /* Cap the width of the TOC. Entries longer than this
+    are clipped – see `.TOC__List a`. */
+    max-width: 36ch;
     overflow-y: auto;
     padding-left: 2ch;
+    padding-bottom: 1ch;
+
+    /* Pinned to the far right of the viewport,
+    just inside the scrollbar. */
     position: fixed;
-    top: var(--line-height);
-    width: 36ch;
+    right: 2ch;
+    top: calc(var(--line-height) * 2);
   }
 }
 
 /* The small-caps label above the list. */
-
 .TOC__Title {
   color: var(--color\=text\|light);
   font-weight: var(--font-weight\=bold);
   margin-bottom: calc(var(--line-height) / 2);
+  margin-top: calc(var(--line-height) / 2);
   text-transform: uppercase;
 }
 
-/* The list is bulletless and flush-left; it resets the bare `ul` styling
-(square bullets, margins) from `_typography.css`. */
-
+/* The list is bullet-less. */
 .TOC__List,
 .TOC__List ul {
   list-style: none;
@@ -57,22 +57,19 @@ that, at that width, the column plus both gutters leaves room for the list. */
   padding: 0;
 }
 
-/* Nested (h3) entries indent two cells under their section. */
-
+/* Nested (h3) entries indent two cells under
+their parent section. */
 .TOC__List ul {
   padding-left: 2ch;
 }
 
-/* The owl selector in `_typography.css` would space items a full line apart;
-the TOC is denser, so reset it and let the list's own line-height set the gap. */
-
+/* Reset any inherited margins on list items. */
 .TOC__List li {
   margin: 0;
 }
 
-/* Entries read as quiet, ink-light text with no underline at rest; the accent
-underline and hover styling are reserved for the active entry. */
-
+/* At rest, entries are quiet, ink-light
+text with no underline. */
 .TOC__List a {
   color: var(--color\=text\|light);
   display: block;
@@ -82,17 +79,15 @@ underline and hover styling are reserved for the active entry. */
   white-space: nowrap;
 }
 
+/* On hover, reveal underline. */
 .TOC__List a:hover {
-  color: var(--color\=text\|default);
-}
-
-/* The entry for the heading currently in view: full-ink text with the signature
-accent marking it, so the reader's place stands out. */
-
-.TOC__List .is-active > a {
-  color: var(--color\=text\|default);
   text-decoration: underline;
   text-decoration-color: var(--color\=accent);
   text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
+}
+
+/* Active item is full-ink text. */
+.TOC__List .is-active > a {
+  color: var(--color\=text\|default);
 }
