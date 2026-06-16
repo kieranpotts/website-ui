@@ -10,21 +10,17 @@
 # software stacks here: https://github.com/github/gitignore
 #
 
-# Build artifacts (but keep the README or .keep file).
-dist/*
-!dist/.keep
-!dist/README.adoc
+# Build artifacts.
+dist/
 
-# Standalone theme preview output (gulp preview).
+# Standalone theme preview website.
 www/
 
-# Throwaway git snapshot of preview content, so the working tree can be
-# previewed without committing (gulp previewSrc).
+# Throwaway Git snapshot of preview content.
 tmp/
 
 # Managed packages.
-node_modules/*
+node_modules/
 
 # Pre-commit.
 .pre-commit
-

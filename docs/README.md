@@ -1,10 +1,115 @@
-# Developer Docs
+# 📓 Developer Docs
 
-- [**Requirements**](./requirements.md)
-- [**Installation**](./installation.md)
-- [**Usage**](./usage.md)
-- [**Development**](./development.md)
+## ✅ Requirements
 
-## Architecture decision records
+- [Node.js](https://nodejs.org/) at the version pinned in [`.nvmrc`](../.nvmrc).
+- `npm` – which is bundled with Node.js.
 
-- [1. Preview reads a working-tree snapshot](./decisions/0001-preview-reads-a-working-tree-snapshot.md)
+No global tooling is required – everything runs from local dev dependencies managed by `npm`.
+
+## 📦 Installing dev dependencies
+
+```bash
+nvm use       # Or specify the version pinned in .nvmrc.
+npm install
+```
+
+## 🗂️ Repository structure
+
+```
+.
+├── dist/              Build target – Git-ignored.
+├── node_modules/      Node.js dependencies – Git-ignored.
+├── src/               Theme source files.
+│   ├── layouts/       Page layouts (default.hbs, 404.hbs).
+│   ├── partials/      Handlebars partials composed by the layouts.
+│   ├── helpers/       Handlebars helpers (and, eq, or).
+│   ├── css/           Stylesheets – site.css is the entry point.
+│   ├── font/          Web fonts.
+│   └── ui.yml         Bundle manifest (static_files).
+├── srv/               Source files for the preview website.
+├── tmp/               Supports build automation – Git-ignored.
+├── vendor/            Fonts and other master files from third-parties.
+├── www/               Static preview site is built here – Git-ignored.
+├── .stylelintrc.json  CSS linting rules.
+├── gulpfile.js        Build tasks (bundle, preview, lint).
+├── package.json       Dev dependency definitions for `npm`.
+└── preview-site.yml   Antora playbook to build the preview site.
+```
+
+## 🔨 Building
+
+The build steps output a custom [Antora](https://antora.org) UI bundle, which becomes the theme for [kieranpotts.com](https://kieranpotts.com).
+
+To build the production bundle:
+
+```bash
+npm run bundle
+```
+
+This processes `src/` and writes `dist/ui-bundle.zip`, which is what Antora consumes.
+
+CSS is run through PostCSS (`@import` inlining + autoprefixer). Layouts, partials, helpers, and fonts are copied verbatim.
+
+The following command builds the bundle, then renders a small sample site. The preview site is built into `www/`, a Git-ignored directory. Simply open the `www/index.html` file in a web browser to view the preview website.
+
+```bash
+npm run preview
+```
+
+The [`preview-site.yml`](../preview-site.yml) file is the Antora "playbook" that configures the preview build. The source content for the preview website is in `srv/`.
+
+## 🚀 Releasing
+
+The bundle is published as a GitHub release asset. To cut a release, push a version tag:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The [release workflow](../.github/workflows/release.yaml) runs automatically when a new tag is pushed. It builds `dist/ui-bundle.zip` and attaches it to a GitHub release for the tag.
+
+## 🧹 Linting
+
+```bash
+npm run lint
+```
+
+Lints the stylesheets with stylelint (configured by `.stylelintrc.json`).
+
+## 🪝 Pre-commit hooks
+
+It is RECOMMENDED to install the [pre-commit](https://pre-commit.com) framework to enable local validation hooks before committing. You need only to run the following command once to install pre-commit system-wide:
+
+```bash
+pipx install pre-commit
+```
+
+Then install the pre-commit hooks in every local repository where you want pre-commit checks to be run:
+
+```bash
+pre-commit install
+```
+
+This installs all hook types declared in `.pre-commit-config.yaml` (`pre-commit`, `commit-msg`).
+
+Edit `./.pre-commit-config.yaml` to configure the pre-commit validation checks you want for your project. See the [pre-commit documentation](https://pre-commit.com) for details.
+
+# The `tmp` directory
+
+The standalone theme preview – `npm run preview`, or `gulp preview` – builds a sample site from the contents of `srv/`. We want edits in `srv/` to appear in the preview.
+
+Antora's content aggregator reads content from a Git source. It uses [isomorphic-git](https://isomorphic-git.org/), a pure-JavaScript Git implementation, to open the repository.
+
+Unfortunately, isomorphic-git has a limitation: it cannot open a Git _worktree, because a worktree's `.git` path is a pointer file rather than a real `.git` directory – and isomorphic-git only recognizes the latter.
+
+If this repository is checked out into a Git worktree, the build fails.
+
+One workaround is to point the preview playbook at the sibling bare repo. That works, but the aggregator only sees objects _committed_ there. Therefore, changes to the `srv/` files that are still in the working tree or index do NOT show up in the preview site – which is a source of confusion.
+
+A more robust solution is to snapshot the contents of the working tree into a throwaway repository. So, the preview build first copies the contents of `srv/` into `tmp/` and does a `git init` in `tmp/`.
+
+The `preview-site.yml` configuration – the Antora playbook for building the preview site – then points its content source at `tmp/`.
+
+It's a bit messy, but it works reliably.
