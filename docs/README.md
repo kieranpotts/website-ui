@@ -1,6 +1,5 @@
-# Documentation
+# Developer Docs
 
-- [**Contributing**](../CONTRIBUTING.md)
 - [**Requirements**](./requirements.md)
 - [**Installation**](./installation.md)
 - [**Usage**](./usage.md)

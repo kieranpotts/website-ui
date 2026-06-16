@@ -4,18 +4,26 @@
 #
 #   gulp preview   (bundles, then builds this into preview-output/)
 #
+
 site:
   title: Website UI Preview
   start_page: preview::index.adoc
 
 content:
   sources:
-  # Read from the .preview-src snapshot, not preview/content directly: this repo
-  # is a git worktree (its `.git` is a pointer file) which Antora's aggregator
-  # cannot open. The `gulp previewSrc` task copies the *current* preview/content
-  # working tree into .preview-src (a plain git repo) and commits it before each
-  # build, so uncommitted content edits appear in the preview without a manual
-  # commit. See gulpfile.js.
+
+  # Read from the .preview-src snapshot, not ./preview/content/ directly.
+  # The reason is, this repo is a Git worktree, which Antora's aggregator
+  # cannot open.
+  #
+  # The `gulp previewSrc` task copies the current ./preview./ working tree
+  # into ./.preview-src./, which is a plain Git repo. It commits the copied
+  # files before each built – in effect, uncommitted content edits appear in
+  # the preview without requiring a manual commit to the worktree repository.
+  # It's hacky, but it works.
+  #
+  # See also gulpfile.js.
+
   - url: ./.preview-src
     branches: HEAD
     start_path: content

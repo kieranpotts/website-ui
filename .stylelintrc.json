@@ -1,6 +1,5 @@
 {
   "extends": "stylelint-config-standard",
-  "comment": "stylelint-config-standard's defaults are relaxed where they fight this theme's deliberate conventions: the escaped custom-property naming (--color\\=text\\|default), the empty layout/component scaffolding selectors, ITCSS layering that repeats selectors across files, the hsl()/media-query notations used, and the readable camelCase CSS-wide keywords.",
   "rules": {
     "selector-class-pattern": null,
     "custom-property-pattern": null,

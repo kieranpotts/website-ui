@@ -1,7 +1,6 @@
 # Usage
 
-This repository is a custom [Antora](https://antora.org) UI bundle: the theme
-for [kieranpotts.com](https://kieranpotts.com).
+This repository is a custom [Antora](https://antora.org) UI bundle that becomes the theme for [kieranpotts.com](https://kieranpotts.com).
 
 ## Build the bundle
 
@@ -9,9 +8,7 @@ for [kieranpotts.com](https://kieranpotts.com).
 npm run bundle
 ```
 
-Processes `src/` and writes `dist/ui-bundle.zip`. CSS is run through PostCSS
-(`@import` inlining + autoprefixer); layouts, partials, helpers, and fonts are
-copied verbatim; the result is zipped into the bundle Antora consumes.
+This processes `src/` and writes `dist/ui-bundle.zip`. CSS is run through PostCSS (`@import` inlining + autoprefixer). Layouts, partials, helpers, and fonts are copied verbatim. The result is zipped into the bundle Antora consumes.
 
 ## Preview the theme
 
