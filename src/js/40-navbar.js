@@ -1,59 +1,56 @@
 /**
  * MOBILE NAV MENU
  *
- * On narrow viewports the primary menu collapses behind a burger button (see
- * `.NavBar__Toggle` in `_components.css`). This script toggles the menu open
- * and closed and keeps `aria-expanded` in sync for assistive technology.
+ * On narrow viewports, the primary menu collapses behind a burger button.
+ * This script toggles the menu open and closed, and keeps `aria-expanded`
+ * in sync with the state.
  *
- * The button is hidden by CSS at wide viewports, where the menu is always shown
- * inline; there the `is-open` state is inert. The menu is closed again when a
- * link inside it is followed, when focus leaves the bar, or on the Escape key,
- * so it never lingers open over the page.
+ * Wrapped in a block so its `const`/`let` bindings stay local: the build
+ * concatenates every `src/js/*.js` into one `site.js`, and block scope keeps
+ * these files from colliding without needing an IIFE.
  */
-;(function () {
-  'use strict'
+{
+  const init = () => {
+    const toggle = document.querySelector('.NavBar__Toggle')
+    const menu = document.getElementById('nav-menu')
 
-  function init () {
-    var toggle = document.querySelector('.NavBar__Toggle')
-    var menu = document.getElementById('nav-menu')
     if (!toggle || !menu) return
 
-    var navbar = toggle.closest('.NavBar')
+    const navbar = toggle.closest('.NavBar')
 
-    function setOpen (open) {
+    const setOpen = (open) => {
       menu.classList.toggle('is-open', open)
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
     }
 
-    toggle.addEventListener('click', function () {
+    toggle.addEventListener('click', () => {
       setOpen(toggle.getAttribute('aria-expanded') !== 'true')
     })
 
     /* Close after a menu link is chosen. */
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) setOpen(false)
+    menu.addEventListener('click', (event) => {
+      if (event.target.closest('a')) setOpen(false)
     })
 
     /* Close on Escape, returning focus to the button. */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.classList.contains('is-open')) {
         setOpen(false)
         toggle.focus()
       }
     })
 
     /* Close when focus or a click moves outside the bar. */
-    document.addEventListener('click', function (e) {
-      if (navbar && !navbar.contains(e.target)) setOpen(false)
+    document.addEventListener('click', (event) => {
+      if (navbar && !navbar.contains(event.target)) setOpen(false)
     })
 
-    /* Close when the viewport widens to the desktop breakpoint (where the menu
-    is shown inline and the toggle is hidden), so it does not stay stuck open.
-    Matches the 800px breakpoint in `_components.css`. */
-    var desktop = window.matchMedia('(min-width: 800px)')
-    desktop.addEventListener('change', function (e) {
-      if (e.matches) setOpen(false)
-    })
+    /* Close when the viewport widens to the desktop breakpoint. */
+    window
+      .matchMedia('(min-width: 800px)')
+      .addEventListener('change', (event) => {
+        if (event.matches) setOpen(false)
+      })
   }
 
   if (document.readyState === 'loading') {
@@ -61,4 +58,4 @@
   } else {
     init()
   }
-})()
+}
