@@ -120,8 +120,17 @@ classes (`.quoteblock`, `.verseblock`). */
 /* blockquote {} */
 
 /* LISTS: Square bullets for ul. Dotted decimal counters for ol
- (1., 1.1., ...). Top-level markers sit flush with the left margin, aligned
- with regular paragraphs (as in The Monospace Web); only nested lists indent. */
+ (1., 1.1., ...). The marker sits flush with the left margin (aligned with
+ regular paragraphs, as in The Monospace Web), but the item text is given a
+ hanging indent: the first line starts two cells in, and wrapped lines align
+ under that text rather than back under the marker.
+ *
+ * The hanging indent is done on the `li`: a 2ch `padding-left` sets the text
+ * column, and a matching negative `text-indent` pulls the first line (the
+ * marker, rendered inline by `list-style-position: inside`, plus the start of
+ * the text) back out to the flush-left margin. This works uniformly for the
+ * `ul` `::marker` and the `ol` `::before` counter, since both are inline at the
+ * head of the first line. */
 
 ul, ol {
   margin: 0 0 var(--line-height);
@@ -137,14 +146,22 @@ ol {
   counter-reset: item;
 }
 
-/* Nested lists indent a further three cells
-and carry no extra vertical gap. */
+/* The hanging indent: text column two cells in, marker pulled back to flush. */
+li {
+  padding-left: 2ch;
+  text-indent: -2ch;
+}
+
+/* Nested lists indent a further two cells past their parent's text column and
+carry no extra vertical gap. The hanging indent on their own items is inherited
+from the `li` rule above. */
 ol ul,
 ol ol,
 ul ol,
 ul ul {
   margin: 0;
-  padding-left: 3ch;
+  padding-left: 2ch;
+  text-indent: 0;
 }
 
 ol li::before {
@@ -158,11 +175,6 @@ ol li::before {
 /* Keep the ordered-list item text ink; only its `::before` counter is tinted. */
 ol > li {
   color: var(--color\=text\|default);
-}
-
-li {
-  margin: 0;
-  padding: 0;
 }
 
 /* The square bullet (ul) is tinted with the accent; list text stays ink. */

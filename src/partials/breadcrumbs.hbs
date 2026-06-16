@@ -1,24 +1,23 @@
-<nav class="BREADCRUMBS" aria-label="breadcrumbs">
-  <ul>
-    {{! A persistent Home root on every trail. On the home page itself this is }}
-    {{! the only (and current) crumb, so it is rendered as plain text. }}
-    <li>
-      {{~#if page.home~}}
-        Home
-      {{~else~}}
-        <a href="{{{relativize '/'}}}">Home</a>
-      {{~/if~}}
-    </li>
-    {{#unless page.home}}
+{{! The breadcrumb trail never includes the current page – it shows only the
+path of ancestors leading to it. Antora lists the current page as the final
+entry of `page.breadcrumbs`, so that entry is skipped (matched by url). On the
+home page there are no ancestors, so the whole trail is omitted. }}
+{{#unless page.home}}
+  <nav class="BREADCRUMBS" aria-label="breadcrumbs">
+    <ul>
+      {{! A persistent Home root on every trail. }}
+      <li><a href="{{{relativize '/'}}}">Home</a></li>
       {{#each page.breadcrumbs}}
-        <li>
-          {{~#if (and ./url (eq ./urlType 'internal'))~}}
-            <a href="{{{relativize ./url}}}">{{{./content}}}</a>
-          {{~else~}}
-            {{{./content}}}
-          {{~/if~}}
-        </li>
+        {{#unless (eq ./url ../page.url)}}
+          <li>
+            {{~#if (and ./url (eq ./urlType 'internal'))~}}
+              <a href="{{{relativize ./url}}}">{{{./content}}}</a>
+            {{~else~}}
+              {{{./content}}}
+            {{~/if~}}
+          </li>
+        {{/unless}}
       {{/each}}
-    {{/unless}}
-  </ul>
-</nav>
+    </ul>
+  </nav>
+{{/unless}}
