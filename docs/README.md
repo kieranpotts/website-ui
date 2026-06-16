@@ -61,7 +61,13 @@ The [`preview-site.yml`](../preview-site.yml) file is the Antora "playbook" that
 
 ## 🚀 Releasing
 
-The bundle is published as a GitHub release asset. To cut a release, push a version tag:
+Update the CHANGELOG.md file, and commit it.
+
+```sh
+git commit -am "release: v0.1.0"
+```
+
+Tag the version point, and push it:
 
 ```bash
 git tag v0.1.0
