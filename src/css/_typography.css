@@ -52,6 +52,7 @@ small,
 
 /* Subscript/superscript are nudged so they do not disturb the line box,
 preserving the baseline grid. */
+
 sub {
   position: relative;
   display: inline-block;
@@ -185,7 +186,12 @@ li::marker {
 
 /* IMAGES & FIGURES */
 
-img, video {
+/* Videos and bare/figure images fill the content column. Images are NOT given a
+blanket `width: 100%` here: that would override the HTML `width`/`height`
+attributes on inline images (`.image > img`), forcing them to the intrinsic
+size. Block images opt into full width explicitly (see `.imageblock` and
+`figure img` below); inline images are left to their attributes. */
+video {
   display: block;
   width: 100%;
   object-fit: contain;
@@ -195,6 +201,14 @@ img, video {
 img {
   /* Alt text, shown if the image fails to load, reads as a caption. */
   color: var(--color\=text\|light);
+}
+
+/* Block images (figures and Asciidoctor image blocks) fill the column. */
+figure > img {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
 }
 
 figure {

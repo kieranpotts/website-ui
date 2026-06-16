@@ -118,8 +118,8 @@ target. */
 and brightens to the accent on hover/focus, matching the link behaviour. The
 glyph is nudged onto the text baseline of the adjacent menu items. */
 .NavBar__Icon {
-  width: 1.6em;
-  height: 1.6em;
+  width: 2.2em;
+  height: 2.2em;
   fill: currentColor;
   vertical-align: text-bottom;
 }
