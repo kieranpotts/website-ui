@@ -359,12 +359,14 @@ u {
   text-decoration: none;
 }
 
-/* Neutralize the browser's yellow highlight on `<mark>`.
-The theme restyles it. */
+/* `<mark>` highlight: a soft, translucent yellow (the selection yellow,
+lightened) that tints over either background; the text keeps its inherited
+color. A little horizontal padding lifts the tint off the glyph edges. */
 
 mark {
-  background: transparent;
+  background: var(--color\=mark\|background);
   color: inherit;
+  padding: 0 0.25ch;
 }
 
 /* Size sub/sup down and zero their line-height so they

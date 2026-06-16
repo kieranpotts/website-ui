@@ -238,7 +238,7 @@ Use the `print()` function to output text in Python.
 
 The configuration file is located at `/etc/nginx/nginx.conf`.
 
-=== Code blocks with syntax highlighting
+=== Code blocks
 
 [source,python]
 ----

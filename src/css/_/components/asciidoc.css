@@ -267,8 +267,24 @@ single-spaced. */
   margin: 0;
 }
 
+/* Inline code: a tinted box with hairline border and grid-aligned padding, so
+a code span stands out within prose. Block code (inside `<pre>`) opts back out
+below, since the `<pre>` already provides the code surface. */
+
 .AsciiDoc code {
+  background: var(--color\=text\|code\|background);
+  border: var(--border-thickness) solid var(--color\=border);
+  color: var(--color\=text\|code\|foreground);
   font-weight: var(--font-weight\=medium);
+  padding: 0 0.5ch;
+}
+
+/* Inside a code block the surface is the `<pre>`; strip the inline box. */
+
+.AsciiDoc pre code {
+  background: none;
+  border: 0;
+  padding: 0;
 }
 
 
@@ -490,7 +506,7 @@ buttons elsewhere in the theme but inline within prose. */
 than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 
 .AsciiDoc .menuseq b {
-  font-weight: var(--font-weight\=medium);
+  font-weight: var(--font-weight\=bold);
 }
 
 .AsciiDoc .menuseq .caret {
@@ -647,6 +663,7 @@ sidebar) take precedence. */
 
 .AsciiDoc .title {
   color: var(--color\=text\|light);
+  font-weight: var(--font-weight\=bold);
 }
 
 /* IMAGE BLOCKS & INLINE IMAGES: `.imageblock` wraps a block image; `.image`
@@ -666,6 +683,7 @@ full width here. */
 
 .AsciiDoc .imageblock > .title {
   text-align: center;
+  font-weight: var(--font-weight\=bold);
 }
 
 /* An inline image flows within the text. No width/height is set, so its HTML

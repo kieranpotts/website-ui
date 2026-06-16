@@ -50,6 +50,12 @@
   --base\=highlight: hsl(50, 100%, 50%);
   --base\=highlight\|ink: hsl(0, 0%, 15%);
 
+  /* A softer, translucent version of the highlight yellow, for `<mark>`. The
+  alpha lets it tint over either background, so the marked text keeps its
+  inherited color and stays legible in both light and dark mode. */
+
+  --base\=highlight\|soft: hsl(50, 100%, 50%, 35%);
+
   /* Semantic colors. These name a *role* and derive from
   the base palette, so they invert automatically in dark mode. */
 
@@ -92,6 +98,11 @@
 
   --color\=text\|selection: var(--base\=highlight);
   --color\=text\|selection\|foreground: var(--base\=highlight\|ink);
+
+  /* `<mark>` highlight: the softer translucent yellow; the text keeps its
+  inherited color. */
+
+  --color\=mark\|background: var(--base\=highlight\|soft);
 
   /* Video background (letter-boxing). Always black – a
   fixed literal, NOT flipped in between light/dark mode. */

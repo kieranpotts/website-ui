@@ -114,7 +114,7 @@ its label and sits inline, so adjacent buttons line up in a row. */
 button {
   cursor: pointer;
   display: inline-block;
-  font-weight: var(--font-weight\=medium);
+  font-weight: var(--font-weight\=bold);
   text-transform: uppercase;
   vertical-align: top;
   width: auto;
@@ -147,7 +147,7 @@ label/control pairs align. */
 
 label {
   display: block;
-  font-weight: var(--font-weight\=medium);
+  font-weight: var(--font-weight\=bold);
   height: auto;
   line-height: var(--line-height);
   margin: 0;
@@ -181,7 +181,7 @@ can render. */
 summary {
   cursor: pointer;
   display: list-item;
-  font-weight: var(--font-weight\=medium);
+  font-weight: var(--font-weight\=bold);
 }
 
 details[open] summary {
