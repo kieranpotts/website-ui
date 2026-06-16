@@ -11,20 +11,19 @@
  * https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css
  */
 
-/* LISTS
- *
- * Asciidoctor wraps every list item's text in a `<p>` (always, even for a
- * single line), and wraps each list in a `<div class="ulist">` /
- * `<div class="olist">`. Two of our base rules misbehave against that markup:
- *
- *   - the `<p>` is block-level, so the item text drops onto the line *below*
- *     the list marker, leaving the bullet/number stranded on its own line;
- *   - the owl selector (`* + *`) adds a top margin to that `<p>`, widening
- *     the gap further.
- *
- * Pull the first/only paragraph of an item back inline with its marker and
- * strip its top margin. Subsequent paragraphs in a multi-paragraph item keep
- * the normal one-line gap. */
+/* LISTS: Asciidoctor wraps every list item's text in a `<p>` (always, even
+for a single line), and wraps each list in a `<div class="ulist">` /
+`<div class="olist">`. Two of our base rules misbehave against that markup:
+
+- The `<p>` is block-level, so the item text drops onto the line *below*
+  the list marker, leaving the bullet/number stranded on its own line.
+- The owl selector (`* + *`) adds a top margin to that `<p>`, widening
+  the gap further.
+
+Pull the first/only paragraph of an item back inline with its marker and
+strip its top margin. Subsequent paragraphs in a multi-paragraph item keep
+the normal one-line gap. */
+
 .ulist li > p:first-child,
 .olist li > p:first-child {
   display: inline;
@@ -33,17 +32,17 @@
 
 /* Following blocks within an item (continuation paragraphs, nested lists)
 restore block flow and the standard inter-line gap. */
+
 .ulist li > p:first-child + *,
 .olist li > p:first-child + * {
   margin-top: var(--line-height);
 }
 
-/* CHECKLISTS
- *
- * A `[ ]`/`[*]` list renders each marker as a Font Awesome `<i>` glyph
- * (`fa-square-o` / `fa-check-square-o`). We have no Font Awesome, so replace
- * the empty glyph with a monospace box character. The list itself drops its
- * square bullet (the box *is* the marker). */
+/* CHECKLISTS: A `[ ]`/`[*]` list renders each marker as a Font Awesome
+`<i>` glyph (`fa-square-o` / `fa-check-square-o`). We have no Font Awesome,
+so replace the empty glyph with a monospace box character. The list itself
+drops its square bullet (the box *is* the marker). */
+
 .checklist {
   list-style-type: none;
   padding-left: 0;
@@ -57,10 +56,10 @@ restore block flow and the standard inter-line gap. */
   content: "\2611 "; /* ☑ ballot box with check */
 }
 
-/* DESCRIPTION LISTS (dlist)
- *
- * `<dt class="hdlist1">` term, `<dd>` description. Bold the term and indent
- * the description by whole character cells, keeping the line grid. */
+/* DESCRIPTION LISTS (dlist): `<dt class="hdlist1">` term, `<dd>` description.
+Bold the term and indent the description by whole character cells, keeping
+the line grid. */
+
 .dlist dl {
   margin: 0 0 var(--line-height);
 }
@@ -77,19 +76,19 @@ restore block flow and the standard inter-line gap. */
   margin-top: 0;
 }
 
-/* QUESTION & ANSWER (qanda)
- *
- * `[qanda]` renders an `<ol>` where each item's first `<p>` is the (italic)
- * question and following paragraphs are the answer. Number the questions and
- * keep answers flush under them. */
-.qlist.qanda ol {
-  list-style-type: none;
+/* QUESTION & ANSWER: `[qanda]` renders an `<ol>` where each item's first
+`<p>` is the (italic) question and following paragraphs are the answer. Number
+the questions and keep answers flush under them. */
+
+ .qlist.qanda ol {
   counter-reset: question;
+  list-style-type: none;
   padding-left: 0;
 }
 
 /* Suppress the base `ol li::before` decimal counter (from `_typography.css`);
 the question counter below replaces it. */
+
 .qlist.qanda > ol > li::before {
   content: none;
   counter-increment: none;
@@ -104,23 +103,23 @@ the question counter below replaces it. */
   font-weight: var(--font-weight\=bold);
 }
 
-/* CALLOUT LISTS (colist) & CALLOUT NUMBERS (conum)
- *
- * A conum is an inline reference marker (`<i class="conum" data-value="N">`)
- * shown as an inverted, bordered box holding its number; the sibling `<b>N</b>`
- * Asciidoctor adds for no-CSS fallback is hidden. The colist below the code
- * pairs each number with its explanation in a borderless table. */
+/* CALLOUT LISTS (colist) & CALLOUT NUMBERS (conum): A conum is an inline
+reference marker (`<i class="conum" data-value="N">`) shown as an inverted,
+bordered box holding its number; the sibling `<b>N</b>` Asciidoctor adds for
+no-CSS fallback is hidden. The colist below the code pairs each number with
+its explanation in a borderless table. */
+
 .conum[data-value] {
-  display: inline-block;
-  width: 2ch;
-  height: 2ch;
-  border: var(--border-thickness) solid var(--color\=border);
   background: var(--color\=text\|default);
+  border: var(--border-thickness) solid var(--color\=border);
   color: var(--color\=page\|background);
+  display: inline-block;
   font-style: normal;
   font-weight: var(--font-weight\=bold);
+  height: 2ch;
   line-height: calc(2ch - var(--border-thickness) * 2);
   text-align: center;
+  width: 2ch;
 }
 
 .conum[data-value]::after {
@@ -132,10 +131,10 @@ the question counter below replaces it. */
 }
 
 .colist table {
+  margin: 0 0 var(--line-height);
   position: static;
   top: 0;
   width: auto;
-  margin: 0 0 var(--line-height);
 }
 
 .colist td {
@@ -144,24 +143,26 @@ the question counter below replaces it. */
   vertical-align: top;
 }
 
-/* FOOTNOTES
- *
- * In-text reference markers (`<sup class="footnote">[N]</sup>`) keep their
- * body-size text and are raised by the `sup` reset, so a `[N]` reads clearly
- * rather than shrinking to a tiny gloss. The footnote *definitions* printed at
- * the foot of the page (`#footnotes > div.footnote`) also stay at body size. */
+/* FOOTNOTES: In-text reference markers (`<sup class="footnote">[N]</sup>`)
+keep their body-size text and are raised by the `sup` reset, so a `[N]`
+reads clearly rather than shrinking to a tiny gloss. The footnote
+*definitions* printed at the foot of the page (`#footnotes > div.footnote`)
+also stay at body size. */
+
 sup.footnote,
 sup.footnoteref {
   font-size: 100%; /* override the generic `sup` shrink (`_resets.css`) */
 }
 
 /* Tint the marker link with the accent (the `[ ]` brackets stay ink). */
+
 sup.footnote > a,
 sup.footnoteref > a {
   color: var(--color\=accent);
 }
 
 /* The endnote list at the page foot: separated by a rule, normal body size. */
+
 #footnotes {
   margin-top: calc(var(--line-height) * 2);
 }
@@ -170,32 +171,33 @@ sup.footnoteref > a {
   margin-bottom: var(--line-height);
 }
 
-/* UI MACROS (kbd, btn, menu)
- *
- * The experimental UI macros (`kbd:[]`, `btn:[]`, `menu:[]`) need the document
- * attribute `:experimental:` to be processed. Asciidoctor's default styling is
- * borrowed here but translated to the theme: the grid's border thickness, the
- * token palette, and a CSS caret glyph in place of the Font Awesome icon.
- *
- *   kbd:[Ctrl+C]      -> <span.keyseq><kbd>Ctrl</kbd>+<kbd>C</kbd></span>
- *   btn:[Save]        -> <b.button>Save</b>
- *   menu:File[Save]   -> <span.menuseq><b.menu>File</b><i.caret></i><b.menuitem>Save</b></span>
- */
+/* UI MACROS (kbd, btn, menu): The experimental UI macros (`kbd:[]`, `btn:[]`,
+`menu:[]`) need the document attribute `:experimental:` to be processed.
+Asciidoctor's default styling is borrowed here but translated to the theme:
+the grid's border thickness, the token palette, and a CSS caret glyph in
+place of the Font Awesome icon.
+
+kbd:[Ctrl+C]      -> <span.keyseq><kbd>Ctrl</kbd>+<kbd>C</kbd></span>
+btn:[Save]        -> <b.button>Save</b>
+menu:File[Save]   -> <span.menuseq><b.menu>File</b><i.caret></i><b.menuitem>Save</b></span>
+*/
 
 /* A keystroke, drawn as a small bordered keycap. */
+
 kbd {
-  display: inline-block;
-  margin: 0 0.2ch;
-  padding: 0 0.5ch;
-  border: var(--border-thickness) solid var(--color\=border);
   background: var(--color\=header\|background);
+  border: var(--border-thickness) solid var(--color\=border);
+  display: inline-block;
   font-family: var(--font-family\=monospace);
   line-height: calc(var(--line-height) - var(--border-thickness) * 2);
+  margin: 0 0.2ch;
+  padding: 0 0.5ch;
   white-space: nowrap;
 }
 
 /* In a key sequence the separators (`+`) sit between caps; trim the outer caps'
 margins so the sequence aligns with the surrounding text. */
+
 .keyseq kbd:first-child {
   margin-left: 0;
 }
@@ -206,6 +208,7 @@ margins so the sequence aligns with the surrounding text. */
 
 /* A UI button reference: the label wrapped in square brackets, like the boxed
 buttons elsewhere in the theme but inline within prose. */
+
 b.button::before {
   content: "[";
   padding-right: 0.25ch;
@@ -218,6 +221,7 @@ b.button::after {
 
 /* A menu path (File > Save As). The caret between items uses a glyph rather
 than the Font Awesome icon Asciidoctor emits (which we have no font for). */
+
 .menuseq b {
   font-weight: var(--font-weight\=medium);
 }
@@ -228,24 +232,24 @@ than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 
 .menuseq .caret::before {
   content: "›";
-  margin: 0 0.5ch;
   font-weight: var(--font-weight\=normal);
+  margin: 0 0.5ch;
 }
 
-/* ADMONITIONS (note, tip, important, caution, warning)
- *
- * Asciidoctor emits a two-cell table: an `.icon` cell (a Font Awesome `<i>`,
- * which we have no font for) and a `.content` cell. Rather than icons, we use
- * a left rule plus the admonition's name as an uppercase label — drawn from the
- * icon's `title` attribute via `attr()`. Consistent with the boxed, lettered
- * aesthetic of the rest of the theme. */
-.admonitionblock {
+/* ADMONITIONS (note, tip, important, caution, warning): Asciidoctor emits a
+two-cell table: an `.icon` cell (a Font Awesome `<i>`, which we have no font
+for) and a `.content` cell. Rather than icons, we use a left rule plus the
+admonition's name as an uppercase label — drawn from the icon's `title`
+attribute via `attr()`. Consistent with the boxed, lettered aesthetic of
+the rest of the theme. */
+
+ .admonitionblock {
   margin: var(--line-height) 0;
 }
 
 .admonitionblock > table {
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .admonitionblock td {
@@ -255,11 +259,12 @@ than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 }
 
 .admonitionblock td.icon {
-  width: 12ch;
   padding-right: 2ch;
+  width: 12ch;
 }
 
 /* Replace the (missing) Font Awesome glyph with the admonition label. */
+
 .admonitionblock td.icon .fa {
   font-style: normal;
   font-weight: var(--font-weight\=bold);
@@ -271,26 +276,25 @@ than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 }
 
 .admonitionblock td.content {
-  padding-left: 2ch;
   border-left: var(--border-thickness) solid var(--color\=border);
+  padding-left: 2ch;
 }
 
 .admonitionblock td.content > :first-child {
   margin-top: 0;
 }
 
-/* QUOTE & VERSE BLOCKS
- *
- * Quoteblock wraps a real `<blockquote>`; verseblock keeps line breaks in a
- * `<pre class="content">`. Both may carry an `.attribution`. A left rule marks
- * the quotation; the attribution is lighter and right of an em dash (already in
- * the markup). */
+/* QUOTE & VERSE BLOCKS: Quoteblock wraps a real `<blockquote>`. Verseblock
+keeps line breaks in a `<pre class="content">`. Both may carry an
+`.attribution`. A left rule marks the quotation. The attribution is
+lighter and right of an em dash (already in the markup). */
+
 .quoteblock,
 .verseblock {
+  /* The quotation rule is a muted monotone, like the list markers. */
+  border-left: var(--border-thickness) solid var(--color\=text\|light);
   margin: var(--line-height) 0;
   padding-left: 2ch;
-  /* The quotation rule carries the signature accent. */
-  border-left: var(--border-thickness) solid var(--color\=accent);
 }
 
 .quoteblock blockquote {
@@ -298,33 +302,33 @@ than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 }
 
 .verseblock pre.content {
-  margin: 0;
   font-family: var(--font-family\=default);
+  margin: 0;
 }
 
 .attribution {
-  margin-top: var(--line-height);
   color: var(--color\=text\|light);
+  margin-top: var(--line-height);
 }
 
 .attribution cite {
   display: block;
 }
 
-/* SIDEBAR & EXAMPLE BLOCKS
- *
- * Asides and worked examples. Both get a full border so they read as a
- * self-contained box, snapped to whole character cells, with interior padding
- * on the line grid. */
+/* SIDEBAR & EXAMPLE BLOCKS: Asides and worked examples. Both get a full
+border so they read as a self-contained box, snapped to whole character cells,
+with interior padding on the line grid. */
+
 .sidebarblock,
 .exampleblock {
+  border: var(--border-thickness) solid var(--color\=border);
   margin: var(--line-height) 0;
   padding: 0 2ch;
-  border: var(--border-thickness) solid var(--color\=border);
 }
 
 /* The example's own `.title` ("Example 1. Title") sits above the box; the
 sidebar's title sits inside it. Both are bold, not the default italic. */
+
 .exampleblock > .title {
   font-weight: var(--font-weight\=bold);
 }
@@ -344,25 +348,24 @@ sidebar's title sits inside it. Both are bold, not the default italic. */
   margin-bottom: var(--line-height);
 }
 
-/* OPEN BLOCK
- *
- * A bare grouping block with no chrome of its own; it only carries the spacing
- * of whatever it contains. */
+/* OPEN BLOCK: A bare grouping block with no chrome of its own. It only
+carries the spacing of whatever it contains. */
+
 .openblock {
   margin: var(--line-height) 0;
 }
 
-/* CODE & LITERAL BLOCKS
- *
- * Listing/literal blocks wrap their `<pre>` in `.content`. The `<pre>` is
- * already styled in `_typography.css`; here we just give the block a tinted,
- * bordered frame snapped to whole cells, with interior padding. */
+/* CODE & LITERAL BLOCKS: Listing/literal blocks wrap their `<pre>` in
+`.content`. The `<pre>` is already styled in `_typography.css`. Here we just
+give the block a tinted, bordered frame snapped to whole cells, with
+interior padding. */
+
 .listingblock > .content,
 .literalblock > .content {
+  background: var(--color\=text\|pre\|background);
+  border: var(--border-thickness) solid var(--color\=border);
   margin: var(--line-height) 0;
   padding: var(--line-height) 2ch;
-  border: var(--border-thickness) solid var(--color\=border);
-  background: var(--color\=text\|pre\|background);
 }
 
 .listingblock > .content > pre,
@@ -370,29 +373,28 @@ sidebar's title sits inside it. Both are bold, not the default italic. */
   margin: 0;
 }
 
-/* BLOCK TITLES
- *
- * Asciidoctor labels many blocks with a `.title` (a caption above the block:
- * image titles, listing titles, table titles...). Render them as a light
- * caption on the line grid. Block-specific overrides above (example,
- * sidebar) take precedence. */
+/* BLOCK TITLES: Asciidoctor labels many blocks with a `.title` (a caption
+above the block: image titles, listing titles, table titles...). Render them
+as a light caption on the line grid. Block-specific overrides above (example,
+sidebar) take precedence. */
+
 .title {
   color: var(--color\=text\|light);
 }
 
-/* IMAGE BLOCKS & INLINE IMAGES
- *
- * `.imageblock` wraps a block image; `.image` is the inline-image span. Bare
- * `img` is NOT given a width in `_typography.css` (so inline images keep their
- * attribute dimensions), so block images opt into full width here. */
+/* IMAGE BLOCKS & INLINE IMAGES: `.imageblock` wraps a block image; `.image`
+is the inline-image span. Bare `img` is NOT given a width in `_typography.css`
+(so inline images keep their attribute dimensions), so block images opt into
+full width here. */
+
 .imageblock {
   margin: calc(var(--line-height) * 2) 0;
 }
 
 .imageblock img {
   display: block;
-  width: 100%;
   object-fit: contain;
+  width: 100%;
 }
 
 .imageblock > .title {
@@ -402,6 +404,7 @@ sidebar's title sits inside it. Both are bold, not the default italic. */
 /* An inline image flows within the text. No width/height is set, so its HTML
 `width`/`height` attributes size it (the presentational attributes apply because
 no author rule overrides them); it is merely capped at the column width. */
+
 .image {
   display: inline;
 }
@@ -412,10 +415,10 @@ no author rule overrides them); it is merely capped at the column width. */
   vertical-align: baseline;
 }
 
-/* INLINE TEXT ROLES
- *
- * Built-in Asciidoctor text roles: `[.underline]#...#`, `[.line-through]#...#`,
- * and alignment roles on paragraphs. */
+/* INLINE TEXT ROLES: Built-in Asciidoctor text roles:
+`[.underline]#...#`, `[.line-through]#...#`, and
+alignment roles on paragraphs. */
+
 .underline {
   text-decoration: underline;
 }
@@ -430,6 +433,7 @@ no author rule overrides them); it is merely capped at the column width. */
 
 /* The `[.lead]` role marks an introductory paragraph; give it slightly larger
 type while staying on the grid. */
+
 .paragraph.lead > p {
   font-size: var(--font-size\=lg);
 }

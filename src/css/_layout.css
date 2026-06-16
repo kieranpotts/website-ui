@@ -2,123 +2,101 @@
  * LAYOUT
  */
 
-/*
- * PAGE CENTERING: `round(down, 100%, 1ch)` snaps the column to a whole number
- * of character cells, so content aligns to the monospace grid – see
- * `_typography.css` for an explanation.
+/* PAGE CENTERING: `round(down, 100%, 1ch)` snaps the column to a
+whole number of character cells, so content aligns to the monospace
+grid – see `_typography.css` for an explanation.
  */
 
 body {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .MAIN {
+  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  overflow-x: hidden;
+  padding: var(--line-height, 1.6rem) 2ch;
   position: relative;
   width: 100%;
-  max-width: calc(min(80ch, round(down, 100%, 1ch)));
-  padding: var(--line-height, 1.6rem) 2ch;
-  overflow-x: hidden;
 }
 
-/* The header is a full-width band across the top of the viewport, set off from
-the document by a single bottom rule. It sits outside the centered `.MAIN`
-column, so it spans edge to edge; its inner content (the nav bar) is itself
-constrained to the content column – see `_components.css`. The band carries no
-bottom margin; the one line of space above the breadcrumb is supplied by
-`.MAIN`'s top padding. */
+/* The header is a full-width band across the top of the viewport,
+set off from the document by a single bottom rule. It sits outside
+the centered `.MAIN column, so it spans edge to edge. Its inner
+content (the nav bar) is itself constrained to the content column
+– see `_components.css`. The band carries no bottom margin. The
+line of space above the breadcrumb is supplied by `.MAIN`'s top
+padding. */
+
 .HEADER {
-  width: 100%;
   border-bottom: var(--border-thickness) solid var(--color\=border);
+  width: 100%;
 }
 
-.DOCUMENT {}
+/* OWL SELECTOR: Consecutive flow elements are separated by exactly
+one line of the grid. This is scoped to inside `.DOCUMENT` so it shapes
+only the document body's vertical rhythm, not the header/nav/
+breadcrumb/footer, which manage their own spacing. It is a
+descendant selector (`.DOCUMENT * + *`, not `>`), so it reaches
+nested content too – paragraphs inside list items, blocks inside
+admonitions, etc. Elements that need more breathing room override
+`margin-top` in the typography / asciidoctor layers. */
 
-/* BREADCRUMBS
- *
- * The trail to the current page, shown above the document title. An inline,
- * bulletless list with a "/" between items. Light and small, like the footer,
- * so it reads as secondary to the page content.
- *
- * Markup: <nav.BREADCRUMBS> > <ul> > <li>{a|text}</li>... */
+.DOCUMENT * + * {
+  margin-top: var(--line-height);
+}
+
+/* BREADCRUMBS: The trail to the current page, shown above the document
+title. An inline, bullet-less list with a "/" between items. Light and small,
+like the footer, so it reads as secondary to the page content.
+Markup: <nav.BREADCRUMBS> > <ul> > <li>{a|text}</li>... */
+
 .BREADCRUMBS {
-  margin-bottom: var(--line-height);
   color: var(--color\=text\|light);
   font-size: var(--font-size\=sm);
+  margin-bottom: var(--line-height);
 }
 
 .BREADCRUMBS ul {
+  column-gap: 1ch;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 1ch;
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 /* Reset the owl-selector top margin so items stay on one line. */
+
 .BREADCRUMBS li {
   margin: 0;
 }
 
 /* A "/" separator before every item except the first. */
+
 .BREADCRUMBS li + li::before {
+  color: var(--color\=text\|light);
   content: "/";
   margin-right: 1ch;
-  color: var(--color\=text\|light);
 }
 
-/* The footer closes the page, separated from the document by a rule and two
-lines of the grid. Its text is light and small, like a colophon. */
+/* The footer closes the page, separated from the document
+by a rule and two lines of the grid. Its text is light and
+small, like a colophon. */
+
 .FOOTER {
-  margin-top: calc(var(--line-height) * 2);
-  padding-top: var(--line-height);
   border-top: var(--border-thickness) solid var(--color\=border);
   color: var(--color\=text\|light);
   font-size: var(--font-size\=sm);
+  margin-top: calc(var(--line-height) * 2);
+  padding-top: var(--line-height);
 }
 
-/* Reset the owl-selector top margin so the copyright line hugs the rule. */
+/* Reset the owl-selector top margin so the copyright
+line hugs the rule. */
+
 .FOOTER > :first-child {
   margin-top: 0;
 }
-
-/* GRID
- *
- * A horizontal layout primitive (from The Monospace Web): it divides its width
- * into equal cells, one per child, gapped by a single character cell and
- * snapped so every cell is a whole number of characters wide. Used to lay form
- * controls and label/control pairs out side by side. The cell count is read
- * from the number of children via `:has()`. */
-.grid {
-  --grid-cells: 0;
-
-  display: flex;
-  gap: 1ch;
-  width: calc(round(down, 100%, (1ch * var(--grid-cells)) - (1ch * var(--grid-cells) - 1)));
-  margin-bottom: var(--line-height);
-}
-
-/* Each cell takes an equal, character-snapped share of the row. `flex: 0 0`
-fixes the basis so cells do not grow or shrink off the grid. */
-.grid > * {
-  flex: 0 0 calc(round(down, (100% - (1ch * (var(--grid-cells) - 1))) / var(--grid-cells), 1ch));
-}
-
-/* The owl selector (`_typography.css`) would push every cell after the first
-down by a line; in a grid the cells sit on one row, so reset it. */
-.grid > * + * {
-  margin-top: 0;
-}
-
-.grid:has(> :last-child:nth-child(1)) { --grid-cells: 1; }
-.grid:has(> :last-child:nth-child(2)) { --grid-cells: 2; }
-.grid:has(> :last-child:nth-child(3)) { --grid-cells: 3; }
-.grid:has(> :last-child:nth-child(4)) { --grid-cells: 4; }
-.grid:has(> :last-child:nth-child(5)) { --grid-cells: 5; }
-.grid:has(> :last-child:nth-child(6)) { --grid-cells: 6; }
-.grid:has(> :last-child:nth-child(7)) { --grid-cells: 7; }
-.grid:has(> :last-child:nth-child(8)) { --grid-cells: 8; }
-.grid:has(> :last-child:nth-child(9)) { --grid-cells: 9; }

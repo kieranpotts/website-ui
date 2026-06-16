@@ -28,13 +28,13 @@
   font-optical-sizing: auto;
   font-variant-numeric: tabular-nums lining-nums;
 
-  /* Honour the user's light/dark preference. Let browser-rendered chrome
-  (form controls, scrollbars) follow it. */
+  /* Honour the user's light/dark preference. Let browser-rendered
+  chrome (form controls, scrollbars) follow it. */
 
   color-scheme: light dark;
 
-  /* Base palette (light mode). The only literal colors in the theme; flipped
-  for dark mode at the foot of this file. */
+  /* Base palette (light mode). The only literal colors in the theme.
+  Flipped for dark mode at the foot of this file. */
 
   --base\=ink: hsl(0, 0%, 15%);          /* primary text, borders, bullets */
   --base\=ink\|muted: hsl(0, 0%, 50%);   /* secondary/light text */
@@ -43,16 +43,18 @@
   --base\=page\|muted: hsl(0, 0%, 96%);  /* tinted surfaces: header, code */
   --base\=accent: hsl(176, 100%, 36%);   /* signature color (#00b7ac) */
 
-  /* Selection highlight + its text ink. Fixed in both modes (NOT flipped in the
-  dark-mode block below), so yellow-on-dark-ink reads on either background. */
+  /* Selection highlight + its text ink. Fixed in both modes
+  (NOT flipped in the dark-mode block below), so yellow-on-dark
+  ink reads on either background. */
+
   --base\=highlight: hsl(50, 100%, 50%);
   --base\=highlight\|ink: hsl(0, 0%, 15%);
 
-  /* Semantic colors. These name a *role* and derive from the base palette, so
-  they invert automatically in dark mode. */
+  /* Semantic colors. These name a *role* and derive from
+  the base palette, so they invert automatically in dark mode. */
 
-  --color\=page\|background: var(--base\=page);
   --color\=header\|background: var(--base\=page\|muted);
+  --color\=page\|background: var(--base\=page);
 
   --color\=text\|default: var(--base\=ink);
   --color\=text\|light: var(--base\=ink\|muted);
@@ -67,30 +69,32 @@
   --color\=text\|code\|background: var(--base\=page\|muted);
   --color\=text\|code\|foreground: inherit;
 
-  /* The signature accent. Used for subtle interactive marks: link underlines,
-  footnote markers, etc. Everything else stays monochrome. */
+  /* The signature accent. Used for subtle interactive marks:
+  link underlines, footnote markers, etc. Everything else
+  stays monochrome. */
 
   --color\=accent: var(--base\=accent);
 
   /* Links: ink-colored text with an accent underline and outline. */
 
-  --color\=hyperlink\|default: inherit;
-  --color\=hyperlink\|visited: inherit;
-  --color\=hyperlink\|hover: inherit;
-  --color\=hyperlink\|focus: inherit;
   --color\=hyperlink\|active: inherit;
+  --color\=hyperlink\|default: inherit;
+  --color\=hyperlink\|focus: inherit;
+  --color\=hyperlink\|hover: inherit;
   --color\=hyperlink\|underline: var(--color\=accent);
+  --color\=hyperlink\|visited: inherit;
   --color\=outline: var(--color\=accent);
 
-  /* Text selection is a fixed yellow highlight in both light and dark mode.
-  The selected text is forced to ink for contrast (the themed ink flips
-  near-white in dark mode and would wash out on yellow). */
+  /* Text selection is a fixed yellow highlight in both
+  light and dark mode. The selected text is forced to ink
+  for contrast (the themed ink flips near-white in dark
+  mode and would wash out on yellow). */
 
   --color\=text\|selection: var(--base\=highlight);
   --color\=text\|selection\|foreground: var(--base\=highlight\|ink);
 
-  /* Video background (letter-boxing). Always black – a fixed literal, NOT
-  flipped in between light/dark mode. */
+  /* Video background (letter-boxing). Always black – a
+  fixed literal, NOT flipped in between light/dark mode. */
 
   --color\=video: hsl(0, 0%, 15%);
 
@@ -101,9 +105,9 @@
 
   /* Font weights */
 
-  --font-weight\=normal: 500;
-  --font-weight\=medium: 600;
   --font-weight\=bold: 800;
+  --font-weight\=medium: 600;
+  --font-weight\=normal: 500;
 
   /* Font sizes scale at breakpoints */
 
@@ -115,45 +119,48 @@
   --font-size\=root\@xl: 10.5px;  /* 1200px */
   --font-size\=root\@xxl: 11px;   /* 1400px */
 
-  --font-size\=xxl: 3rem;
-  --font-size\=xl:  2.2rem;
   --font-size\=lg:  1.6rem;
   --font-size\=md:  1.6rem; /* default */
   --font-size\=sm:  1.4rem;
+  --font-size\=xl:  2.2rem;
   --font-size\=xs:  1.2rem;
+  --font-size\=xxl: 3rem;
 
   --font-size\=monospace\|block: 1.6rem;
   --font-size\=monospace\|inline: 100%;
 
-  /* Grid rhythm: `--line-height` is the single vertical rhythm unit. Every
-  vertical margin is  a multiple of it. It is expressed in `rem`, so it scales
-  with the responsive root font-size ladder. It means the vertical rhythm
-  stays consistent through breakpoints (just proportionally larger with the base
-  font size). `--border-thickness` is the grid's hairline, used by rules,
-  tables, and form controls. */
+  /* GRID RHYTHM: `--line-height` is the single vertical
+  rhythm unit. Every vertical margin is  a multiple of it.
+  It is expressed in `rem`, so it scales with the responsive
+  root font-size ladder. It means the vertical rhythm stays
+  consistent through breakpoints (just proportionally larger
+  with the base font size). `--border-thickness` is the grid's
+  hairline, used by rules, tables, and form controls. */
 
-  --line-height: 2.5rem;
   --border-thickness: 2px;
+  --line-height: 2.5rem;
 
-  /* Code blocks get their own, tighter leading: looser than the default
-  single-spaced `pre` but tighter than the body's full grid rhythm, which is
-  too airy for dense code. */
+  /* Code blocks get their own, tighter leading: looser
+  than the default single-spaced `pre` but tighter than
+  the body's full grid rhythm, which is too airy for
+  dense code. */
 
   --line-height\=code: 2rem;
 
   /* Spacing */
 
   --spacing: 4rem;
-  --spacing\@sm: 6rem;
   --spacing\@lg: 8rem;
+  --spacing\@sm: 6rem;
 
 }
 
-/* DARK MODE: Color inversions happen here – flip the four base palette tones
- * and every semantic `--color=*` token follows. The ink/page roles swap and
- * the three-step ink ladder is mirrored, so the text hierarchy (default >
- * light > placeholder) is preserved. The accent is also brightened a little
- * to keep its punch against the near-black page. */
+/* DARK MODE: Color inversions happen here – flip the four
+ase palette tones and every semantic `--color=*` token follows.
+The ink/page roles swap and the three-step ink ladder is
+mirrored, so the text hierarchy (default > light > placeholder)
+is preserved. The accent is also brightened a little to keep its
+punch against the near-black page. */
 
 @media (prefers-color-scheme: dark) {
   :root {

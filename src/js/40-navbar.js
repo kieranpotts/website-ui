@@ -29,12 +29,12 @@
       setOpen(toggle.getAttribute('aria-expanded') !== 'true')
     })
 
-    // Close after a menu link is chosen.
+    /* Close after a menu link is chosen. */
     menu.addEventListener('click', function (e) {
       if (e.target.closest('a')) setOpen(false)
     })
 
-    // Close on Escape, returning focus to the button.
+    /* Close on Escape, returning focus to the button. */
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && menu.classList.contains('is-open')) {
         setOpen(false)
@@ -42,7 +42,7 @@
       }
     })
 
-    // Close when focus or a click moves outside the bar.
+    /* Close when focus or a click moves outside the bar. */
     document.addEventListener('click', function (e) {
       if (navbar && !navbar.contains(e.target)) setOpen(false)
     })

@@ -7,19 +7,15 @@
  *
  * A vertical and horizontal rhythm is established around the base font size:
  *
- *   - VERTICAL RHYTHM: The `--line-height` property sets the box height for
- *     lines of text, nd every vertical margin is a multiple of it: 1x, 1.5x,
- *     2x. The owl selector (`* + *`) is used to add consistent spacing between
- *     sibling elements: every flow element is given, by default, a top margin
- *     equivalent to the space of one line of text. Specific elements may
- *     override with larger multiples. The result is text that sits on a
- *     consistent baseline grid.
+ * - VERTICAL RHYTHM: The `--line-height` property sets the box height for
+ *   lines of text, and every vertical margin is a multiple of it: 1x, 1.5x,
+ *   2x.
  *
- *   - HORIZONTAL GRID: Because the body text is rendered in a monospace font,
- *     a horizontal rhythm can be established by using `ch` (one character width)
- *     for horizontal measures. Indents and padding align to whole character
- *     cells. In `_layout.css`, the width of the main content is also snapped
- *     to a whole number of characters.
+ * - HORIZONTAL GRID: Because the body text is rendered in a monospace font,
+ *   a horizontal rhythm can be established by using `ch` (one character width)
+ *   for horizontal measures. Indents and padding align to whole character
+ *   cells. In `_layout.css`, the width of the main content is also snapped
+ *   to a whole number of characters.
  */
 
 /* BASE TEXT */
@@ -28,13 +24,6 @@ body {
   font-family: var(--font-family\=default);
   font-weight: var(--font-weight\=normal);
   line-height: var(--line-height);
-}
-
-/* TODO: Temporarily disabled. */
-/* Consecutive flow elements are separated by exactly one line. Elements that
-need more breathing room override `margin-top`, below. */
-* + * {
-  /*margin-top: var(--line-height);*/
 }
 
 strong, b, dfn {
@@ -50,20 +39,21 @@ small,
   color: var(--color\=text\|light);
 }
 
-/* Subscript/superscript are nudged so they do not disturb the line box,
-preserving the baseline grid. */
+/* Subscript/superscript are nudged so they do not
+disturb the line box, preserving the baseline grid. */
 
 sub {
-  position: relative;
   display: inline-block;
-  margin: 0;
-  vertical-align: sub;
-  line-height: 0;
   font-size: 0.75rem;
+  line-height: 0;
+  margin: 0;
+  position: relative;
+  vertical-align: sub;
 }
 
-/* HEADINGS: Uppercase, bold, and spaced in whole lines. h1 occupies a double
-line box, so it still lands on the grid at its larger size. */
+/* HEADINGS: Uppercase, bold, and spaced in whole lines.
+h1 occupies a double line box, so it still lands on the
+grid at its larger size. */
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight\=bold);
@@ -73,11 +63,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  /* Four lines above (double the other headings) to set the page title apart. */
-  margin-top: calc(var(--line-height) * 4);
   font-size: var(--font-size\=xxl);
-  text-transform: uppercase;
   letter-spacing: -0.05rem;
+  /* Four lines above (double the other headings),
+  to set the page title apart. */
+  margin-top: calc(var(--line-height) * 4);
+  text-transform: uppercase;
 }
 
 h2 {
@@ -90,48 +81,48 @@ h3 { font-size: var(--font-size\=lg); }
 /* FLOW BLOCKS */
 
 p {
+  hyphens: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  hyphens: auto;
 }
 
 hr {
-  position: relative;
+  border: none;
+  color: var(--color\=border);
   display: block;
   height: var(--line-height);
   margin: calc(var(--line-height) * 1.5) 0;
-  border: none;
-  color: var(--color\=border);
+  position: relative;
 }
 
 hr::after {
+  border-top: calc(var(--border-thickness) * 3) double currentColor;
   content: "";
   display: block;
+  height: 0;
+  left: 0;
   position: absolute;
   top: calc(var(--line-height) / 2 - var(--border-thickness));
-  left: 0;
   width: 100%;
-  height: 0;
-  border-top: calc(var(--border-thickness) * 3) double currentColor;
 }
 
 /* Quote/verse blocks are styled in `_asciidoctor.css` against their wrapper
 classes (`.quoteblock`, `.verseblock`). */
 
-/* blockquote {} */
+blockquote {}
 
 /* LISTS: Square bullets for ul. Dotted decimal counters for ol
- (1., 1.1., ...). The marker sits flush with the left margin (aligned with
- regular paragraphs, as in The Monospace Web), but the item text is given a
- hanging indent: the first line starts two cells in, and wrapped lines align
- under that text rather than back under the marker.
- *
- * The hanging indent is done on the `li`: a 2ch `padding-left` sets the text
- * column, and a matching negative `text-indent` pulls the first line (the
- * marker, rendered inline by `list-style-position: inside`, plus the start of
- * the text) back out to the flush-left margin. This works uniformly for the
- * `ul` `::marker` and the `ol` `::before` counter, since both are inline at the
- * head of the first line. */
+(1., 1.1., ...). The marker sits flush with the left margin (aligned with
+regular paragraphs), but the item text is given a hanging indent: the first
+line starts two cells in, and wrapped lines align under that text rather
+than back under the marker.
+
+The hanging indent is done on the `li`: a 2ch `padding-left` sets the text
+column, and a matching negative `text-indent` pulls the first line (the
+marker, rendered inline by `list-style-position: inside`, plus the start of
+the text) back out to the flush-left margin. This works uniformly for the
+`ul` `::marker` and the `ol` `::before` counter, since both are inline at the
+head of the first line. */
 
 ul, ol {
   margin: 0 0 var(--line-height);
@@ -143,19 +134,23 @@ ul {
 }
 
 ol {
-  list-style-type: none;
   counter-reset: item;
+  list-style-type: none;
 }
 
-/* The hanging indent: text column two cells in, marker pulled back to flush. */
+/* The hanging indent: text column two cells in,
+marker pulled back to flush. */
+
 li {
   padding-left: 2ch;
   text-indent: -2ch;
 }
 
-/* Nested lists indent a further two cells past their parent's text column and
-carry no extra vertical gap. The hanging indent on their own items is inherited
-from the `li` rule above. */
+/* Nested lists indent a further two cells past their
+parent's text column and carry no extra vertical gap. The
+hanging indent on their own items is inherited from
+the `li` rule, above. */
+
 ol ul,
 ol ol,
 ul ol,
@@ -166,49 +161,57 @@ ul ul {
 }
 
 ol li::before {
+  /* The muted tone tints the number; the item text stays ink (set below). */
+  color: var(--color\=text\|light);
   content: counters(item, ".") ". ";
   counter-increment: item;
-  /* The accent tints the number; the item text stays ink (set below). */
-  color: var(--color\=accent);
   font-weight: var(--font-weight\=medium);
 }
 
-/* Keep the ordered-list item text ink; only its `::before` counter is tinted. */
+/* Keep the ordered-list item text ink; only its
+`::before` counter is tinted. */
+
 ol > li {
   color: var(--color\=text\|default);
 }
 
-/* The square bullet (ul) is tinted with the accent; list text stays ink. */
+/* The square bullet (ul) is tinted with the muted
+tone. List text stays ink. */
+
 li::marker {
-  color: var(--color\=accent);
+  color: var(--color\=text\|light);
   line-height: 0;
 }
 
-/* IMAGES & FIGURES */
+/* IMAGES & FIGURES:  Videos and bare/figure images fill the content
+column. Images are NOT given a blanket `width: 100%` here – that would
+override the HTML `width`/`height` attributes on inline images ,
+forcing them to the intrinsic size. Block images opt into full width
+explicitly (see `.imageblock` and `figure img` below); inline images
+are left to their attributes. */
 
-/* Videos and bare/figure images fill the content column. Images are NOT given a
-blanket `width: 100%` here: that would override the HTML `width`/`height`
-attributes on inline images (`.image > img`), forcing them to the intrinsic
-size. Block images opt into full width explicitly (see `.imageblock` and
-`figure img` below); inline images are left to their attributes. */
 video {
   display: block;
-  width: 100%;
   object-fit: contain;
   overflow: hidden;
+  width: 100%;
 }
 
+/* Text color is set on the images because, if an image fails
+to load, its alt text will be rendered in its place. */
+
 img {
-  /* Alt text, shown if the image fails to load, reads as a caption. */
   color: var(--color\=text\|light);
 }
 
-/* Block images (figures and Asciidoctor image blocks) fill the column. */
+/* Block images (figures and Asciidoctor image blocks)
+fill the column. */
+
 figure > img {
   display: block;
-  width: 100%;
   object-fit: contain;
   overflow: hidden;
+  width: 100%;
 }
 
 figure {
@@ -222,26 +225,27 @@ figcaption {
   text-align: center;
 }
 
-/* TABLES: Full-width, snapped to whole cells, with the grid's border thickness
-on every edge and padding computed so cell text stays on the line grid. */
+/* TABLES: Full-width, snapped to whole cells, with the grid's
+border thickness on every edge and padding computed so cell
+text stays on the line grid. */
 
 table {
+  border-collapse: collapse;
+  margin: 0 0 calc(var(--line-height) * 2);
   position: relative;
   top: calc(var(--line-height) / 2);
   width: calc(round(down, 100%, 1ch));
-  border-collapse: collapse;
-  margin: 0 0 calc(var(--line-height) * 2);
 }
 
 th, td {
   border: var(--border-thickness) solid var(--color\=border);
+  line-height: var(--line-height);
   padding:
     calc(var(--line-height) / 2)
     calc(1ch - var(--border-thickness) / 2)
     calc(var(--line-height) / 2 - var(--border-thickness));
-  line-height: var(--line-height);
-  vertical-align: top;
   text-align: left;
+  vertical-align: top;
 }
 
 table tbody tr:first-child > * {
@@ -269,17 +273,21 @@ a:active { color: var(--color\=hyperlink\|active); }
 
 /* CODE */
 
+/* Preformatted text blocks have a tighter vertical grid
+rhythm than body text, but still a little looser than
+single-spaced. */
+
 pre {
   font-family: var(--font-family\=monospace);
-  margin: var(--line-height) 0;
-  /* Tighter than the body's full grid rhythm, looser than single-spaced. */
   line-height: var(--line-height\=code);
-  white-space: pre;
+  margin: var(--line-height) 0;
   overflow-x: auto;
   overflow-y: hidden;
+  white-space: pre;
 }
 
 /* Code inside a figure aligns to the figure's own margins. */
+
 figure pre {
   margin: 0;
 }
