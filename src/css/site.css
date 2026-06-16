@@ -3,16 +3,16 @@
 /**
  * Main entry point to the website's stylesheet.
  *
- * The stylesheet is split layers, imported in order of increasing specificity
- * and reach. Earlier layers set far-reaching defaults. Later layers narrow to
- * to specific elements, components, and one-off helpers.
+ * The stylesheet is split into layers, imported in order of increasing
+ * specificity and reach. Earlier layers set far-reaching defaults. Later
+ * layers narrow to to specific elements, components, and one-off helpers.
  *
  * Keeping the cascade flowing downward avoids specificity battles.
  *
  *   _fonts       @font-face declarations.
  *   _properties  Design tokens.
  *   _resets      Cross-browser normalization.
- *   _typography  Bare-element text styling .
+ *   _typography  Bare-element text styling.
  *   _layout      Page-level structure.
  *   _components  Reusable UI components, eg. NavBar.
  *   _utilities   Single-purpose helpers; highest specificity, may use !important.

@@ -1,35 +1,36 @@
 /**
  * CUSTOM PROPERTIES (DESIGN TOKENS)
  *
- * The single source of truth for the theme's colors, fonts, grid unit, and
- * spacing. Other layers consume these via var() and should not hard-code
+ * The single source of truth for the theme's colors, fonts, and spacing.
+ * Other CSS layers consume these via `var()` and should not hard-code
  * equivalent literals.
  *
  * Naming convention: tokens read as `--<group>=<name>|<part>`, with `=` and `|`
  * escaped (`\=`, `\|`) since they are not normally valid in identifiers. The
- * `\@<bp>` suffix denotes a breakpoint-specific value (eg. `\@sm`). This makes
+ * `\@<bp>` suffix denotes a breakpoint-specific value, eg. `\@sm`. This makes
  * a token's group/role/variant legible at-a-glance, and groups related tokens
- * together alphabetically.
+ * together alphabetically
  *
- * The :root block also sets the font-rendering defaults that give JetBrains
- * Mono its intended appearance.
- *
- * COLOR & DARK MODE: Color is built in two tiers. A small set of *base palette*
- * tokens (`--base=*`) holds the only literal colors in the theme – an ink,
- * a muted ink, a page, and a muted-page tone. Light/dark mode is implemented
- * by flipping just those four values in a single `@media (prefers-color-scheme:
- * dark)` block (see the end of this file). Every *semantic* color token below
- * (`--color=*`) derives from the base palette, so the whole UI inverts from one
- * place and no other layer needs a dark-mode rule. (The two accent tokens –
- * selection and focus outline – are fixed hues that read on either background.)
+ * COLOR & LIGHT/DARK MODE: Color is built in two tiers. A small set of base
+ * palette tokens (`--base=*`) holds the only literal colors in the theme – an
+ * ink, a muted ink, a page, and a muted-page tone. Light/dark mode is
+ * implemented by flipping just those four values in a single
+ * `@media (prefers-color-scheme: dark)` block. Every semantic color token
+ * (`--color=*`) derives from the base palette. The two accent tokens –
+ * selection and focus outline – are fixed hues that read on either background.
  */
 
 :root {
+
+  /* Font-rendering default required to give JetBrains Mono its
+  intended appearance. */
+
   font-optical-sizing: auto;
   font-variant-numeric: tabular-nums lining-nums;
 
-  /* Honour the user's OS light/dark preference, and let UA-rendered chrome
+  /* Honour the user's light/dark preference. Let browser-rendered chrome
   (form controls, scrollbars) follow it. */
+
   color-scheme: light dark;
 
   /* Base palette (light mode). The only literal colors in the theme; flipped
@@ -41,6 +42,11 @@
   --base\=page: hsl(0, 0%, 100%);        /* page background */
   --base\=page\|muted: hsl(0, 0%, 96%);  /* tinted surfaces: header, code */
   --base\=accent: hsl(176, 100%, 36%);   /* signature color (#00b7ac) */
+
+  /* Selection highlight + its text ink. Fixed in both modes (NOT flipped in the
+  dark-mode block below), so yellow-on-dark-ink reads on either background. */
+  --base\=highlight: hsl(50, 100%, 50%);
+  --base\=highlight\|ink: hsl(0, 0%, 15%);
 
   /* Semantic colors. These name a *role* and derive from the base palette, so
   they invert automatically in dark mode. */
@@ -61,26 +67,34 @@
   --color\=text\|code\|background: var(--base\=page\|muted);
   --color\=text\|code\|foreground: inherit;
 
-  /* The signature accent. Used for subtle structural marks (list markers, the
-  blockquote rule, footnote markers), link underlines, link hover/focus text,
-  and the selection highlight. Everything else stays monochrome. */
+  /* The signature accent. Used for subtle interactive marks: link underlines,
+  footnote markers, etc. Everything else stays monochrome. */
+
   --color\=accent: var(--base\=accent);
 
-  /* Links: ink-colored text with an accent underline at rest; the text itself
-  turns accent on hover/focus. */
+  /* Links: ink-colored text with an accent underline and outline. */
+
   --color\=hyperlink\|default: inherit;
   --color\=hyperlink\|visited: inherit;
-  --color\=hyperlink\|hover: var(--color\=accent);
-  --color\=hyperlink\|focus: var(--color\=accent);
-  --color\=hyperlink\|active: var(--color\=accent);
+  --color\=hyperlink\|hover: inherit;
+  --color\=hyperlink\|focus: inherit;
+  --color\=hyperlink\|active: inherit;
   --color\=hyperlink\|underline: var(--color\=accent);
+  --color\=outline: var(--color\=accent);
 
-  --color\=text\|selection: var(--color\=accent);
-  --color\=outline: hsl(200, 100%, 50%);
+  /* Text selection is a fixed yellow highlight in both light and dark mode.
+  The selected text is forced to ink for contrast (the themed ink flips
+  near-white in dark mode and would wash out on yellow). */
 
-  --color\=video: var(--color\=text\|default);
+  --color\=text\|selection: var(--base\=highlight);
+  --color\=text\|selection\|foreground: var(--base\=highlight\|ink);
 
-  /* Fonts */
+  /* Video background (letter-boxing). Always black – a fixed literal, NOT
+  flipped in between light/dark mode. */
+
+  --color\=video: hsl(0, 0%, 15%);
+
+  /* Fonts – monospace throughout */
 
   --font-family\=default: 'JetBrains Mono', ui-monospace, monospace;
   --font-family\=monospace: 'JetBrains Mono', ui-monospace, monospace;
@@ -91,15 +105,15 @@
   --font-weight\=medium: 600;
   --font-weight\=bold: 800;
 
-  /* Font sizes */
+  /* Font sizes scale at breakpoints */
 
   --font-size\=root: 9px;
-  --font-size\=root\@xs: 9.5px;   /* 400px */
-  --font-size\=root\@sm: 10px;    /* 600px */
-  --font-size\=root\@md: 10.5px;  /* 800px */
-  --font-size\=root\@lg: 11px;    /* 1000px */
-  --font-size\=root\@xl: 11.5px;  /* 1200px */
-  --font-size\=root\@xxl: 12px;   /* 1400px */
+  --font-size\=root\@xs: 9.25px;   /* 400px */
+  --font-size\=root\@sm: 9.5px;    /* 600px */
+  --font-size\=root\@md: 9.75px;  /* 800px */
+  --font-size\=root\@lg: 10px;    /* 1000px */
+  --font-size\=root\@xl: 10.5px;  /* 1200px */
+  --font-size\=root\@xxl: 11px;   /* 1400px */
 
   --font-size\=xxl: 3rem;
   --font-size\=xl:  2.2rem;
@@ -113,7 +127,7 @@
 
   /* Grid rhythm: `--line-height` is the single vertical rhythm unit. Every
   vertical margin is  a multiple of it. It is expressed in `rem`, so it scales
-  with the responsive root font-size ladder below. It means the vertical rhythm
+  with the responsive root font-size ladder. It means the vertical rhythm
   stays consistent through breakpoints (just proportionally larger with the base
   font size). `--border-thickness` is the grid's hairline, used by rules,
   tables, and form controls. */
@@ -122,8 +136,9 @@
   --border-thickness: 2px;
 
   /* Code blocks get their own, tighter leading: looser than the default
-  single-spaced `pre` (which crowds wrapped/long lines) but tighter than the
-  body's full grid rhythm, which is too airy for dense code. */
+  single-spaced `pre` but tighter than the body's full grid rhythm, which is
+  too airy for dense code. */
+
   --line-height\=code: 2rem;
 
   /* Spacing */
@@ -134,14 +149,11 @@
 
 }
 
-/* DARK MODE
- *
- * The whole inversion happens here: flip the four base palette tones and every
- * semantic `--color=*` token follows, because each derives from the base
- * palette via var(). The ink/page roles swap and the three-step ink ladder is
- * mirrored, so the text hierarchy (default > light > placeholder) is preserved.
- * The accent is also brightened a little to keep its punch against the near-
- * black page; the focus-outline accent is left as-is. */
+/* DARK MODE: Color inversions happen here – flip the four base palette tones
+ * and every semantic `--color=*` token follows. The ink/page roles swap and
+ * the three-step ink ladder is mirrored, so the text hierarchy (default >
+ * light > placeholder) is preserved. The accent is also brightened a little
+ * to keep its punch against the near-black page. */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -152,5 +164,4 @@
     --base\=page\|muted: hsl(0, 0%, 14%);  /* tinted surfaces: header, code */
     --base\=accent: hsl(176, 70%, 50%);    /* brighter teal for dark bg */
   }
-
 }

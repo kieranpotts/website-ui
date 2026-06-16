@@ -129,9 +129,9 @@ glyph is nudged onto the text baseline of the adjacent menu items. */
   fill: var(--color\=accent);
 }
 
-/* DESKTOP: at >=50rem the burger is hidden and the menu is always shown as an
+/* DESKTOP: at >=800px the burger is hidden and the menu is always shown as an
 inline horizontal list on the right, regardless of the `is-open` state. */
-@media screen and (min-width: 50rem) {
+@media screen and (min-width: 800px) {
   .NavBar__Toggle {
     display: none;
   }
@@ -165,14 +165,14 @@ inline horizontal list on the right, regardless of the `is-open` state. */
  * It is `position: fixed`, so it floats over the page and tracks the viewport
  * as the reader scrolls. It is pinned to the right edge of the content column:
  * `left: calc(50% + 40ch + 4ch)` clears the centered column (half of the 80ch
- * column = 40ch) plus a 4ch gap. The reveal breakpoint (90rem) is chosen so
+ * column = 40ch) plus a 4ch gap. The reveal breakpoint (1440px) is chosen so
  * that, at that width, the column plus both gutters leaves room for the list. */
 
 .TOC {
   display: none;
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 1440px) {
   /* Reveal only when the page actually has a contents list (the aside is left
   empty on pages with too few headings) and there is gutter room. */
   .TOC:not(:empty) {
