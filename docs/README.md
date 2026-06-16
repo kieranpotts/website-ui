@@ -95,21 +95,3 @@ pre-commit install
 This installs all hook types declared in `.pre-commit-config.yaml` (`pre-commit`, `commit-msg`).
 
 Edit `./.pre-commit-config.yaml` to configure the pre-commit validation checks you want for your project. See the [pre-commit documentation](https://pre-commit.com) for details.
-
-# The `tmp` directory
-
-The standalone theme preview – `npm run preview`, or `gulp preview` – builds a sample site from the contents of `srv/`. We want edits in `srv/` to appear in the preview.
-
-Antora's content aggregator reads content from a Git source. It uses [isomorphic-git](https://isomorphic-git.org/), a pure-JavaScript Git implementation, to open the repository.
-
-Unfortunately, isomorphic-git has a limitation: it cannot open a Git _worktree, because a worktree's `.git` path is a pointer file rather than a real `.git` directory – and isomorphic-git only recognizes the latter.
-
-If this repository is checked out into a Git worktree, the build fails.
-
-One workaround is to point the preview playbook at the sibling bare repo. That works, but the aggregator only sees objects _committed_ there. Therefore, changes to the `srv/` files that are still in the working tree or index do NOT show up in the preview site – which is a source of confusion.
-
-A more robust solution is to snapshot the contents of the working tree into a throwaway repository. So, the preview build first copies the contents of `srv/` into `tmp/` and does a `git init` in `tmp/`.
-
-The `preview-site.yml` configuration – the Antora playbook for building the preview site – then points its content source at `tmp/`.
-
-It's a bit messy, but it works reliably.
