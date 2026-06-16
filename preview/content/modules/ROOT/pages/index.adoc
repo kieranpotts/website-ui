@@ -5,23 +5,18 @@
 [.lead]
 This page demonstrates every major AsciiDoc element and feature. It serves as a comprehensive reference and testing ground for the theme. This opening paragraph has been given the "lead" role, which is typically used for introductory text.
 
+---
+
 This is the default paragraph style. Consectetur esse do anim mollit quis occaecat aute consectetur veniam cillum ut reprehenderit. Ipsum enim ipsum veniam labore nostrud aliquip ea cillum minim commodo sint commodo cillum magna. Dolore tempor id occaecat tempor reprehenderit exercitation reprehenderit do incididunt enim magna cupidatat laboris.
 
 [.text-center]
 This demonstrates how to center a paragraph of text. Consectetur aute tempor aliquip dolor. Officia nostrud id laborum laborum exercitation enim labore culpa qui. Velit sint ipsum cupidatat veniam sunt culpa.
 
-_There is a thematic break between the next two paragraphs._
-
-Mollit ea minim commodo anim id eiusmod deserunt qui laborum Lorem in fugiat id. Eu et et tempor sit nostrud irure veniam pariatur. Veniam magna quis dolor excepteur deserunt ea tempor laborum Lorem est veniam fugiat cillum elit. Ipsum exercitation ut ea in nostrud nostrud cupidatat tempor. Cupidatat in enim qui Lorem dolor laborum sint sunt sint veniam non.
-
----
-
-Mollit est velit anim adipisicing. Magna pariatur dolore Lorem aute enim duis et mollit est adipisicing. Laborum dolor voluptate amet veniam. Mollit voluptate quis voluptate Lorem reprehenderit dolor adipisicing veniam mollit laboris reprehenderit qui esse laborum. Qui enim dolore mollit reprehenderit esse.
-
 == Inline text formatting
 
 This is *bold text*. This is _italic text_. This is `monospace text`. This is #highlighted text#. This is [.underline]#underlined text# and this is [.line-through]#strikethrough text#. This is http://example.com/[hyperlinked text]. This is ^superscript^ text and this is ~subscript~ text.
 
+[[links-cross-references-section]]
 === Links and cross-references
 
 https://asciidoctor.org[Website link]
@@ -81,7 +76,7 @@ Consequat nisi cupidatat cillum cillum voluptate eiusmod. Proident dolor in temp
 [[custom-anchor]]
 === Section with a custom anchor
 
-This section has a custom anchor that is referenced from elsewhere on this page.
+This section has a custom anchor that is referenced from the <<links-cross-references,links and cross-references>> section.
 
 [[lists-section]]
 == Lists
@@ -119,6 +114,13 @@ An ordered list:
 . Second item
 . Third item
 . Fourth item
+
+An ordered list with longer paragraphs of text:
+
+. Tempor irure aliqua aute elit elit dolor ad deserunt fugiat eiusmod duis minim deserunt.
+.. Nisi proident Lorem fugiat non nulla labore esse nisi consequat duis in. Officia eu aliquip ipsum tempor. Dolore excepteur et non aliqua dolor sunt magna.
+... Amet consectetur enim quis adipisicing tempor veniam ipsum nulla. Elit est enim eu do proident mollit quis elit et Lorem ex culpa irure pariatur. Tempor irure aliqua aute elit elit dolor ad deserunt fugiat eiusmod duis minim deserunt.
+. Minim enim exercitation nisi est consequat reprehenderit. Sit pariatur labore minim reprehenderit cillum amet commodo dolore consequat et eiusmod id. Culpa cupidatat laborum enim dolore.
 
 .A mixed list
 . Ordered item
@@ -263,12 +265,12 @@ A `[source]` block with callouts:
 [source,javascript]
 ----
 function createUser(name, email) {
-    return {
-        name: name,           // <1>
-        email: email,         // <2>
-        id: generateId(),     // <3>
-        createdAt: new Date()
-    };
+  return {
+    name: name,           // <1>
+    email: email,         // <2>
+    id: generateId(),     // <3>
+    createdAt: new Date()
+  };
 }
 ----
 <1> User's display name
@@ -282,6 +284,31 @@ This is a listing block.
 It preserves line breaks and spacing.
 Often used for code without syntax highlighting.
 ----
+
+Listing blocks are useful for rendering illustrations using Unicode box-drawing characters:
+
+[listing]
+....
+/dev/nvme0n1p2
+  ├── usr
+  │   ├── local
+  │   ├── share
+  │   ├── libexec
+  │   ├── include
+  │   ├── sbin
+  │   ├── src
+  │   ├── lib64
+  │   ├── lib
+  │   ├── bin
+  │   ├── games
+  │   │   ├── solitaire
+  │   │   ├── snake
+  │   │   └── tic-tac-toe
+  │   └── media
+  ├── media
+  ├── run
+  └── tmp
+....
 
 === Literal blocks
 
@@ -363,12 +390,23 @@ Hello, World!
 .Earthrise, photographed from lunar orbit
 image::earthrise.jpg[Earthrise over the lunar horizon]
 
-.A simple build pipeline (SVG)
+.Diagram that responds to light/dark mode preference
 image::diagram.svg[Build pipeline diagram, 600, 240]
 
 === Inline images
 
 This paragraph contains an inline image image:picture.png[Picture, 16, 16] within the text, flowing with the words around it.
+
+=== Video
+
+A video with multiple sources (WebM with an MP4 fallback) and a poster image:
+
+++++
+<video controls loop muted poster="_images/apollo8-640x480.jpg">
+  <source src="_images/apollo8-320x240.webm" type="video/webm" />
+  <source src="_images/apollo8-320x240.mp4" type="video/mp4" />
+</video>
+++++
 
 == User interface elements
 
@@ -411,39 +449,9 @@ This sentence references the previous footnote again.footnote:fn1[]
 
 The footnotes are printed at the end of the page (ie. they are implemented as endnotes).
 
-== Monospace Web components
+== Interactive controls
 
-The following elements are borrowed from
-https://owickstrom.github.io/the-monospace-web/[The Monospace Web^] to exercise
-interactive and grid-aligned UI. They are emitted as raw HTML via AsciiDoc
-passthrough blocks, since AsciiDoc has no native syntax for form controls.
-
-=== Tree component
-
-A filesystem listing drawn with literal box-drawing characters:
-
-[listing]
-....
-/dev/nvme0n1p2
-├── usr
-│   ├── local
-│   ├── share
-│   ├── libexec
-│   ├── include
-│   ├── sbin
-│   ├── src
-│   ├── lib64
-│   ├── lib
-│   ├── bin
-│   ├── games
-│   │   ├── solitaire
-│   │   ├── snake
-│   │   └── tic-tac-toe
-│   └── media
-├── media
-├── run
-└── tmp
-....
+These are rendered in AsciiDoc using literal blocks.
 
 === Buttons
 
@@ -501,10 +509,7 @@ A filesystem listing drawn with literal box-drawing characters:
 </form>
 ++++
 
-=== Disclosure widget
-
-A `details`/`summary` pair: a collapsible region the reader can open and close.
-The first one is collapsed; the second is open by default.
+=== Disclosure component (`details`/`summary`)
 
 ++++
 <details>
@@ -515,24 +520,4 @@ The first one is collapsed; the second is open by default.
   <summary>This one starts open</summary>
   <p>Its contents are visible until the reader collapses it.</p>
 </details>
-++++
-
-=== Grids
-
-A `grid` container divides the horizontal space evenly across its cells,
-snapping to the character grid. Here are grids with one through four cells:
-
-++++
-<div class="grid">
-  <input readonly value="1" />
-</div>
-<div class="grid">
-  <input readonly value="1" /><input readonly value="2" />
-</div>
-<div class="grid">
-  <input readonly value="1" /><input readonly value="2" /><input readonly value="3" />
-</div>
-<div class="grid">
-  <input readonly value="1" /><input readonly value="2" /><input readonly value="3" /><input readonly value="4" />
-</div>
 ++++
