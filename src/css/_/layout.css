@@ -45,7 +45,7 @@ admonitions, etc. Elements that need more breathing room override
 `margin-top` in the typography / asciidoctor layers. */
 
 .DOCUMENT * + * {
-  margin-top: var(--line-height);
+  /*margin-top: var(--line-height);*/
 }
 
 /* BREADCRUMBS: The trail to the current page, shown above the document

@@ -16,7 +16,9 @@ disturb the line box, preserving the baseline grid. */
 
 .AsciiDoc sub {
   display: inline-block;
-  font-size: 0.75rem;
+  /* Match superscript: the reset sizes both `sub`/`sup` at 75% of the body
+  text; keep the same relative size here rather than a smaller absolute rem. */
+  font-size: 75%;
   line-height: 0;
   margin: 0;
   position: relative;
@@ -279,12 +281,16 @@ below, since the `<pre>` already provides the code surface. */
   padding: 0 0.5ch;
 }
 
-/* Inside a code block the surface is the `<pre>`; strip the inline box. */
+/* Inside a code block the surface is the `<pre>`; strip the inline box. The
+`<pre>` preserves whitespace (`white-space: pre`), but the `code` reset sets
+`pre-line`, which collapses leading indentation; `inherit` makes block code
+follow the `<pre>` again so source indentation is preserved. */
 
 .AsciiDoc pre code {
   background: none;
   border: 0;
   padding: 0;
+  white-space: inherit;
 }
 
 
