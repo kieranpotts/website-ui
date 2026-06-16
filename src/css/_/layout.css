@@ -17,7 +17,7 @@ body {
 .MAIN {
   max-width: calc(min(80ch, round(down, 100%, 1ch)));
   overflow-x: hidden;
-  padding: var(--line-height, 1.6rem) 2ch;
+  padding: calc(var(--line-height) / 2) 2ch var(--line-height) 2ch;
   position: relative;
   width: 100%;
 }
@@ -74,12 +74,32 @@ Markup: <nav.BREADCRUMBS> > <ul> > <li>{a|text}</li>... */
   margin: 0;
 }
 
-/* A "/" separator before every item except the first. */
+/* A "›" separator before every item except the first, and a trailing one after
+the last item so the trail always ends with a divider. */
+
+.BREADCRUMBS li + li::before,
+.BREADCRUMBS li:last-child::after {
+  color: var(--color\=text\|light);
+  content: "›";
+}
 
 .BREADCRUMBS li + li::before {
-  color: var(--color\=text\|light);
-  content: "/";
   margin-right: 1ch;
+}
+
+.BREADCRUMBS li:last-child::after {
+  margin-left: 1ch;
+}
+
+/* On hover/focus, trail links show the same accent underline as links inside
+the `.AsciiDoc` component. */
+
+.BREADCRUMBS a:hover,
+.BREADCRUMBS a:focus {
+  text-decoration: underline;
+  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-thickness: var(--border-thickness);
+  text-underline-offset: 0.3em;
 }
 
 /* The footer closes the page, separated from the document

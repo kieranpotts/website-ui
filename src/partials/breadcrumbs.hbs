@@ -1,8 +1,12 @@
 {{! The breadcrumb trail never includes the current page – it shows only the
 path of ancestors leading to it. Antora lists the current page as the final
-entry of `page.breadcrumbs`, so that entry is skipped (matched by url). On the
-home page there are no ancestors, so the whole trail is omitted. }}
-{{#unless page.home}}
+entry of `page.breadcrumbs`, so that entry is skipped (matched by url).
+
+The trail is shown only when the page is one or more levels below a top-level
+page, i.e. it has at least one ancestor. `page.breadcrumbs` includes the current
+page, so one-plus ancestors means a length greater than 1. The home page and
+top-level pages get no trail. }}
+{{#if (gt page.breadcrumbs.length 1)}}
   <nav class="BREADCRUMBS" aria-label="breadcrumbs">
     <ul>
       {{! A persistent Home root on every trail. }}
@@ -20,4 +24,4 @@ home page there are no ancestors, so the whole trail is omitted. }}
       {{/each}}
     </ul>
   </nav>
-{{/unless}}
+{{/if}}
