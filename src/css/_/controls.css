@@ -98,7 +98,7 @@ button:focus,
 input:focus,
 select:focus,
 textarea:focus {
-  --border-thickness: 3px;
+  /* --border-thickness: 3px; */
   outline: none;
 }
 
@@ -135,11 +135,11 @@ button::-moz-focus-inner {
 }
 
 button:hover {
-  background: var(--color\=header\|background);
+  /* background: var(--color\=header\|background); */
 }
 
 button:active {
-  transform: translate(2px, 2px);
+  /* transform: translate(2px, 2px); */
 }
 
 /* Labels are block-level and grid-wide, so stacked

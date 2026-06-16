@@ -9,21 +9,22 @@
  *
  * Keeping the cascade flowing downward avoids specificity battles.
  *
- *   _fonts       @font-face declarations.
- *   _properties  Design tokens.
- *   _resets      Cross-browser normalization.
- *   _typography  Bare-element text styling.
- *   _layout      Page-level structure.
- *   _components  Reusable UI components, eg. NavBar.
- *   _utilities   Single-purpose helpers; highest specificity, may use !important.
+ *   fonts       @font-face declarations.
+ *   properties  Design tokens.
+ *   resets      Cross-browser normalization.
+ *   typography  Bare-element text styling.
+ *   layout      Page-level structure.
+ *   components  Reusable UI components, eg. NavBar.
+ *   utilities   Single-purpose helpers; highest specificity, may use !important.
  */
 
-@import url('_fonts.css');
-@import url('_properties.css');
-@import url('_resets.css');
-@import url('_typography.css');
-@import url('_controls.css');
-@import url('_layout.css');
-@import url('_components.css');
-@import url('_utilities.css');
-@import url('_asciidoctor.css');
+@import url('./_/fonts.css');
+@import url('./_/properties.css');
+@import url('./_/resets.css');
+@import url('./_/typography.css');
+@import url('./_/controls.css');
+@import url('./_/layout.css');
+@import url('./_/components/asciidoc.css');
+@import url('./_/components/navbar.css');
+@import url('./_/components/toc.css');
+@import url('./_/utilities.css');

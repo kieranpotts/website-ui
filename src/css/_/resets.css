@@ -721,7 +721,10 @@ canvas {
 
 svg {
   display: block;
-  max-width: 100%;
+
+  /* Fills container. Height scales proportionally. */
+  width: 100%;
+  height: auto;
 }
 
 /* Clip a nested SVG's overflow (a non-root SVG can
@@ -795,6 +798,7 @@ template {
 enclose them. Applied to the common block containers
 so floats (eg. a floated image) don't escape. */
 
+/*
 :where(
   address, article, aside, blockquote, details, div, dl, fieldset, figure,
   footer, form, header, main, nav, ol, section, ul
@@ -803,3 +807,4 @@ so floats (eg. a floated image) don't escape. */
   content: '';
   display: table;
 }
+*/

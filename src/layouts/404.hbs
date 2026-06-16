@@ -11,9 +11,11 @@
     {{> header}}
     <main class="MAIN">
       <article class="DOCUMENT">
-        <h1>Page not found</h1>
-        <p>The page you requested does not exist.</p>
-        <p><a href="{{{or site.homeUrl (siteRootPath)}}}">Return home</a></p>
+        <div class="AsciiDoc">
+          <h1>Page not found</h1>
+          <p>The page you requested does not exist.</p>
+          <p><a href="{{{or site.homeUrl (siteRootPath)}}}">Return home</a></p>
+        </div>
       </article>
       {{> footer}}
     </main>

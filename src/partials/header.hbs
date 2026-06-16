@@ -2,9 +2,11 @@
   <nav class="NavBar" aria-label="primary">
     <a class="NavBar__Brand" href="{{{relativize '/'}}}">{{site.title}}</a>
     <button class="NavBar__Toggle" aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle menu">
-      <span class="NavBar__ToggleBar"></span>
-      <span class="NavBar__ToggleBar"></span>
-      <span class="NavBar__ToggleBar"></span>
+      <svg class="NavBar__ToggleIcon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
     </button>
     <ul class="NavBar__Menu" id="nav-menu">
       <li><a href="{{{relativize '/'}}}">Home</a></li>

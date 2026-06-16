@@ -11,6 +11,273 @@
  * https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css
  */
 
+/* Subscript/superscript are nudged so they do not
+disturb the line box, preserving the baseline grid. */
+
+.AsciiDoc sub {
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 0;
+  margin: 0;
+  position: relative;
+  vertical-align: sub;
+}
+
+/* HEADINGS: Uppercase, bold, and spaced in whole lines.
+h1 occupies a double line box, so it still lands on the
+grid at its larger size. */
+
+.AsciiDoc h1,
+.AsciiDoc h2,
+.AsciiDoc h3,
+.AsciiDoc h4,
+.AsciiDoc h5,
+.AsciiDoc h6 {
+  font-weight: var(--font-weight\=bold);
+  line-height: var(--line-height);
+  /* Two lines above, one below. */
+  margin: calc(var(--line-height) * 2) 0 var(--line-height);
+}
+
+.AsciiDoc h1 {
+  font-size: var(--font-size\=xxl);
+  letter-spacing: -0.05rem;
+  /* Four lines above (double the other headings),
+  to set the page title apart. */
+  margin-top: calc(var(--line-height) * 4);
+  text-transform: uppercase;
+}
+
+.AsciiDoc h2 {
+  font-size: var(--font-size\=xl);
+  text-transform: uppercase;
+}
+
+.AsciiDoc h3 { font-size: var(--font-size\=lg); }
+
+/* FLOW BLOCKS */
+
+.AsciiDoc p {
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.AsciiDoc hr {
+  border: none;
+  color: var(--color\=border);
+  display: block;
+  height: var(--line-height);
+  margin: calc(var(--line-height) * 1.5) 0;
+  position: relative;
+}
+
+.AsciiDoc hr::after {
+  border-top: calc(var(--border-thickness) * 3) double currentColor;
+  content: "";
+  display: block;
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: calc(var(--line-height) / 2 - var(--border-thickness));
+  width: 100%;
+}
+
+/* Quote/verse blocks are styled in `_asciidoctor.css` against their wrapper
+classes (`.quoteblock`, `.verseblock`). */
+
+.AsciiDoc blockquote {}
+
+/* LISTS: Square bullets for ul. Dotted decimal counters for ol
+(1., 1.1., ...). The marker sits flush with the left margin (aligned with
+regular paragraphs), but the item text is given a hanging indent: the first
+line starts two cells in, and wrapped lines align under that text rather
+than back under the marker.
+
+The hanging indent is done on the `li`: a 2ch `padding-left` sets the text
+column, and a matching negative `text-indent` pulls the first line (the
+marker, rendered inline by `list-style-position: inside`, plus the start of
+the text) back out to the flush-left margin. This works uniformly for the
+`ul` `::marker` and the `ol` `::before` counter, since both are inline at the
+head of the first line. */
+
+.AsciiDoc ul,
+.AsciiDoc ol {
+  margin: 0 0 var(--line-height);
+  padding: 0;
+}
+
+.AsciiDoc ul {
+  list-style-type: square;
+}
+
+.AsciiDoc ol {
+  counter-reset: item;
+  list-style-type: none;
+}
+
+/* The hanging indent – for unordered lists, not numbered ones. */
+
+.AsciiDoc ul li {
+  padding-left: 2.75ch;
+  text-indent: -2.75ch;
+}
+
+/* Nested lists are further indented. */
+
+.AsciiDoc ol ul,
+.AsciiDoc ol ol,
+.AsciiDoc ul ol,
+.AsciiDoc ul ul {
+  margin: 0;
+  padding-left: 2.75ch;
+  text-indent: 0;
+}
+
+.AsciiDoc ol li::before {
+  /* The muted tone tints the number; the item text stays ink (set below). */
+  color: var(--color\=text\|light);
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+  font-weight: var(--font-weight\=medium);
+}
+
+/* Keep the ordered-list item text ink; only its
+`::before` counter is tinted. */
+
+.AsciiDoc ol > li {
+  color: var(--color\=text\|default);
+}
+
+/* The square bullet (ul) is tinted with the muted
+tone. List text stays ink. */
+
+.AsciiDoc li::marker {
+  color: var(--color\=text\|light);
+  line-height: 0;
+}
+
+/* IMAGES & FIGURES:  Videos and bare/figure images fill the content
+column. Images are NOT given a blanket `width: 100%` here – that would
+override the HTML `width`/`height` attributes on inline images ,
+forcing them to the intrinsic size. Block images opt into full width
+explicitly (see `.imageblock` and `figure img` below); inline images
+are left to their attributes. */
+
+.AsciiDoc video {
+  display: block;
+  object-fit: contain;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Text color is set on the images because, if an image fails
+to load, its alt text will be rendered in its place. */
+
+.AsciiDoc img {
+  color: var(--color\=text\|light);
+}
+
+/* Block images (figures and Asciidoctor image blocks)
+fill the column. */
+
+.AsciiDoc figure > img {
+  display: block;
+  object-fit: contain;
+  overflow: hidden;
+  width: 100%;
+}
+
+.AsciiDoc figure {
+  margin: calc(var(--line-height) * 2) 3ch;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.AsciiDoc figcaption {
+  display: block;
+  text-align: center;
+}
+
+/* TABLES: Full-width, snapped to whole cells, with the grid's
+border thickness on every edge and padding computed so cell
+text stays on the line grid. */
+
+.AsciiDoc table {
+  border-collapse: collapse;
+  margin: 0 0 calc(var(--line-height) * 2);
+  position: relative;
+  top: calc(var(--line-height) / 2);
+  width: calc(round(down, 100%, 1ch));
+}
+
+.AsciiDoc th,
+.AsciiDoc td {
+  border: var(--border-thickness) solid var(--color\=border);
+  line-height: var(--line-height);
+  padding:
+    calc(var(--line-height) / 2)
+    calc(1ch - var(--border-thickness) / 2)
+    calc(var(--line-height) / 2 - var(--border-thickness));
+  text-align: left;
+  vertical-align: top;
+}
+
+.AsciiDoc table tbody tr:first-child > * {
+  padding-top: calc(var(--line-height) / 2 - var(--border-thickness));
+}
+
+.AsciiDoc th {
+  font-weight: var(--font-weight\=bold);
+}
+
+/* LINKS */
+
+.AsciiDoc a {
+  color: var(--color\=hyperlink\|default);
+  text-decoration: underline;
+  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-thickness: var(--border-thickness);
+  text-underline-offset: 0.3em;
+}
+
+.AsciiDoc a:visited { color: var(--color\=hyperlink\|visited); }
+.AsciiDoc a:hover { color: var(--color\=hyperlink\|hover); }
+.AsciiDoc a:focus { color: var(--color\=hyperlink\|focus); }
+.AsciiDoc a:active { color: var(--color\=hyperlink\|active); }
+
+/* CODE */
+
+/* Preformatted text blocks have a tighter vertical grid
+rhythm than body text, but still a little looser than
+single-spaced. */
+
+.AsciiDoc pre {
+  font-family: var(--font-family\=monospace);
+  line-height: var(--line-height\=code);
+  margin: var(--line-height) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: pre;
+}
+
+/* Code inside a figure aligns to the figure's own margins. */
+
+.AsciiDoc figure pre {
+  margin: 0;
+}
+
+.AsciiDoc code {
+  font-weight: var(--font-weight\=medium);
+}
+
+
+
+
+
+
+
+
 /* LISTS: Asciidoctor wraps every list item's text in a `<p>` (always, even
 for a single line), and wraps each list in a `<div class="ulist">` /
 `<div class="olist">`. Two of our base rules misbehave against that markup:
@@ -24,8 +291,8 @@ Pull the first/only paragraph of an item back inline with its marker and
 strip its top margin. Subsequent paragraphs in a multi-paragraph item keep
 the normal one-line gap. */
 
-.ulist li > p:first-child,
-.olist li > p:first-child {
+.AsciiDoc .ulist li > p:first-child,
+.AsciiDoc .olist li > p:first-child {
   display: inline;
   margin-top: 0;
 }
@@ -33,8 +300,8 @@ the normal one-line gap. */
 /* Following blocks within an item (continuation paragraphs, nested lists)
 restore block flow and the standard inter-line gap. */
 
-.ulist li > p:first-child + *,
-.olist li > p:first-child + * {
+.AsciiDoc .ulist li > p:first-child + *,
+.AsciiDoc .olist li > p:first-child + * {
   margin-top: var(--line-height);
 }
 
@@ -43,16 +310,16 @@ restore block flow and the standard inter-line gap. */
 so replace the empty glyph with a monospace box character. The list itself
 drops its square bullet (the box *is* the marker). */
 
-.checklist {
+.AsciiDoc .checklist {
   list-style-type: none;
   padding-left: 0;
 }
 
-.checklist .fa::before {
+.AsciiDoc .checklist .fa::before {
   content: "\2610 "; /* ☐ ballot box */
 }
 
-.checklist .fa-check-square-o::before {
+.AsciiDoc .checklist .fa-check-square-o::before {
   content: "\2611 "; /* ☑ ballot box with check */
 }
 
@@ -60,19 +327,19 @@ drops its square bullet (the box *is* the marker). */
 Bold the term and indent the description by whole character cells, keeping
 the line grid. */
 
-.dlist dl {
+.AsciiDoc .dlist dl {
   margin: 0 0 var(--line-height);
 }
 
-.dlist dt {
+.AsciiDoc .dlist dt {
   font-weight: var(--font-weight\=bold);
 }
 
-.dlist dd {
+.AsciiDoc .dlist dd {
   margin: 0 0 var(--line-height) 3ch;
 }
 
-.dlist dd > p:first-child {
+.AsciiDoc .dlist dd > p:first-child {
   margin-top: 0;
 }
 
@@ -80,7 +347,7 @@ the line grid. */
 `<p>` is the (italic) question and following paragraphs are the answer. Number
 the questions and keep answers flush under them. */
 
- .qlist.qanda ol {
+.AsciiDoc .qlist.qanda ol {
   counter-reset: question;
   list-style-type: none;
   padding-left: 0;
@@ -89,16 +356,16 @@ the questions and keep answers flush under them. */
 /* Suppress the base `ol li::before` decimal counter (from `_typography.css`);
 the question counter below replaces it. */
 
-.qlist.qanda > ol > li::before {
+.AsciiDoc .qlist.qanda > ol > li::before {
   content: none;
   counter-increment: none;
 }
 
-.qlist.qanda > ol > li {
+.AsciiDoc .qlist.qanda > ol > li {
   counter-increment: question;
 }
 
-.qlist.qanda > ol > li > p:first-child::before {
+.AsciiDoc .qlist.qanda > ol > li > p:first-child::before {
   content: counter(question) ". ";
   font-weight: var(--font-weight\=bold);
 }
@@ -109,7 +376,7 @@ bordered box holding its number; the sibling `<b>N</b>` Asciidoctor adds for
 no-CSS fallback is hidden. The colist below the code pairs each number with
 its explanation in a borderless table. */
 
-.conum[data-value] {
+.AsciiDoc .conum[data-value] {
   background: var(--color\=text\|default);
   border: var(--border-thickness) solid var(--color\=border);
   color: var(--color\=page\|background);
@@ -122,22 +389,22 @@ its explanation in a borderless table. */
   width: 2ch;
 }
 
-.conum[data-value]::after {
+.AsciiDoc .conum[data-value]::after {
   content: attr(data-value);
 }
 
-.conum[data-value] + b {
+.AsciiDoc .conum[data-value] + b {
   display: none;
 }
 
-.colist table {
+.AsciiDoc .colist table {
   margin: 0 0 var(--line-height);
   position: static;
   top: 0;
   width: auto;
 }
 
-.colist td {
+.AsciiDoc .colist td {
   border: none;
   padding: 0 1ch 0 0;
   vertical-align: top;
@@ -149,25 +416,25 @@ reads clearly rather than shrinking to a tiny gloss. The footnote
 *definitions* printed at the foot of the page (`#footnotes > div.footnote`)
 also stay at body size. */
 
-sup.footnote,
-sup.footnoteref {
+.AsciiDoc sup.footnote,
+.AsciiDoc sup.footnoteref {
   font-size: 100%; /* override the generic `sup` shrink (`_resets.css`) */
 }
 
 /* Tint the marker link with the accent (the `[ ]` brackets stay ink). */
 
-sup.footnote > a,
-sup.footnoteref > a {
+.AsciiDoc sup.footnote > a,
+.AsciiDoc sup.footnoteref > a {
   color: var(--color\=accent);
 }
 
 /* The endnote list at the page foot: separated by a rule, normal body size. */
 
-#footnotes {
+.AsciiDoc #footnotes {
   margin-top: calc(var(--line-height) * 2);
 }
 
-#footnotes hr {
+.AsciiDoc #footnotes hr {
   margin-bottom: var(--line-height);
 }
 
@@ -184,7 +451,7 @@ menu:File[Save]   -> <span.menuseq><b.menu>File</b><i.caret></i><b.menuitem>Save
 
 /* A keystroke, drawn as a small bordered keycap. */
 
-kbd {
+.AsciiDoc kbd {
   background: var(--color\=header\|background);
   border: var(--border-thickness) solid var(--color\=border);
   display: inline-block;
@@ -198,23 +465,23 @@ kbd {
 /* In a key sequence the separators (`+`) sit between caps; trim the outer caps'
 margins so the sequence aligns with the surrounding text. */
 
-.keyseq kbd:first-child {
+.AsciiDoc .keyseq kbd:first-child {
   margin-left: 0;
 }
 
-.keyseq kbd:last-child {
+.AsciiDoc .keyseq kbd:last-child {
   margin-right: 0;
 }
 
 /* A UI button reference: the label wrapped in square brackets, like the boxed
 buttons elsewhere in the theme but inline within prose. */
 
-b.button::before {
+.AsciiDoc b.button::before {
   content: "[";
   padding-right: 0.25ch;
 }
 
-b.button::after {
+.AsciiDoc b.button::after {
   content: "]";
   padding-left: 0.25ch;
 }
@@ -222,15 +489,15 @@ b.button::after {
 /* A menu path (File > Save As). The caret between items uses a glyph rather
 than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 
-.menuseq b {
+.AsciiDoc .menuseq b {
   font-weight: var(--font-weight\=medium);
 }
 
-.menuseq .caret {
+.AsciiDoc .menuseq .caret {
   font-style: normal;
 }
 
-.menuseq .caret::before {
+.AsciiDoc .menuseq .caret::before {
   content: "›";
   font-weight: var(--font-weight\=normal);
   margin: 0 0.5ch;
@@ -243,44 +510,44 @@ admonition's name as an uppercase label — drawn from the icon's `title`
 attribute via `attr()`. Consistent with the boxed, lettered aesthetic of
 the rest of the theme. */
 
- .admonitionblock {
+.AsciiDoc .admonitionblock {
   margin: var(--line-height) 0;
 }
 
-.admonitionblock > table {
+.AsciiDoc .admonitionblock > table {
   border-collapse: collapse;
   width: 100%;
 }
 
-.admonitionblock td {
+.AsciiDoc .admonitionblock td {
   border: none;
   padding: 0;
   vertical-align: top;
 }
 
-.admonitionblock td.icon {
+.AsciiDoc .admonitionblock td.icon {
   padding-right: 2ch;
   width: 12ch;
 }
 
 /* Replace the (missing) Font Awesome glyph with the admonition label. */
 
-.admonitionblock td.icon .fa {
+.AsciiDoc .admonitionblock td.icon .fa {
   font-style: normal;
   font-weight: var(--font-weight\=bold);
   text-transform: uppercase;
 }
 
-.admonitionblock td.icon .fa::before {
+.AsciiDoc .admonitionblock td.icon .fa::before {
   content: attr(title);
 }
 
-.admonitionblock td.content {
+.AsciiDoc .admonitionblock td.content {
   border-left: var(--border-thickness) solid var(--color\=border);
   padding-left: 2ch;
 }
 
-.admonitionblock td.content > :first-child {
+.AsciiDoc .admonitionblock td.content > :first-child {
   margin-top: 0;
 }
 
@@ -289,29 +556,29 @@ keeps line breaks in a `<pre class="content">`. Both may carry an
 `.attribution`. A left rule marks the quotation. The attribution is
 lighter and right of an em dash (already in the markup). */
 
-.quoteblock,
-.verseblock {
+.AsciiDoc .quoteblock,
+.AsciiDoc .verseblock {
   /* The quotation rule is a muted monotone, like the list markers. */
   border-left: var(--border-thickness) solid var(--color\=text\|light);
   margin: var(--line-height) 0;
   padding-left: 2ch;
 }
 
-.quoteblock blockquote {
+.AsciiDoc .quoteblock blockquote {
   margin: 0;
 }
 
-.verseblock pre.content {
+.AsciiDoc .verseblock pre.content {
   font-family: var(--font-family\=default);
   margin: 0;
 }
 
-.attribution {
+.AsciiDoc .attribution {
   color: var(--color\=text\|light);
   margin-top: var(--line-height);
 }
 
-.attribution cite {
+.AsciiDoc .attribution cite {
   display: block;
 }
 
@@ -319,8 +586,8 @@ lighter and right of an em dash (already in the markup). */
 border so they read as a self-contained box, snapped to whole character cells,
 with interior padding on the line grid. */
 
-.sidebarblock,
-.exampleblock {
+.AsciiDoc .sidebarblock,
+.AsciiDoc .exampleblock {
   border: var(--border-thickness) solid var(--color\=border);
   margin: var(--line-height) 0;
   padding: 0 2ch;
@@ -329,29 +596,29 @@ with interior padding on the line grid. */
 /* The example's own `.title` ("Example 1. Title") sits above the box; the
 sidebar's title sits inside it. Both are bold, not the default italic. */
 
-.exampleblock > .title {
+.AsciiDoc .exampleblock > .title {
   font-weight: var(--font-weight\=bold);
 }
 
-.sidebarblock > .content > .title {
+.AsciiDoc .sidebarblock > .content > .title {
   font-weight: var(--font-weight\=bold);
   text-transform: uppercase;
 }
 
-.sidebarblock > .content > :first-child,
-.exampleblock > .content > :first-child {
+.AsciiDoc .sidebarblock > .content > :first-child,
+.AsciiDoc .exampleblock > .content > :first-child {
   margin-top: var(--line-height);
 }
 
-.sidebarblock > .content > :last-child,
-.exampleblock > .content > :last-child {
+.AsciiDoc .sidebarblock > .content > :last-child,
+.AsciiDoc .exampleblock > .content > :last-child {
   margin-bottom: var(--line-height);
 }
 
 /* OPEN BLOCK: A bare grouping block with no chrome of its own. It only
 carries the spacing of whatever it contains. */
 
-.openblock {
+.AsciiDoc .openblock {
   margin: var(--line-height) 0;
 }
 
@@ -360,16 +627,16 @@ carries the spacing of whatever it contains. */
 give the block a tinted, bordered frame snapped to whole cells, with
 interior padding. */
 
-.listingblock > .content,
-.literalblock > .content {
+.AsciiDoc .listingblock > .content,
+.AsciiDoc .literalblock > .content {
   background: var(--color\=text\|pre\|background);
   border: var(--border-thickness) solid var(--color\=border);
   margin: var(--line-height) 0;
   padding: var(--line-height) 2ch;
 }
 
-.listingblock > .content > pre,
-.literalblock > .content > pre {
+.AsciiDoc .listingblock > .content > pre,
+.AsciiDoc .literalblock > .content > pre {
   margin: 0;
 }
 
@@ -378,7 +645,7 @@ above the block: image titles, listing titles, table titles...). Render them
 as a light caption on the line grid. Block-specific overrides above (example,
 sidebar) take precedence. */
 
-.title {
+.AsciiDoc .title {
   color: var(--color\=text\|light);
 }
 
@@ -387,17 +654,17 @@ is the inline-image span. Bare `img` is NOT given a width in `_typography.css`
 (so inline images keep their attribute dimensions), so block images opt into
 full width here. */
 
-.imageblock {
+.AsciiDoc .imageblock {
   margin: calc(var(--line-height) * 2) 0;
 }
 
-.imageblock img {
+.AsciiDoc .imageblock img {
   display: block;
   object-fit: contain;
   width: 100%;
 }
 
-.imageblock > .title {
+.AsciiDoc .imageblock > .title {
   text-align: center;
 }
 
@@ -405,11 +672,11 @@ full width here. */
 `width`/`height` attributes size it (the presentational attributes apply because
 no author rule overrides them); it is merely capped at the column width. */
 
-.image {
+.AsciiDoc .image {
   display: inline;
 }
 
-.image > img {
+.AsciiDoc .image > img {
   display: inline;
   max-width: 100%;
   vertical-align: baseline;
@@ -419,21 +686,21 @@ no author rule overrides them); it is merely capped at the column width. */
 `[.underline]#...#`, `[.line-through]#...#`, and
 alignment roles on paragraphs. */
 
-.underline {
+.AsciiDoc .underline {
   text-decoration: underline;
 }
 
-.line-through {
+.AsciiDoc .line-through {
   text-decoration: line-through;
 }
 
-.text-center {
+.AsciiDoc .text-center {
   text-align: center;
 }
 
 /* The `[.lead]` role marks an introductory paragraph; give it slightly larger
 type while staying on the grid. */
 
-.paragraph.lead > p {
+.AsciiDoc .paragraph.lead > p {
   font-size: var(--font-size\=lg);
 }

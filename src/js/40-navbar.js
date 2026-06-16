@@ -46,6 +46,14 @@
     document.addEventListener('click', function (e) {
       if (navbar && !navbar.contains(e.target)) setOpen(false)
     })
+
+    /* Close when the viewport widens to the desktop breakpoint (where the menu
+    is shown inline and the toggle is hidden), so it does not stay stuck open.
+    Matches the 800px breakpoint in `_components.css`. */
+    var desktop = window.matchMedia('(min-width: 800px)')
+    desktop.addEventListener('change', function (e) {
+      if (e.matches) setOpen(false)
+    })
   }
 
   if (document.readyState === 'loading') {

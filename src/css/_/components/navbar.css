@@ -1,0 +1,202 @@
+
+/* NAVBAR: The primary site navigation, laid out inside the full-width
+header band (see `.HEADER` in `_layout.css`). The brand sits on the left
+and the menu inline on the right. The bar carries no border of its own –
+the header band's bottom rule sets the header off from the document. Its
+content is centered and constrained to the same column as `.MAIN`, with
+matching side padding, so the brand and menu line up with the body content
+beneath. On narrow viewports the menu collapses behind a burger button – it
+is hidden until the button is pressed, then drops down as a full-width
+list beneath the bar (the `is-open` state is toggled by `40-navbar.js`).
+At >=50rem the button is hidden and the menu is always shown inline on
+the right.
+
+Markup: <nav.NavBar> > <a.NavBar__Brand> + <button.NavBar__Toggle>
+          + <ul.NavBar__Menu#nav-menu>
+*/
+
+.NavBar {
+  /* Center-align so the text brand and the taller icon button line up by their
+  centers; `baseline` would drop the brand's text baseline below the button. */
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  padding: calc(var(--line-height) / 2) 2ch;
+  row-gap: calc(var(--line-height) / 2);
+  width: 100%;
+}
+
+/* The brand is the site title: bold and uppercase like a
+heading, but with no underline (it overrides the bare-link
+styling from `_typography.css`). */
+
+.NavBar__Brand {
+  font-weight: var(--font-weight\=bold);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* BURGER BUTTON: shown only on mobile (hidden at >=50rem, below). Three
+stacked bars in a square that lands on the grid. It resets the full-width
+block styling that `_resets.css` gives bare buttons. */
+
+.NavBar__Toggle {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  /* Pin to the right edge of the bar. `margin-left: auto` keeps the button hard
+  right whether the menu is hidden (closed) or wrapped onto its own full-width
+  row (open) — deterministic regardless of how many siblings share the line, so
+  the button does not shift horizontally when the menu toggles. */
+
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  height: var(--line-height);
+  margin-left: auto;
+  padding: 0;
+  width: auto;
+}
+
+/* The hamburger icon: three stroked lines that take the current text color
+(overriding the `svg { stroke: none }` reset). The stroke matches the grid's
+hairline thickness. */
+svg.NavBar__ToggleIcon {
+  /* `flex: none` stops the reset's `svg { max-width: 100% }` from collapsing
+  the icon inside the flex button (same fix as `.NavBar__Icon`). */
+  flex: none;
+  height: var(--line-height);
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-width: var(--border-thickness);
+  width: var(--line-height);
+}
+
+/* The menu is a bullet-less list. It resets the bare `ul` styling (square
+bullets, padding, bottom margin) from `_typography.css`.
+Mobile default: a full-width dropdown, hidden until opened. It takes a full row
+of the wrapping flex bar (`flex-basis: 100%`) so it sits beneath the brand and
+button, and stacks its items vertically. */
+
+.NavBar__Menu {
+  flex-basis: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.NavBar__Menu:not(.is-open) {
+  display: none;
+}
+
+/* Right-align the stacked items, under the burger button. */
+
+.NavBar__Menu.is-open {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--line-height) / 2);
+  row-gap: calc(var(--line-height) / 2);
+}
+
+/* Reset any inherited margin. */
+
+.NavBar__Menu > li {
+  margin: 0;
+}
+
+.NavBar__Menu a {
+  text-transform: uppercase;
+}
+
+/* On hover/focus, the brand and the text menu items show the same accent
+underline as links inside `.AsciiDoc` (the social icon item is excluded — it
+has no text to underline). */
+
+.NavBar__Brand:hover,
+.NavBar__Brand:focus,
+.NavBar__Menu > li:not(.NavBar__Social) > a:hover,
+.NavBar__Menu > li:not(.NavBar__Social) > a:focus {
+  text-decoration: underline;
+  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-thickness: var(--border-thickness);
+  text-underline-offset: 0.3em;
+}
+
+/* The social (GitHub) item carries an inline SVG icon rather than a text label.
+The icon has no text baseline, so on the baseline-aligned desktop menu it would
+sit misaligned with the text items; `align-self: center` centers this one item
+on the menu line instead. */
+
+@media screen and (min-width: 800px) {
+  .NavBar__Social {
+    /* Collapse the inherited line-height so the item box hugs the icon; otherwise
+    the icon floats at the top of a tall line box and reads as elevated. */
+    line-height: 0;
+  }
+}
+
+/* The link drops the underline that bare links carry, since the icon is the
+target. */
+
+.NavBar__Social a {
+  align-items: center;
+  display: inline-flex;
+  text-decoration: none;
+}
+
+/* The icon inherits the link's ink color (overriding the `fill: none` reset)
+and brightens to the accent on hover/focus, matching the link behavior. The
+glyph is nudged onto the text baseline of the adjacent menu items. */
+
+.NavBar__Icon {
+  /* Sized in `em` so it scales with the adjacent menu text rather than the
+  (small) root font-size that `--line-height` is based on. At 2.6em the Octocat
+  silhouette reads as a confident peer to the bold labels. `flex: none` stops
+  the reset's `svg { max-width: 100% }` from collapsing the icon's width inside
+  the shrink-wrapped inline-flex link. */
+  fill: currentColor;
+  flex: none;
+  width: 1em;
+}
+
+.NavBar__Social a:hover .NavBar__Icon,
+.NavBar__Social a:focus .NavBar__Icon {
+  fill: var(--color\=accent);
+}
+
+/* DESKTOP: at >=800px the burger is hidden and the menu is always shown as an
+inline horizontal list on the right, regardless of the `is-open` state. */
+
+@media screen and (min-width: 800px) {
+  .NavBar__Toggle {
+    display: none;
+  }
+
+  .NavBar__Menu,
+  .NavBar__Menu:not(.is-open),
+  .NavBar__Menu.is-open {
+    align-items: baseline;
+    column-gap: 2ch;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* Push the whole menu to the right edge of the bar (the brand stays left),
+    and right-align the items within it. */
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-top: 0;
+    row-gap: 0;
+  }
+
+  /* On the baseline-aligned horizontal menu the icon (no text baseline) would
+  sit low; center just this item on the line. (On the mobile dropdown it instead
+  follows the column's right-alignment, so this is desktop-only.) */
+  .NavBar__Social {
+    align-self: center;
+  }
+}
