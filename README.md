@@ -1,6 +1,8 @@
 # Website UI
 
-Custom Antora UI theme for my website.
+**Custom Antora UI theme for my website.**
+
+I'd like to acknowledge Oskar Wickström's [The Monospace Web](https://owickstrom.github.io/the-monospace-web/), which provided a starting point for my current website UI.
 
 ## 📖 User Manual
 
