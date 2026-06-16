@@ -20,7 +20,7 @@ preview-output/
 
 # Throwaway git snapshot of preview content, so the working tree can be
 # previewed without committing (gulp previewSrc).
-.preview-src/
+tmp/
 
 # Managed packages.
 node_modules/*

@@ -80,16 +80,15 @@ const bundle = series(clean, parallel(css, js, vendorJs, statics), pack)
 // Antora's content aggregator (isomorphic-git) reads committed git objects, and
 // it cannot open this checkout directly because it is a git WORKTREE — its
 // `.git` is a pointer file, not a real directory. So each preview run copies
-// srv/ into `.preview-src/` (a plain `git init` repo with a real
+// srv/ into `tmp/` (a plain `git init` repo with a real
 // `.git`) and commits a snapshot; preview-site.yml then points Antora there.
 // The net effect: uncommitted edits to srv/ appear in the preview
-// immediately. `.preview-src/` is gitignored and disposable.
+// immediately. `tmp/` is gitignored and disposable.
 async function previewSrc () {
   const { execFileSync } = require('child_process')
-  const dir = '.preview-src'
+  const dir = 'tmp'
   const git = (...args) => execFileSync('git', ['-C', dir, ...args], { stdio: 'ignore' })
 
-  await fs.remove(`${dir}/content`)
   await fs.ensureDir(dir)
   if (!(await fs.pathExists(`${dir}/.git`))) {
     git('init', '-q')
@@ -97,7 +96,12 @@ async function previewSrc () {
     git('config', 'user.name', 'preview')
     git('config', 'commit.gpgsign', 'false')
   }
-  await fs.copy('srv', `${dir}/content`)
+  // Clear the previous snapshot's files (but not the `.git` repo) so removals
+  // in srv/ are reflected, then copy srv/ in at the repo root.
+  for (const entry of await fs.readdir(dir)) {
+    if (entry !== '.git') await fs.remove(`${dir}/${entry}`)
+  }
+  await fs.copy('srv', dir)
   git('add', '-A')
   // `--allow-empty` so an unchanged snapshot still produces a commit to read.
   git('commit', '-q', '--allow-empty', '-m', 'snapshot')
@@ -105,7 +109,7 @@ async function previewSrc () {
 
 // Standalone preview: build the sample site against the unzipped src/ tree (via
 // the freshly built bundle) so the theme can be iterated without the website
-// repo. Reads content from the .preview-src snapshot (see previewSrc).
+// repo. Reads content from the tmp/ snapshot (see previewSrc).
 async function preview () {
   const generateSite = require('@antora/site-generator')
   await generateSite(['--playbook', 'preview-site.yml', '--stacktrace'], process.env)

@@ -47,15 +47,15 @@ We considered three options:
 
 Adopt option 3. A `previewSrc` Gulp task, run before each preview build:
 
-- ensures a disposable, git-ignored `.preview-src/` directory exists, with a
+- ensures a disposable, git-ignored `tmp/` directory exists, with a
   plain `git init` repository (a real `.git` directory, which isomorphic-git
   _can_ read);
-- copies the current `srv/` working tree into it;
+- copies the current `srv/` working tree into it (at the repo root);
 - commits a snapshot (`--allow-empty`, so an unchanged copy still yields a
   commit for the aggregator to read).
 
-`preview-site.yml` points its content source at `./.preview-src`
-(`branches: HEAD`, `start_path: content`). The `gulp preview` pipeline is
+`preview-site.yml` points its content source at `./tmp`
+(`branches: HEAD`). The `gulp preview` pipeline is
 `bundle → previewSrc → preview`.
 
 The net effect: uncommitted edits to `srv/` appear in the preview
@@ -68,11 +68,11 @@ immediately, with no manual commit.
 - **Scope.** This only ever affected _content_. Theme sources under `src/`
   (CSS, templates, helpers) are read straight from the working tree by the
   bundle step, so they never required committing.
-- **Disposable artifact.** `.preview-src/` is git-ignored and rebuilt on
+- **Disposable artifact.** `tmp/` is git-ignored and rebuilt on
   demand; it can be deleted at any time. The `previewSrc` task re-creates it.
 - **Production is unaffected.** This concerns only the local standalone
   preview. The website consumes the published `ui-bundle.zip`; it does not use
-  `preview-site.yml` or `.preview-src/`.
+  `preview-site.yml` or `tmp/`.
 - **If this checkout ever becomes a normal clone**, the snapshot step becomes
   unnecessary and the preview source could point directly at the working tree
   (author mode). The task can then be retired.

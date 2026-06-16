@@ -12,21 +12,20 @@ site:
 content:
   sources:
 
-  # Read from the .preview-src snapshot, not ./srv/ directly.
+  # Read from the ./tmp snapshot, not ./srv/ directly.
   # The reason is, this repo is a Git worktree, which Antora's aggregator
   # cannot open.
   #
   # The `gulp previewSrc` task copies the current ./srv/ working tree
-  # into ./.preview-src/, which is a plain Git repo. It commits the copied
+  # into ./tmp/, which is a plain Git repo. It commits the copied
   # files before each build – in effect, uncommitted content edits appear in
   # the preview without requiring a manual commit to the worktree repository.
   # It's hacky, but it works.
   #
   # See also gulpfile.js.
 
-  - url: ./.preview-src
+  - url: ./tmp
     branches: HEAD
-    start_path: content
 
 ui:
   bundle:
