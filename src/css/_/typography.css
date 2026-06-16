@@ -1,39 +1,20 @@
 /**
  * TYPOGRAPHY
  *
- * This layer sets the base typographic styles, independent of the location
- * of text within the layout or within reusable components. This layer sets
- * only bare element selectors: h1, p, ul, table...
- *
- * A vertical and horizontal rhythm is established around the base font size:
- *
- * - VERTICAL RHYTHM: The `--line-height` property sets the box height for
- *   lines of text, and every vertical margin is a multiple of it: 1x, 1.5x,
- *   2x.
- *
- * - HORIZONTAL GRID: Because the body text is rendered in a monospace font,
- *   a horizontal rhythm can be established by using `ch` (one character width)
- *   for horizontal measures. Indents and padding align to whole character
- *   cells. In `_layout.css`, the width of the main content is also snapped
- *   to a whole number of characters.
+ * A minimal typography layer, just setting some global defaults on bare
+ * elements. Most typographic styles are set vie components.
  */
 
-/* BASE TEXT */
-
 body {
-  font-family: var(--font-family\=default);
-  font-weight: var(--font-weight\=normal);
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-normal);
   line-height: var(--line-height);
 }
 
 strong, b, dfn {
-  font-weight: var(--font-weight\=bold);
-}
-
-em, i {
-  font-style: italic;
+  font-weight: var(--font-weight-bold);
 }
 
 small {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
 }

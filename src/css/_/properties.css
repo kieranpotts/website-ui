@@ -5,181 +5,199 @@
  * Other CSS layers consume these via `var()` and should not hard-code
  * equivalent literals.
  *
- * Naming convention: tokens read as `--<group>=<name>|<part>`, with `=` and `|`
- * escaped (`\=`, `\|`) since they are not normally valid in identifiers. The
- * `\@<bp>` suffix denotes a breakpoint-specific value, eg. `\@sm`. This makes
- * a token's group/role/variant legible at-a-glance, and groups related tokens
- * together alphabetically
+ * Naming convention: tokens read as `--<group>-<name>-<part>`, all parts
+ * hyphen-separated (eg. `--color-text-light`, `--font-weight-medium`). A
+ * trailing `-<bp>` denotes a breakpoint-specific value (eg. `--font-size-root-sm`).
+ * Tokens are grouped by their leading segment (`--color-*`, `--font-size-*`)
+ * and ordered alphabetically.
  *
  * COLOR & LIGHT/DARK MODE: Color is built in two tiers. A small set of base
- * palette tokens (`--base=*`) holds the only literal colors in the theme – an
+ * palette tokens (`--base-*`) holds the only literal colors in the theme – an
  * ink, a muted ink, a page, and a muted-page tone. Light/dark mode is
  * implemented by flipping just those four values in a single
  * `@media (prefers-color-scheme: dark)` block. Every semantic color token
- * (`--color=*`) derives from the base palette. The two accent tokens –
+ * (`--color-*`) derives from the base palette. The two accent tokens –
  * selection and focus outline – are fixed hues that read on either background.
  */
 
 :root {
 
-  /* Font-rendering default required to give JetBrains Mono its
-  intended appearance. */
+  /*
+  Font-rendering default required to give JetBrains Mono its
+  intended appearance.
+  */
 
   font-optical-sizing: auto;
   font-variant-numeric: tabular-nums lining-nums;
 
-  /* Honour the user's light/dark preference. Let browser-rendered
-  chrome (form controls, scrollbars) follow it. */
+  /*
+  Honour the user's light/dark preference. Let browser-rendered
+  chrome (form controls, scrollbars) follow it.
+  */
 
   color-scheme: light dark;
 
-  /* Base palette (light mode). The only literal colors in the theme.
-  Flipped for dark mode at the foot of this file. */
+  /*
+  BASE PALETTE - light mode.
+  The only literal colors in the theme. Flipped for dark mode
+  at the foot of this file.
 
-  --base\=ink: hsl(0, 0%, 15%);          /* primary text, borders, bullets */
-  --base\=ink\|muted: hsl(0, 0%, 50%);   /* secondary/light text */
-  --base\=ink\|faint: hsl(0, 0%, 75%);   /* placeholder text */
-  --base\=page: hsl(0, 0%, 100%);        /* page background */
-  --base\=page\|muted: hsl(0, 0%, 96%);  /* tinted surfaces: header, code */
-  --base\=accent: hsl(176, 100%, 36%);   /* signature color (#00b7ac) */
+  The accent is a subtle signature color used for link underlines, footnote
+  markers, and a few other things.
 
-  /* Selection highlight + its text ink. Fixed in both modes
-  (NOT flipped in the dark-mode block below), so yellow-on-dark
-  ink reads on either background. */
+  The text selection background/foreground are NOT flipped between
+  light and dark modes. The highlight text (`<mark>`) is a softer,
+  translucent version of the same yellow. The alpha lets it tint over
+  any background, to the marked text can keep its inherited color and
+  stay legible between light and dark modes.
 
-  --base\=highlight: hsl(50, 100%, 50%);
-  --base\=highlight\|ink: hsl(0, 0%, 15%);
+  Everything else is monochrome.
+  */
 
-  /* A softer, translucent version of the highlight yellow, for `<mark>`. The
-  alpha lets it tint over either background, so the marked text keeps its
-  inherited color and stays legible in both light and dark mode. */
+  --base-accent: hsl(176, 100%, 36%);    /* signature color */
+  --base-ink: hsl(0, 0%, 15%);           /* primary text, borders, bullets */
+  --base-ink-muted: hsl(0, 0%, 50%);     /* secondary/light text */
+  --base-ink-faint: hsl(0, 0%, 75%);     /* placeholder text */
+  --base-page: hsl(0, 0%, 100%);         /* page background */
+  --base-page-muted: hsl(0, 0%, 96%);    /* tinted surfaces: header, code */
+  --base-highlight: hsl(50, 100%, 50%);  /* selected text background */
+  --base-highlight-ink: hsl(0, 0%, 15%); /* selected text foreground */
+  --base-highlight-soft: hsl(50, 100%, 50%, 35%); /* <mark> background */
 
-  --base\=highlight\|soft: hsl(50, 100%, 50%, 35%);
+  /*
+  ROLES
+  These variables name *roles* and derive their values
+  from the base palette, so they invert automatically
+  in dark mode.
+  */
 
-  /* Semantic colors. These name a *role* and derive from
-  the base palette, so they invert automatically in dark mode. */
+  --color-accent: var(--base-accent);
+  --color-header-background: var(--base-page-muted);
+  --color-page-background: var(--base-page);
+  --color-text-default: var(--base-ink);
+  --color-text-light: var(--base-ink-muted);
+  --color-text-placeholder: var(--base-ink-faint);
+  --color-border: var(--base-ink);
+  --color-bullet: var(--base-ink);
+  --color-text-pre-background: var(--base-page-muted);
+  --color-text-pre-foreground: inherit;
+  --color-text-code-background: var(--base-page-muted);
+  --color-text-code-foreground: inherit;
+  --color-text-selection: var(--base-highlight);
+  --color-text-selection-foreground: var(--base-highlight-ink);
+  --color-mark-background: var(--base-highlight-soft);
 
-  --color\=header\|background: var(--base\=page\|muted);
-  --color\=page\|background: var(--base\=page);
+  /*
+  LINKS + OUTLINES
+  Ink-colored text with an accent underline and outline.
+  */
 
-  --color\=text\|default: var(--base\=ink);
-  --color\=text\|light: var(--base\=ink\|muted);
-  --color\=text\|placeholder: var(--base\=ink\|faint);
+  --color-hyperlink-active: inherit;
+  --color-hyperlink-default: inherit;
+  --color-hyperlink-focus: inherit;
+  --color-hyperlink-hover: inherit;
+  --color-hyperlink-underline: var(--color-accent);
+  --color-hyperlink-visited: inherit;
+  --color-outline: var(--color-accent);
 
-  --color\=border: var(--base\=ink);
-  --color\=bullet: var(--base\=ink);
+  /*
+  VIDEO BACKGROUND
+  The background color for video letter-boxing is always
+  black – this is NOT flipped between light and dark mode,
+  hence we're not reusing a variable here.
+  */
 
-  --color\=text\|pre\|background: var(--base\=page\|muted);
-  --color\=text\|pre\|foreground: inherit;
+  --color-video: hsl(0, 0%, 15%);
 
-  --color\=text\|code\|background: var(--base\=page\|muted);
-  --color\=text\|code\|foreground: inherit;
+  /*
+  FONTS
+  Monospace throughout.
+  */
 
-  /* The signature accent. Used for subtle interactive marks:
-  link underlines, footnote markers, etc. Everything else
-  stays monochrome. */
+  --font-family-default: 'JetBrains Mono', ui-monospace, monospace;
+  --font-family-monospace: 'JetBrains Mono', ui-monospace, monospace;
 
-  --color\=accent: var(--base\=accent);
+  /*
+  FONT WEIGHTS
+  */
 
-  /* Links: ink-colored text with an accent underline and outline. */
+  --font-weight-bold: 800;
+  --font-weight-medium: 600;
+  --font-weight-normal: 500;
 
-  --color\=hyperlink\|active: inherit;
-  --color\=hyperlink\|default: inherit;
-  --color\=hyperlink\|focus: inherit;
-  --color\=hyperlink\|hover: inherit;
-  --color\=hyperlink\|underline: var(--color\=accent);
-  --color\=hyperlink\|visited: inherit;
-  --color\=outline: var(--color\=accent);
+  /*
+  ROOT FONT SIZES
+  The root font size scales up at various breakpoints.
+  */
 
-  /* Text selection is a fixed yellow highlight in both
-  light and dark mode. The selected text is forced to ink
-  for contrast (the themed ink flips near-white in dark
-  mode and would wash out on yellow). */
+  --font-size-root: 9px;
+  --font-size-root-xs: 9.25px;   /* screen width ≥ 400px */
+  --font-size-root-sm: 9.5px;    /* screen width ≥ 600px */
+  --font-size-root-md: 9.75px;   /* screen width ≥ 800px */
+  --font-size-root-lg: 10px;     /* screen width ≥ 1000px */
+  --font-size-root-xl: 10.5px;   /* screen width ≥ 1200px */
+  --font-size-root-xxl: 11px;    /* screen width ≥ 1400px */
 
-  --color\=text\|selection: var(--base\=highlight);
-  --color\=text\|selection\|foreground: var(--base\=highlight\|ink);
+  /*
+  FONT SIZES
+  Six scales, defined relative to the root font size.
+  */
 
-  /* `<mark>` highlight: the softer translucent yellow; the text keeps its
-  inherited color. */
+  --font-size-lg:  1.6rem;
+  --font-size-md:  1.6rem; /* default */
+  --font-size-sm:  1.4rem;
+  --font-size-xl:  2.2rem;
+  --font-size-xs:  1.2rem;
+  --font-size-xxl: 3rem;
 
-  --color\=mark\|background: var(--base\=highlight\|soft);
+  /*
+  MONOSPACE FONT SIZES
+  */
 
-  /* Video background (letter-boxing). Always black – a
-  fixed literal, NOT flipped in between light/dark mode. */
+  --font-size-monospace-block: 1.6rem;
+  --font-size-monospace-inline: 100%;
 
-  --color\=video: hsl(0, 0%, 15%);
+  /*
+  GRID RHYTHM
+  All vertical spacing is based on the `--line-height` value.
+  It is expressed in rem so it scales with the root font size
+  ladder, keeping the vertical rhythm proportional to everything
+  else that scales with font size. Code blocks get their own,
+  tighter leading.
 
-  /* Fonts – monospace throughout */
-
-  --font-family\=default: 'JetBrains Mono', ui-monospace, monospace;
-  --font-family\=monospace: 'JetBrains Mono', ui-monospace, monospace;
-
-  /* Font weights */
-
-  --font-weight\=bold: 800;
-  --font-weight\=medium: 600;
-  --font-weight\=normal: 500;
-
-  /* Font sizes scale at breakpoints */
-
-  --font-size\=root: 9px;
-  --font-size\=root\@xs: 9.25px;   /* 400px */
-  --font-size\=root\@sm: 9.5px;    /* 600px */
-  --font-size\=root\@md: 9.75px;  /* 800px */
-  --font-size\=root\@lg: 10px;    /* 1000px */
-  --font-size\=root\@xl: 10.5px;  /* 1200px */
-  --font-size\=root\@xxl: 11px;   /* 1400px */
-
-  --font-size\=lg:  1.6rem;
-  --font-size\=md:  1.6rem; /* default */
-  --font-size\=sm:  1.4rem;
-  --font-size\=xl:  2.2rem;
-  --font-size\=xs:  1.2rem;
-  --font-size\=xxl: 3rem;
-
-  --font-size\=monospace\|block: 1.6rem;
-  --font-size\=monospace\|inline: 100%;
-
-  /* GRID RHYTHM: `--line-height` is the single vertical
-  rhythm unit. Every vertical margin is  a multiple of it.
-  It is expressed in `rem`, so it scales with the responsive
-  root font-size ladder. It means the vertical rhythm stays
-  consistent through breakpoints (just proportionally larger
-  with the base font size). `--border-thickness` is the grid's
-  hairline, used by rules, tables, and form controls. */
+  The `--border-thickness` value is the grid's hairline, used for
+  rulers, tables, and form controls.
+  */
 
   --border-thickness: 2px;
   --line-height: 2.5rem;
+  --line-height-code: 2rem;
 
-  /* Code blocks get their own, tighter leading: looser
-  than the default single-spaced `pre` but tighter than
-  the body's full grid rhythm, which is too airy for
-  dense code. */
-
-  --line-height\=code: 2rem;
-
-  /* Spacing */
+  /*
+  SPACING
+  */
 
   --spacing: 4rem;
-  --spacing\@lg: 8rem;
-  --spacing\@sm: 6rem;
+  --spacing-lg: 8rem;
+  --spacing-sm: 6rem;
 
 }
 
-/* DARK MODE: Color inversions happen here – flip the four
-ase palette tones and every semantic `--color=*` token follows.
-The ink/page roles swap and the three-step ink ladder is
-mirrored, so the text hierarchy (default > light > placeholder)
-is preserved. The accent is also brightened a little to keep its
-punch against the near-black page. */
+/*
+DARK MODE
+Color inversions happen here. The four base palette tones
+are flipped, and every semantic `--color-*` token follows.
+The accent is also brightened a little to keep it punch
+against the near-black backdrop.
+*/
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --base\=ink: hsl(0, 0%, 90%);          /* primary text, borders, bullets */
-    --base\=ink\|muted: hsl(0, 0%, 60%);   /* secondary/light text */
-    --base\=ink\|faint: hsl(0, 0%, 35%);   /* placeholder text */
-    --base\=page: hsl(0, 0%, 8%);          /* page background */
-    --base\=page\|muted: hsl(0, 0%, 14%);  /* tinted surfaces: header, code */
-    --base\=accent: hsl(176, 70%, 50%);    /* brighter teal for dark bg */
+    --base-accent: hsl(176, 70%, 50%);  /* brighter teal for dark bg */
+    --base-ink: hsl(0, 0%, 90%);        /* primary text, borders, bullets */
+    --base-ink-muted: hsl(0, 0%, 60%);  /* secondary/light text */
+    --base-ink-faint: hsl(0, 0%, 35%);  /* placeholder text */
+    --base-page: hsl(0, 0%, 8%);        /* page background */
+    --base-page-muted: hsl(0, 0%, 14%); /* tinted surfaces: header, code */
   }
 }

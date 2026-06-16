@@ -1,0 +1,162 @@
+/**
+ * FORM CONTROLS
+ */
+
+/*
+Shared styles for input fields.
+`appearance: none` strips native chrome.
+*/
+
+.Form input,
+.Form button,
+.Form select,
+.Form textarea {
+  -moz-osx-font-smoothing: inherit;
+  -webkit-font-smoothing: inherit;
+
+  appearance: none;
+  background: var(--color-page-background);
+  border: var(--border-thickness) solid var(--color-text-default);
+  color: var(--color-text-default);
+  font: inherit;
+  font-weight: inherit;
+  height: calc(var(--line-height) * 2);
+  line-height: normal;
+  margin: 0;
+  overflow: visible;
+  padding:
+    calc(var(--line-height) / 2 - var(--border-thickness))
+    calc(1ch - var(--border-thickness));
+  width: auto;
+}
+
+/*
+Allow textareas to be resized vertically only.
+Horizontal resizing can break layout.
+*/
+
+.Form textarea {
+  height: auto;
+  min-height: calc(var(--line-height) * 4);
+  resize: vertical;
+}
+
+/*
+Text-like inputs fill the available width,
+snapped to whole characters.
+*/
+
+.Form input,
+.Form select,
+.Form textarea {
+  width: calc(round(down, 100%, 1ch));
+}
+
+/*
+Checkboxes and radios are compact toggles drawn from the box
+itself: a 2ch square (or circle), filled with a solid block when
+checked. The height is pinned to the 2ch width (rather than the
+line height) so the box stays square regardless of line height,
+and centred on the text line via margin.
+*/
+
+.Form input[type="checkbox"],
+.Form input[type="radio"] {
+  cursor: pointer;
+  display: inline-grid;
+  height: 2ch;
+  margin-top: calc((var(--line-height) - 2ch) / 2);
+  place-content: center;
+  vertical-align: top;
+  width: 2ch;
+}
+
+/*
+The checked mark is a solid block (a dot, for radios)
+filling half the box.
+*/
+
+.Form input[type="checkbox"]:checked::before,
+.Form input[type="radio"]:checked::before {
+  background: var(--color-text-default);
+  content: "";
+  height: 1ch;
+  width: 1ch;
+}
+
+.Form input[type="radio"],
+.Form input[type="radio"]::before {
+  border-radius: 100%;
+}
+
+/*
+Disable outline.
+*/
+
+.Form button:focus,
+.Form input:focus,
+.Form select:focus,
+.Form textarea:focus {
+  outline: none;
+}
+
+
+/*
+Buttons read as uppercase actions and depress slightly when
+activated. Unlike the full-width text inputs, a button shrinks to
+its label and sits inline, so adjacent buttons line up in a row.
+*/
+
+.Form button {
+  cursor: pointer;
+  display: inline-block;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  vertical-align: top;
+  width: auto;
+}
+
+/*
+Space consecutive inline buttons by one character cell. Cancel
+any inherited margin, so a row of buttons stay on one line. Separate
+inline buttons with left margin only.
+*/
+
+.Form button + button {
+  margin-left: 1ch;
+  margin-top: 0;
+}
+
+.Form button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.Form button:active {
+  transform: translate(2px, 2px);
+}
+
+/*
+Labels are block-level and grid-wide, so stacked
+label/control pairs align.
+*/
+
+.Form label {
+  display: block;
+  font-weight: var(--font-weight-bold);
+  height: auto;
+  line-height: var(--line-height);
+  margin: 0;
+  width: calc(round(down, 100%, 1ch));
+}
+
+/*
+A control nested inside its label fills the
+label's width.
+*/
+
+.Form label input,
+.Form label select,
+.Form label textarea {
+  width: 100%;
+}

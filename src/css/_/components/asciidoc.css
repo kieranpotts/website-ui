@@ -9,6 +9,18 @@
  *
  * The "default" Asciidoctor v2 style sheet is here – this is our reference:
  * https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css
+ *
+ * A vertical and horizontal rhythm is established around the base font size:
+ *
+ * - VERTICAL RHYTHM: The `--line-height` property sets the box height for
+ *   lines of text, and every vertical margin is a multiple of it: 1x, 1.5x,
+ *   2x.
+ *
+ * - HORIZONTAL GRID: Because the body text is rendered in a monospace font,
+ *   a horizontal rhythm can be established by using `ch` (one character width)
+ *   for horizontal measures. Indents and padding align to whole character
+ *   cells. In `_layout.css`, the width of the main content is also snapped
+ *   to a whole number of characters.
  */
 
 /* Subscript/superscript are nudged so they do not
@@ -35,14 +47,14 @@ grid at its larger size. */
 .AsciiDoc h4,
 .AsciiDoc h5,
 .AsciiDoc h6 {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
   /* Two lines above, one below. */
   margin: calc(var(--line-height) * 2) 0 var(--line-height);
 }
 
 .AsciiDoc h1 {
-  font-size: var(--font-size\=xxl);
+  font-size: var(--font-size-xxl);
   letter-spacing: -0.05rem;
   /* Four lines above (double the other headings),
   to set the page title apart. */
@@ -51,11 +63,11 @@ grid at its larger size. */
 }
 
 .AsciiDoc h2 {
-  font-size: var(--font-size\=xl);
+  font-size: var(--font-size-xl);
   text-transform: uppercase;
 }
 
-.AsciiDoc h3 { font-size: var(--font-size\=lg); }
+.AsciiDoc h3 { font-size: var(--font-size-lg); }
 
 /* FLOW BLOCKS */
 
@@ -67,7 +79,7 @@ grid at its larger size. */
 
 .AsciiDoc hr {
   border: none;
-  color: var(--color\=border);
+  color: var(--color-border);
   display: block;
   height: var(--line-height);
   margin: calc(var(--line-height) * 1.5) 0;
@@ -138,24 +150,24 @@ head of the first line. */
 
 .AsciiDoc ol li::before {
   /* The muted tone tints the number; the item text stays ink (set below). */
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
   content: counters(item, ".") ". ";
   counter-increment: item;
-  font-weight: var(--font-weight\=medium);
+  font-weight: var(--font-weight-medium);
 }
 
 /* Keep the ordered-list item text ink; only its
 `::before` counter is tinted. */
 
 .AsciiDoc ol > li {
-  color: var(--color\=text\|default);
+  color: var(--color-text-default);
 }
 
 /* The square bullet (ul) is tinted with the muted
 tone. List text stays ink. */
 
 .AsciiDoc li::marker {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
   line-height: 0;
 }
 
@@ -177,7 +189,7 @@ are left to their attributes. */
 to load, its alt text will be rendered in its place. */
 
 .AsciiDoc img {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
 }
 
 /* Block images (figures and Asciidoctor image blocks)
@@ -215,7 +227,7 @@ text stays on the line grid. */
 
 .AsciiDoc th,
 .AsciiDoc td {
-  border: var(--border-thickness) solid var(--color\=border);
+  border: var(--border-thickness) solid var(--color-border);
   line-height: var(--line-height);
   padding:
     calc(var(--line-height) / 2)
@@ -230,23 +242,23 @@ text stays on the line grid. */
 }
 
 .AsciiDoc th {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 /* LINKS */
 
 .AsciiDoc a {
-  color: var(--color\=hyperlink\|default);
+  color: var(--color-hyperlink-default);
   text-decoration: underline;
-  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-color: var(--color-hyperlink-underline);
   text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
 }
 
-.AsciiDoc a:visited { color: var(--color\=hyperlink\|visited); }
-.AsciiDoc a:hover { color: var(--color\=hyperlink\|hover); }
-.AsciiDoc a:focus { color: var(--color\=hyperlink\|focus); }
-.AsciiDoc a:active { color: var(--color\=hyperlink\|active); }
+.AsciiDoc a:visited { color: var(--color-hyperlink-visited); }
+.AsciiDoc a:hover { color: var(--color-hyperlink-hover); }
+.AsciiDoc a:focus { color: var(--color-hyperlink-focus); }
+.AsciiDoc a:active { color: var(--color-hyperlink-active); }
 
 /* CODE */
 
@@ -255,8 +267,8 @@ rhythm than body text, but still a little looser than
 single-spaced. */
 
 .AsciiDoc pre {
-  font-family: var(--font-family\=monospace);
-  line-height: var(--line-height\=code);
+  font-family: var(--font-family-monospace);
+  line-height: var(--line-height-code);
   margin: var(--line-height) 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -274,10 +286,10 @@ a code span stands out within prose. Block code (inside `<pre>`) opts back out
 below, since the `<pre>` already provides the code surface. */
 
 .AsciiDoc code {
-  background: var(--color\=text\|code\|background);
-  border: var(--border-thickness) solid var(--color\=border);
-  color: var(--color\=text\|code\|foreground);
-  font-weight: var(--font-weight\=medium);
+  background: var(--color-text-code-background);
+  border: var(--border-thickness) solid var(--color-border);
+  color: var(--color-text-code-foreground);
+  font-weight: var(--font-weight-medium);
   padding: 0 0.5ch;
 }
 
@@ -354,7 +366,7 @@ the line grid. */
 }
 
 .AsciiDoc .dlist dt {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 .AsciiDoc .dlist dd {
@@ -389,7 +401,7 @@ the question counter below replaces it. */
 
 .AsciiDoc .qlist.qanda > ol > li > p:first-child::before {
   content: counter(question) ". ";
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 /* CALLOUT LISTS (colist) & CALLOUT NUMBERS (conum): A conum is an inline
@@ -399,12 +411,12 @@ no-CSS fallback is hidden. The colist below the code pairs each number with
 its explanation in a borderless table. */
 
 .AsciiDoc .conum[data-value] {
-  background: var(--color\=text\|default);
-  border: var(--border-thickness) solid var(--color\=border);
-  color: var(--color\=page\|background);
+  background: var(--color-text-default);
+  border: var(--border-thickness) solid var(--color-border);
+  color: var(--color-page-background);
   display: inline-block;
   font-style: normal;
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
   height: 2ch;
   line-height: calc(2ch - var(--border-thickness) * 2);
   text-align: center;
@@ -447,7 +459,7 @@ also stay at body size. */
 
 .AsciiDoc sup.footnote > a,
 .AsciiDoc sup.footnoteref > a {
-  color: var(--color\=accent);
+  color: var(--color-accent);
 }
 
 /* The endnote list at the page foot: separated by a rule, normal body size. */
@@ -474,10 +486,10 @@ menu:File[Save]   -> <span.menuseq><b.menu>File</b><i.caret></i><b.menuitem>Save
 /* A keystroke, drawn as a small bordered keycap. */
 
 .AsciiDoc kbd {
-  background: var(--color\=header\|background);
-  border: var(--border-thickness) solid var(--color\=border);
+  background: var(--color-header-background);
+  border: var(--border-thickness) solid var(--color-border);
   display: inline-block;
-  font-family: var(--font-family\=monospace);
+  font-family: var(--font-family-monospace);
   line-height: calc(var(--line-height) - var(--border-thickness) * 2);
   margin: 0 0.2ch;
   padding: 0 0.5ch;
@@ -512,7 +524,7 @@ buttons elsewhere in the theme but inline within prose. */
 than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 
 .AsciiDoc .menuseq b {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 .AsciiDoc .menuseq .caret {
@@ -521,7 +533,7 @@ than the Font Awesome icon Asciidoctor emits (which we have no font for). */
 
 .AsciiDoc .menuseq .caret::before {
   content: "›";
-  font-weight: var(--font-weight\=normal);
+  font-weight: var(--font-weight-normal);
   margin: 0 0.5ch;
 }
 
@@ -556,7 +568,7 @@ the rest of the theme. */
 
 .AsciiDoc .admonitionblock td.icon .fa {
   font-style: normal;
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 
@@ -565,7 +577,7 @@ the rest of the theme. */
 }
 
 .AsciiDoc .admonitionblock td.content {
-  border-left: var(--border-thickness) solid var(--color\=border);
+  border-left: var(--border-thickness) solid var(--color-border);
   padding-left: 2ch;
 }
 
@@ -581,7 +593,7 @@ lighter and right of an em dash (already in the markup). */
 .AsciiDoc .quoteblock,
 .AsciiDoc .verseblock {
   /* The quotation rule is a muted monotone, like the list markers. */
-  border-left: var(--border-thickness) solid var(--color\=text\|light);
+  border-left: var(--border-thickness) solid var(--color-text-light);
   margin: var(--line-height) 0;
   padding-left: 2ch;
 }
@@ -591,12 +603,12 @@ lighter and right of an em dash (already in the markup). */
 }
 
 .AsciiDoc .verseblock pre.content {
-  font-family: var(--font-family\=default);
+  font-family: var(--font-family-default);
   margin: 0;
 }
 
 .AsciiDoc .attribution {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
   margin-top: var(--line-height);
 }
 
@@ -610,7 +622,7 @@ with interior padding on the line grid. */
 
 .AsciiDoc .sidebarblock,
 .AsciiDoc .exampleblock {
-  border: var(--border-thickness) solid var(--color\=border);
+  border: var(--border-thickness) solid var(--color-border);
   margin: var(--line-height) 0;
   padding: 0 2ch;
 }
@@ -619,11 +631,11 @@ with interior padding on the line grid. */
 sidebar's title sits inside it. Both are bold, not the default italic. */
 
 .AsciiDoc .exampleblock > .title {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 .AsciiDoc .sidebarblock > .content > .title {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 
@@ -651,8 +663,8 @@ interior padding. */
 
 .AsciiDoc .listingblock > .content,
 .AsciiDoc .literalblock > .content {
-  background: var(--color\=text\|pre\|background);
-  border: var(--border-thickness) solid var(--color\=border);
+  background: var(--color-text-pre-background);
+  border: var(--border-thickness) solid var(--color-border);
   margin: var(--line-height) 0;
   padding: var(--line-height) 2ch;
 }
@@ -668,8 +680,8 @@ as a light caption on the line grid. Block-specific overrides above (example,
 sidebar) take precedence. */
 
 .AsciiDoc .title {
-  color: var(--color\=text\|light);
-  font-weight: var(--font-weight\=bold);
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-bold);
 }
 
 /* IMAGE BLOCKS & INLINE IMAGES: `.imageblock` wraps a block image; `.image`
@@ -689,7 +701,7 @@ full width here. */
 
 .AsciiDoc .imageblock > .title {
   text-align: center;
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 /* An inline image flows within the text. No width/height is set, so its HTML
@@ -726,5 +738,5 @@ alignment roles on paragraphs. */
 type while staying on the grid. */
 
 .AsciiDoc .paragraph.lead > p {
-  font-size: var(--font-size\=lg);
+  font-size: var(--font-size-lg);
 }

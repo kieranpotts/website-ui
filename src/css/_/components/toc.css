@@ -19,9 +19,9 @@ right edge of the page. */
   /* Reveal only when the page actually has a contents list.
   The JS leaves the TOC empty on pages with too few headings. */
   .TOC:not(:empty) {
-    border-left: var(--border-thickness) solid var(--color\=border);
+    border-left: var(--border-thickness) solid var(--color-border);
     display: block;
-    font-size: var(--font-size\=sm);
+    font-size: var(--font-size-sm);
     line-height: var(--line-height);
     max-height: calc(100vh - var(--line-height) * 2);
 
@@ -42,8 +42,8 @@ right edge of the page. */
 
 /* The small-caps label above the list. */
 .TOC__Title {
-  color: var(--color\=text\|light);
-  font-weight: var(--font-weight\=bold);
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-bold);
   margin-bottom: calc(var(--line-height) / 2);
   margin-top: calc(var(--line-height) / 2);
   text-transform: uppercase;
@@ -71,7 +71,7 @@ their parent section. */
 /* At rest, entries are quiet, ink-light
 text with no underline. */
 .TOC__List a {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
   display: block;
   overflow: hidden;
   text-decoration: none;
@@ -82,12 +82,12 @@ text with no underline. */
 /* On hover, reveal underline. */
 .TOC__List a:hover {
   text-decoration: underline;
-  text-decoration-color: var(--color\=accent);
+  text-decoration-color: var(--color-accent);
   text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
 }
 
 /* Active item is full-ink text. */
 .TOC__List .is-active > a {
-  color: var(--color\=text\|default);
+  color: var(--color-text-default);
 }

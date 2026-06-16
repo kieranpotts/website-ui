@@ -33,7 +33,7 @@ heading, but with no underline (it overrides the bare-link
 styling from `_typography.css`). */
 
 .NavBar__Brand {
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -121,7 +121,7 @@ has no text to underline). */
 .NavBar__Menu > li:not(.NavBar__Social) > a:hover,
 .NavBar__Menu > li:not(.NavBar__Social) > a:focus {
   text-decoration: underline;
-  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-color: var(--color-hyperlink-underline);
   text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
 }
@@ -165,7 +165,7 @@ glyph is nudged onto the text baseline of the adjacent menu items. */
 
 .NavBar__Social a:hover .NavBar__Icon,
 .NavBar__Social a:focus .NavBar__Icon {
-  fill: var(--color\=accent);
+  fill: var(--color-accent);
 }
 
 /* DESKTOP: at >=800px the burger is hidden and the menu is always shown as an

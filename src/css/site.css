@@ -25,6 +25,7 @@
 @import url('./_/controls.css');
 @import url('./_/layout.css');
 @import url('./_/components/asciidoc.css');
+@import url('./_/components/form.css');
 @import url('./_/components/navbar.css');
 @import url('./_/components/toc.css');
 @import url('./_/utilities.css');

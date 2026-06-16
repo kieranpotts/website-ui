@@ -1,195 +1,56 @@
 /**
  * CONTROLS
  *
- * Interactive form controls — buttons, text inputs, checkboxes, radios,
- * selects, and textareas.
+ * A minimal baseline of interactive controls.
  *
- * Every control is sized in whole grid units: borders use `--border-thickness`,
- * heights are multiples of `--line-height`, and horizontal padding/width are in
- * `ch`, so controls sit on the same character grid as the body text.
+ * Buttons, text inputs, checkboxes, radios, selects, and textareas are
+ * styled through the Form component.
  */
 
-/* The horizontal scrollbar is given the
-grid's line height. */
+/*
+The horizontal scrollbar is given the
+grid's line height.
+*/
 
 ::-webkit-scrollbar {
   height: var(--line-height);
 }
 
-/* Shared control box: a hairline border, grid-aligned padding,
-two lines tall. `appearance: none` strips native chrome so the box
-renders identically across browsers. */
-
-input, button, select, textarea {
-  -moz-osx-font-smoothing: inherit;
-  -webkit-font-smoothing: inherit;
-
-  appearance: none;
-  background: var(--color\=page\|background);
-  border: var(--border-thickness) solid var(--color\=text\|default);
-  color: var(--color\=text\|default);
-  font: inherit;
-  font-weight: inherit;
-  height: calc(var(--line-height) * 2);
-  line-height: normal;
-  margin: 0;
-  overflow: visible;
-  padding:
-    calc(var(--line-height) / 2 - var(--border-thickness))
-    calc(1ch - var(--border-thickness));
-  width: auto;
-}
-
-/* A textarea spans multiple lines, so it is not
-pinned to the two-line height. */
-
-textarea {
-  height: auto;
-  min-height: calc(var(--line-height) * 4);
-  resize: vertical;
-}
-
-/* Text-like inputs fill the available width,
-snapped to whole characters. */
-
-input,
-select,
-textarea {
-  width: calc(round(down, 100%, 1ch));
-}
-
-/* Checkboxes and radios are compact toggles drawn from the box
-itself: a 2ch square (or circle), filled with a solid block when
-checked. The height is pinned to the 2ch width (rather than the
-line height) so the box stays square regardless of line height,
-and centred on the text line via margin. */
-
-input[type="checkbox"],
-input[type="radio"] {
-  cursor: pointer;
-  display: inline-grid;
-  height: 2ch;
-  margin-top: calc((var(--line-height) - 2ch) / 2);
-  place-content: center;
-  vertical-align: top;
-  width: 2ch;
-}
-
-/* The checked mark is a solid block (a dot, for radios)
-filling half the box. */
-
-input[type="checkbox"]:checked::before,
-input[type="radio"]:checked::before {
-  background: var(--color\=text\|default);
-  content: "";
-  height: 1ch;
-  width: 1ch;
-}
-
-input[type="radio"],
-input[type="radio"]::before {
-  border-radius: 100%;
-}
-
-/* Focus thickens the border rather than drawing
-a separate outline, keeping the control on the grid. */
-
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
-  /* --border-thickness: 3px; */
-  outline: none;
-}
+/*
+Placeholder text. Reset opacity.
+*/
 
 ::placeholder {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
   opacity: 1;
 }
 
-/* Buttons read as uppercase actions and depress slightly when
-activated. Unlike the full-width text inputs, a button shrinks to
-its label and sits inline, so adjacent buttons line up in a row. */
-
-button {
-  cursor: pointer;
-  display: inline-block;
-  font-weight: var(--font-weight\=bold);
-  text-transform: uppercase;
-  vertical-align: top;
-  width: auto;
-}
-
-/* Space consecutive inline buttons by one character cell. Cancel
-any inherited margin, so a row of buttons stay on one line. Separate
-inline buttons with left margin only. */
-
-button + button {
-  margin-left: 1ch;
-  margin-top: 0;
-}
-
-button::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-button:hover {
-  /* background: var(--color\=header\|background); */
-}
-
-button:active {
-  /* transform: translate(2px, 2px); */
-}
-
-/* Labels are block-level and grid-wide, so stacked
-label/control pairs align. */
-
-label {
-  display: block;
-  font-weight: var(--font-weight\=bold);
-  height: auto;
-  line-height: var(--line-height);
-  margin: 0;
-  width: calc(round(down, 100%, 1ch));
-}
-
-/* A control nested inside its label fills the
-label's width. */
-
-label input,
-label select,
-label textarea {
-  width: 100%;
-}
-
-/* DISCLOSURE (details / summary): The summary is the always-visible
-toggle. Its marker is a triangle that points right when closed and
-down when open. When open, the summary is separated from the revealed
-content by one line of the grid. */
+/*
+DISCLOSURE (details / summary)
+The summary is the always-visible toggle. Its marker is a triangle that
+points right when closed and down when open.
+*/
 
 details {
-  border: var(--border-thickness) solid var(--color\=border);
+  border: var(--border-thickness) solid var(--color-border);
   margin-bottom: var(--line-height);
   padding: calc(var(--line-height) - var(--border-thickness)) 1ch;
 }
 
-/* `_resets.css` sets summary to `display: block`, which removes
-its marker box. Restore `list-item` so the disclosure triangle
-can render. */
+/*
+Restore `list-item` so the disclosure triangle
+can render.
+*/
 
 summary {
   cursor: pointer;
   display: list-item;
-  font-weight: var(--font-weight\=bold);
+  font-weight: var(--font-weight-bold);
 }
 
 details[open] summary {
   margin-bottom: var(--line-height);
 }
-
-/* Replace the native disclosure triangle with
-grid-friendly glyphs. */
 
 details ::marker {
   content: "▶ ";
@@ -199,8 +60,10 @@ details[open] ::marker {
   content: "▼ ";
 }
 
-/* The last revealed block sits flush
-with the box's bottom padding. */
+/*
+The last revealed block sits flush
+with the box's bottom padding.
+*/
 
 details :last-child {
   margin-bottom: 0;

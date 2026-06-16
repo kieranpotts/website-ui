@@ -1,7 +1,7 @@
 /**
  * RESETS
  *
- * Normalizes browser defaults to a clean, predictable baseline so the layers
+ * Normalizes browser defaults to a clean, predictable baseline, so the layers
  * that follow can style from a known starting point. Inspired by the classic
  * resets (Meyer, normalize.css, sanitize.css) but trimmed to what this theme
  * actually uses, and wired to the design tokens in `_properties.css`.
@@ -11,18 +11,19 @@
  * evergreen browsers only.
  */
 
-/* Zero the default margins/padding every element ships
-with (headings, lists, body, etc.), so spacing is owned
-entirely by the type and layout layers. */
+/*
+Zero the default margins/padding on every element, so spacing
+is owned entirely by the layout and typography layers.
+*/
 
 * {
   margin: 0;
   padding: 0;
 }
 
-/* Border-box everywhere. Padding and border count *inside*
-an element's stated width/height, which makes the character-cell
-grid sizing predictable. */
+/*
+Border-box everywhere – it's easier to work with.
+*/
 
 *,
 *::after,
@@ -30,9 +31,12 @@ grid sizing predictable. */
   box-sizing: border-box;
 }
 
-/* Respect a user's request for less motion. All-but-extinguish
+/*
+Respect a user's request for less motion. All-but-extinguish
 animations, transitions, and smooth scrolling for everyone who
-has set this preference. Applies globally. */
+has set this preference. Enforced through high (`!important`)
+specificity. Applies globally.
+*/
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -45,115 +49,128 @@ has set this preference. Applies globally. */
   }
 }
 
-/* Paint the page background even where content is short,
-and stop the layout collapsing below the narrowest
-supported viewport. */
+/*
+Applying page background to the <html> element is
+more reliable than <body>. Don't allow the layout
+to collapse below the narrowest supported viewpoint.
+*/
 
 html {
-  background: var(--color\=page\|background);
+  background: var(--color-page-background);
   min-width: 320px;
 }
 
-/* Always reserve the vertical scrollbar gutter so the
-centred content does not shift sideways when navigating
-between short and tall pages. */
+/*
+Always reserve the vertical scrollbar gutter so centered
+content does not shift sideways when navigating between
+short and tall pages.
+*/
 
 body {
   overflow-x: auto;
   overflow-y: scroll;
 }
 
-/* Drop the grey flash that mobile browsers
-paint over a tapped element. */
+/*
+Drop the grey flash that mobile browsers
+paint over a tapped element.
+*/
 
 body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Force font inheritance through every element
-(form controls in particular ship with their own family/weight),
-so the default face applies everywhere. */
+/*
+Force font inheritance through every element. Effects form controls,
+which would otherwise ship with their own font family and weight.
+This makes it easier to manage the font cascade – everything is
+inherited from the root font.
+*/
 
 body * {
   font-family: inherit;
   font-weight: inherit;
 }
 
-/* `<var>` is italic by default. This theme keeps it upright
-(see also abbr/dfn/cite/address). */
+/*
+Switch `<var>` from italic to upright text. See also
+abbr/dfn/cite/address.
+*/
 
 var {
   font-style: normal;
 }
 
-/* Only true `<em>`/`<i>` are italic by default – reinforced here. */
+/*
+Let only `<em>`/`<i>` be italic by default.
+*/
 
 em, i {
   font-style: italic;
 }
 
-/* RESPONSIVE ROOT FONT SIZE: The root `font-size` is set in pixels
-and stepped up at a ladder of breakpoints. Because virtually everything
-else in the theme is sized in `rem` – the type scale – the whole UI
-scales proportionally to font size. Increasing the font size at a
-breakpoint therefore scales the whole UI – no need to maintain lots
-of per-element media queries.
+/*
+RESPONSIVE ROOT FONT SIZE
+The root font size is set in pixels and stepped up over a ladder
+of breakpoints.
 
-The text stays comfortably sized on small screens and grows on larger
-ones while keeping every proportion (and the baseline grid) intact.
+Because virtually everything else in the theme is sized relative to
+the root em size (`rem`), the whole UI scales proportionally to
+font size. Increasing the font size at a breakpoint therefore
+scales the whole UI – no need to maintain lots of per-element
+media queries.
 
 The breakpoints are defined in pixels. Using `rem` units for media query
-breakpoints is a bit pointless because they resolve against the initial
-root size, which is fixed at 16px. So `rem` units here would just be
-obfuscated pixel values. Breakpoint `em`/`rem` values DO respond to the
-user's preferred default font-size setting, but this theme has opted out
-of that by explicitly setting its root font size. Thus, we might as well
-express breakpoints in plain pixels. */
+breakpoints would resolve against the initial root size, which is fixed
+at 16px. So we might as well define absolute pixels for the breakpoints.
+*/
 
 html {
-  font-size: var(--font-size\=root);
+  font-size: var(--font-size-root);
 }
 
 @media screen and (min-width: 400px) {
   html {
-    font-size: var(--font-size\=root\@xs);
+    font-size: var(--font-size-root-xs);
   }
 }
 
 @media screen and (min-width: 600px) {
   html {
-    font-size: var(--font-size\=root\@sm);
+    font-size: var(--font-size-root-sm);
   }
 }
 
 @media screen and (min-width: 800px) {
   html {
-    font-size: var(--font-size\=root\@md);
+    font-size: var(--font-size-root-md);
   }
 }
 
 @media screen and (min-width: 1000px) {
   html {
-    font-size: var(--font-size\=root\@lg);
+    font-size: var(--font-size-root-lg);
   }
 }
 
 @media screen and (min-width: 1200px) {
   html {
-    font-size: var(--font-size\=root\@xl);
+    font-size: var(--font-size-root-xl);
   }
 }
 
 @media screen and (min-width: 1400px) {
   html {
-    font-size: var(--font-size\=root\@xxl);
+    font-size: var(--font-size-root-xxl);
   }
 }
 
-/* Neutralize the browser's built-in font-size shrinking:
+/*
+Neutralize the browser's built-in font-size shrinking:
 headings, small, nested lists, etc. all reset to 100% (inherit),
 so the type scale is set only by the explicit tokens in the
-typography layer, not by browser defaults. */
+typography layer, not by browser defaults.
+*/
 
 html * {
   font-size: 100%;
@@ -166,30 +183,34 @@ ol ul {
   font-size: 100%;
 }
 
-/* The document's base size – the rem-based type scale keys off this. */
+/*
+The document's base size – the rem-based type scale keys off this.
+*/
 
 body {
-  font-size: var(--font-size\=md);
+  font-size: var(--font-size-md);
 }
 
-/* Verbatim text keeps the monospace block/inline sizes
-(everything is already monospace here, but these tokens
-let code be tuned independently). */
+/*
+Font sizes for monospace text can be fine-tuned independently.
+*/
 
 pre {
   display: block;
-  font-size: var(--font-size\=monospace\|block);
+  font-size: var(--font-size-monospace-block);
 }
 
 code, kbd, samp, var {
   display: inline;
-  font-size: var(--font-size\=monospace\|inline);
+  font-size: var(--font-size-monospace-inline);
 }
 
-/* Start from single line-height. The typography layer
+/*
+Start from a single line-height. The typography layer
 sets the real grid rhythm on `body`. Forcing `inherit`
 on descendants stops controls and other elements from
-reintroducing their own leading. */
+reintroducing their own leading.
+*/
 
 body {
   line-height: 1;
@@ -203,10 +224,12 @@ pre {
   line-height: 1;
 }
 
-/* Hint legibility-priority shaping, and stop iOS inflating
-text after an orientation change (which would break the
-baseline grid). `scroll-padding-top` keeps a heading jumped
-to via a TOC / in-page anchor off the very top edge. */
+/*
+Hint legibility-priority shaping, and stop iOS inflating
+text after an orientation change. `scroll-padding-top`
+keeps a heading jumped to via a TOC / in-page anchor
+off the very top edge.
+*/
 
 html {
   scroll-padding-top: var(--line-height);
@@ -214,10 +237,12 @@ html {
   text-size-adjust: 100%;
 }
 
-/* Typographic line-breaking polish. Balance headings so
+/*
+Typographic line-breaking polish. Balance headings so
 their lines are evened out rather than left ragged, and
 set body copy to avoid orphans (awkward last lines).
-Both degrade gracefully where unsupported. */
+Both degrade gracefully where unsupported.
+*/
 
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
@@ -227,13 +252,15 @@ p {
   text-wrap: pretty;
 }
 
-/* Single source of text color, inherited by everything,
+/*
+Single source of text color, inherited by everything,
 so dark mode flips it in one place via the token. A global
 `overflow-wrap` is a safety net so a long unbroken string
-(eg. a URL) breaks rather than overflowing the narrow column. */
+(eg. a URL) breaks rather than overflowing a narrow column.
+*/
 
 body {
-  color: var(--color\=text\|default);
+  color: var(--color-text-default);
   overflow-wrap: break-word;
 }
 
@@ -241,10 +268,12 @@ body * {
   color: inherit;
 }
 
-/* SVGs paint nothing until a layer opts in (icons set
-their own fill). This avoids browsers' default black
-fill bleeding through. Text inside an SVG does take
-the current text color. */
+/*
+SVGs paint nothing until a layer opts in. This avoids
+browsers' default black fill bleeding through. Text
+inside an SVG does take the current text color,
+however.
+*/
 
 svg {
   fill: none;
@@ -255,9 +284,11 @@ svg text {
   fill: currentColor;
 }
 
-/* Markers sit inside the content box (the typography
-layer builds the hanging indent on top of this). `ul`
-markers are cleared here and re-added there. */
+/*
+Markers sit inside the content box (the typography
+layer builds the hanging indent on top of this). List
+markers are removed here and re-added where required.
+*/
 
 ol,
 ul {
@@ -272,17 +303,21 @@ li {
   list-style: inherit;
 }
 
-/* Strip the default 3D groove rule down to nothing.
-The typography layer draws its own rule. */
+/*
+Strip the default 3D groove rule down to nothing.
+The typography layer draws its own ruler styles.
+*/
 
 hr {
   border: 0;
-  border-top: 1px solid var(--color\=text\|default);
+  border-top: 1px solid var(--color-text-default);
   height: 0;
 }
 
-/* Let long tokens in inline code break rather
-than overflow the column. */
+/*
+Let long tokens in inline code break rather
+than overflow a column.
+*/
 
 code {
   overflow-wrap: break-word;
@@ -290,9 +325,11 @@ code {
   word-break: normal;
 }
 
-/* Preformatted blocks preserve whitespace but wrap,
+/*
+Preformatted blocks preserve whitespace but wrap,
 and scroll horizontally only when a line genuinely
-cannot wrap (eg. a long unbroken string). */
+cannot wrap (eg. a long unbroken string).
+*/
 
 pre {
   overflow: hidden;
@@ -301,10 +338,12 @@ pre {
   word-wrap: normal;
 }
 
-/* Clear any browser decoration on abbr/dfn, then give
+/*
+Clear any browser decoration on abbr/dfn, then give
 an abbreviation that carries a `title` a consistent
 dotted underline (browsers are inconsistent here)
-plus a help cursor, so the expansion is discoverable. */
+plus a help cursor, so the expansion is discoverable.
+*/
 
 abbr,
 dfn {
@@ -325,9 +364,11 @@ dfn {
   font-style: normal;
 }
 
-/* Suppress the browser's automatic quotation marks
+/*
+Suppress the browser's automatic quotation marks
 around blockquote/q. Quoting is handled explicitly
-by the Asciidoctor quote styles. */
+by the Asciidoctor quote styles.
+*/
 
 blockquote,
 q {
@@ -339,15 +380,19 @@ q::before, q::after {
   content: '';
 }
 
-/* `<cite>` is italic by default. Keep upright. */
+/*
+The `<cite>` element is italic by default. Keep upright.
+*/
 
 cite {
   font-style: normal;
 }
 
-/* Remove default decorations from edit/underline elements.
+/*
+Remove default decorations from edit/underline elements.
 Semantics are conveyed by the typography layer, not
-browser defaults. */
+browser defaults.
+*/
 
 del,
 ins {
@@ -359,19 +404,22 @@ u {
   text-decoration: none;
 }
 
-/* `<mark>` highlight: a soft, translucent yellow (the selection yellow,
-lightened) that tints over either background; the text keeps its inherited
-color. A little horizontal padding lifts the tint off the glyph edges. */
+/*
+Highlight text. A little horizontal padding lifts
+the tint off the glyph edges.
+*/
 
 mark {
-  background: var(--color\=mark\|background);
+  background: var(--color-mark-background);
   color: inherit;
   padding: 0 0.25ch;
 }
 
-/* Size sub/sup down and zero their line-height so they
+/*
+Size sub/sup down and zero their line-height so they
 don't open up the line box and disturb the baseline grid.
-Each is then nudged to its position. */
+Each is then nudged to its position.
+*/
 
 sub,
 sup {
@@ -389,7 +437,10 @@ sub {
   bottom: -0.25em;
 }
 
-/* `<small>` is sized by the typography layer. */
+/*
+`<small>` is sized by the typography layer.
+Remove default italic styling of `<address>`.
+*/
 
 small {
   font-size: 100%;
@@ -399,9 +450,11 @@ address {
   font-style: normal;
 }
 
-/* Generated content inherits the decoration/alignment
+/*
+Generated content inherits the decoration/alignment
 of its originating element rather than resetting, so
-`::before`/`::after` glyphs line up. */
+`::before`/`::after` glyphs line up.
+*/
 
 ::before,
 ::after {
@@ -409,20 +462,24 @@ of its originating element rather than resetting, so
   vertical-align: inherit;
 }
 
-/* Text selection: a fixed highlight with a contrasting
-ink (tokens), and no text-shadow bleeding through the
-highlight. */
+/*
+Text selection: a fixed highlight with a contrasting
+ink, and no text-shadow bleeding through the
+highlight.
+*/
 
 ::selection {
-  background: var(--color\=text\|selection);
-  color: var(--color\=text\|selection\|foreground);
+  background: var(--color-text-selection);
+  color: var(--color-text-selection-foreground);
   text-shadow: none;
 }
 
-/* Collapse the double-border model to single shared borders,
+/*
+Collapse the double-border model to single shared borders,
 drop cell spacing, and start tables full-width and left-aligned.
 The typography layer styles the actual borders/padding onto
-this clean base. */
+this clean base.
+*/
 
 table {
   border: 0;
@@ -439,9 +496,11 @@ table {
   text-align: right;
 }
 
-/* Make every table part transparent and inheriting, so
+/*
+Make every table part transparent and inheriting, so
 cells take their look from the table rather than browser
-defaults. */
+defaults.
+*/
 
 tbody,
 td,
@@ -462,9 +521,11 @@ caption {
   caption-side: top;
 }
 
-/* Form controls don't inherit font properties by default.
+/*
+Form controls don't inherit font properties by default.
 Force them to, so inputs/buttons/selects use the monospace
-face and the theme's weights/sizes. */
+face and the theme's weights/sizes.
+*/
 
 button,
 input,
@@ -479,10 +540,12 @@ optgroup {
   font-style: normal;
 }
 
-/* Strip links back to plain inherited text (no browser
-blue/underline). The typography layer re-applies the accent
-underline. The decoration defaults here mean any later
-`text-decoration: underline` starts from a known style. */
+/*
+Strip links back to plain inherited text (no browser
+blue/underline). The typography layer re-applies custom
+presentation The decoration defaults here mean any later
+`text-decoration: underline` starts from a known style.
+*/
 
 a {
   color: inherit;
@@ -496,36 +559,44 @@ a {
   text-underline-offset: 0;
 }
 
-/* A single, visible focus ring in the accent color for
+/*
+A single, visible focus ring in the accent color for
 every focusable element, offset off the element so it
-reads clearly (accessibility). */
+reads clearly (accessibility).
+*/
 
 *:focus {
-  outline-color: var(--color\=outline);
+  outline-color: var(--color-outline);
   outline-offset: 3px;
   outline-style: solid;
   outline-width: 2px;
 }
 
-/* Show the ring only for keyboard / programmatic focus,
+/*
+Show the ring only for keyboard / programmatic focus,
 not for mouse clicks. When the browser judges focus not
 to warrant a visible indicator (`:not(:focus-visible)`),
-hide it. */
+hide it.
+*/
 
 *:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Programmatically-focusable-only elements (tabindex=-1)
-should never show a ring. */
+/*
+Programmatically-focusable-only elements (tabindex=-1)
+should never show a ring.
+*/
 
 *[tabindex="-1"],
 *[tabindex="-1"]:focus {
   outline: none;
 }
 
-/* Pointer cursor on everything interactive (some,
-like `details`, don't get it by default). */
+/*
+Pointer cursor on everything interactive (some,
+like `details`, don't get it by default).
+*/
 
 a,
 button,
@@ -546,29 +617,37 @@ textarea[disabled] {
   cursor: default;
 }
 
-/* Surface an element's access key as a hint, eg. " [s]". */
+/*
+Surface an element's access key as a hint, eg. " [s]".
+*/
 
 *[accesskey]::after {
   content: ' [' attr(accesskey) ']';
 }
 
-/* Remove the default fieldset border.
-Forms are styled by the controls layer. */
+/*
+Remove the default fieldset border.
+Forms are styled by the controls layer.
+*/
 
 fieldset {
   border: 0;
 }
 
-/* Labels stack above their controls by default. */
+/*
+Labels stack above their controls by default.
+*/
 
 label {
   display: block;
 }
 
-/* Flatten controls to a blank slate (no browser chrome,
+/*
+Flatten controls to a blank slate (no browser chrome,
 transparent, full-width block), so the controls layer can
 style them from scratch. The exceptions below opt specific
-control types back out of full-width/block. */
+control types back out of full-width/block.
+*/
 
 button,
 input,
@@ -586,8 +665,10 @@ select[size] {
   height: auto;
 }
 
-/* Color and image inputs are intrinsically sized,
-not full-width. */
+/*
+Color and image inputs are intrinsically sized,
+not full-width.
+*/
 
 input[type="color"] {
   display: inline-block;
@@ -599,8 +680,10 @@ input[type="image"] {
   width: auto;
 }
 
-/* Give textareas a sane minimum height and disable
-the drag-resize handle (which would break the grid). */
+/*
+Give textareas a sane minimum height and disable
+the drag-resize handle (which would break the grid).
+*/
 
 textarea {
   min-height: 10em;
@@ -608,9 +691,11 @@ textarea {
   resize: none;
 }
 
-/* Checkboxes/radios are small inline toggles, not
+/*
+Checkboxes/radios are small inline toggles, not
 full-width blocks. The controls layer draws the
-custom square. */
+custom square.
+*/
 
 input[type="checkbox"],
 input[type="radio"] {
@@ -621,14 +706,18 @@ input[type="radio"] {
   width: auto;
 }
 
-/* Keep the native button appearance as the base to restyle. */
+/*
+Keep the native button appearance as the base to restyle.
+*/
 
 button {
   appearance: button;
 }
 
-/* Treat search inputs like plain text fields and
-strip WebKit's search decorations/cancel button. */
+/*
+Treat search inputs like plain text fields and
+strip WebKit's search decorations/cancel button.
+*/
 
 input[type="search"] {
   appearance: textfield;
@@ -639,8 +728,10 @@ input[type="search"]::-webkit-search-decoration {
   appearance: none;
 }
 
-/* Firefox: remove the inner focus border/padding so the
-theme's own focus ring is the only one shown. */
+/*
+Firefox: remove the inner focus border/padding so the
+theme's own focus ring is the only one shown.
+*/
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
@@ -648,9 +739,11 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-/* Firefox: restore a visible selected-option text by
+/*
+Firefox: restore a visible selected-option text by
 faking it with a zero-blur text-shadow (works around the
-transparent-text focusring quirk). */
+transparent-text focusring quirk).
+*/
 
 select:-moz-focusring,
 select::-moz-focus-inner {
@@ -662,16 +755,20 @@ input[type="range"]::-moz-focus-outer {
   border: 0;
 }
 
-/* Placeholder text uses the muted token at full opacity
-(Firefox dims it). */
+/*
+Placeholder text uses the muted token at full opacity
+(Firefox dims it).
+*/
 
 ::placeholder {
-  color: var(--color\=text\|placeholder);
+  color: var(--color-text-placeholder);
   opacity: 1;
 }
 
-/* Media elements are block-level. A controls-less
-audio element is hidden entirely. */
+/*
+Media elements are block-level. A controls-less
+audio element is hidden entirely.
+*/
 
 audio,
 video {
@@ -682,9 +779,11 @@ audio:not([controls]) {
   display: none;
 }
 
-/* Images are block-level and never overflow the column.
+/*
+Images are block-level and never overflow the column.
 `height: auto` preserves the aspect ratio. (Inline images
-opt back into their attribute size in the asciidoctor layer.) */
+opt back into their attribute size in the asciidoctor layer.)
+*/
 
 img {
   border: 0;
@@ -693,16 +792,20 @@ img {
   max-width: 100%;
 }
 
-/* Video letter-boxing shows the fixed video background
-token (always black). */
+/*
+Video letter-boxing shows the fixed video background
+token (always black).
+*/
 
 video {
-  background: var(--color\=video);
+  background: var(--color-video);
   max-width: 100%;
 }
 
-/* Embedded content is block-level and capped
-to the column width. */
+/*
+Embedded content is block-level and capped
+to the column width.
+*/
 
 iframe,
 embed,
@@ -729,15 +832,19 @@ svg {
   height: auto;
 }
 
-/* Clip a nested SVG's overflow (a non-root SVG can
-otherwise paint outside its box in some engines). */
+/*
+Clip a nested SVG's overflow (a non-root SVG can
+otherwise paint outside its box in some engines).
+*/
 
 svg:not(:root) {
   overflow: hidden;
 }
 
-/* Ensure HTML5 sectioning/semantic elements are block-level in
-very, very old browsers that default them to inline. */
+/*
+Ensure HTML5 sectioning/semantic elements are block-level in
+very, very old browsers that default them to inline.
+*/
 
 address,
 article,
@@ -757,13 +864,15 @@ progress {
   display: inline-block;
 }
 
-/* Strip the browser chrome off `<dialog>` and popovers
+/*
+Strip the browser chrome off `<dialog>` and popovers
 (default border, padding, and the centred/inset positioning)
 back to a blank slate. The backdrop's default dim is also
-cleared. Both stay hidden until opened. */
+cleared. Both stay hidden until opened.
+*/
 
 dialog {
-  background: var(--color\=page\|background);
+  background: var(--color-page-background);
   border: 0;
   color: inherit;
   margin: auto;
@@ -771,7 +880,7 @@ dialog {
 }
 
 [popover] {
-  background: var(--color\=page\|background);
+  background: var(--color-page-background);
   border: 0;
   color: inherit;
   margin: 0;
@@ -783,22 +892,28 @@ dialog {
 }
 
 /* Honour the non-standard `unselectable` attribute. */
-
 *[unselectable] {
   user-select: none;
 }
 
-/* `[hidden]`/`<template>` must always stay hidden,
-even against later display rules — hence `!important`. */
+/*
+`[hidden]`/`<template>` must always stay hidden,
+even against later display rules — hence `!important`.
+*/
 
 *[hidden],
 template {
   display: none !important;
 }
 
-/* Clearfix: containers of floated children grow to
-enclose them. Applied to the common block containers
-so floats (eg. a floated image) don't escape. */
+/*
+@deprecated
+CLEARFIX: A legacy hack to keep floated children inside
+their parent containers. No longer required if modern
+layout techniques are used, and the ghost content added by
+the hack to pseudo elements cna create layout issue.
+Kept here for reference.
+*/
 
 /*
 :where(

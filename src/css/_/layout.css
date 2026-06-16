@@ -2,10 +2,11 @@
  * LAYOUT
  */
 
-/* PAGE CENTERING: `round(down, 100%, 1ch)` snaps the column to a
-whole number of character cells, so content aligns to the monospace
-grid – see `_typography.css` for an explanation.
- */
+/*
+PAGE CENTERING
+`round(down, 100%, 1ch)` snaps the column to a whole number
+of character cells, so content aligns to the monospace grid
+*/
 
 body {
   align-items: center;
@@ -22,40 +23,14 @@ body {
   width: 100%;
 }
 
-/* The header is a full-width band across the top of the viewport,
-set off from the document by a single bottom rule. It sits outside
-the centered `.MAIN column, so it spans edge to edge. Its inner
-content (the nav bar) is itself constrained to the content column
-– see `_components.css`. The band carries no bottom margin. The
-line of space above the breadcrumb is supplied by `.MAIN`'s top
-padding. */
-
 .HEADER {
-  border-bottom: var(--border-thickness) solid var(--color\=border);
+  border-bottom: var(--border-thickness) solid var(--color-border);
   width: 100%;
 }
 
-/* OWL SELECTOR: Consecutive flow elements are separated by exactly
-one line of the grid. This is scoped to inside `.DOCUMENT` so it shapes
-only the document body's vertical rhythm, not the header/nav/
-breadcrumb/footer, which manage their own spacing. It is a
-descendant selector (`.DOCUMENT * + *`, not `>`), so it reaches
-nested content too – paragraphs inside list items, blocks inside
-admonitions, etc. Elements that need more breathing room override
-`margin-top` in the typography / asciidoctor layers. */
-
-.DOCUMENT * + * {
-  /*margin-top: var(--line-height);*/
-}
-
-/* BREADCRUMBS: The trail to the current page, shown above the document
-title. An inline, bullet-less list with a "/" between items. Light and small,
-like the footer, so it reads as secondary to the page content.
-Markup: <nav.BREADCRUMBS> > <ul> > <li>{a|text}</li>... */
-
 .BREADCRUMBS {
-  color: var(--color\=text\|light);
-  font-size: var(--font-size\=sm);
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
   margin-bottom: var(--line-height);
 }
 
@@ -68,18 +43,13 @@ Markup: <nav.BREADCRUMBS> > <ul> > <li>{a|text}</li>... */
   padding: 0;
 }
 
-/* Reset the owl-selector top margin so items stay on one line. */
-
 .BREADCRUMBS li {
   margin: 0;
 }
 
-/* A "›" separator before every item except the first, and a trailing one after
-the last item so the trail always ends with a divider. */
-
 .BREADCRUMBS li + li::before,
 .BREADCRUMBS li:last-child::after {
-  color: var(--color\=text\|light);
+  color: var(--color-text-light);
   content: "›";
 }
 
@@ -91,31 +61,21 @@ the last item so the trail always ends with a divider. */
   margin-left: 1ch;
 }
 
-/* On hover/focus, trail links show the same accent underline as links inside
-the `.AsciiDoc` component. */
-
 .BREADCRUMBS a:hover,
 .BREADCRUMBS a:focus {
   text-decoration: underline;
-  text-decoration-color: var(--color\=hyperlink\|underline);
+  text-decoration-color: var(--color-hyperlink-underline);
   text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
 }
 
-/* The footer closes the page, separated from the document
-by a rule and two lines of the grid. Its text is light and
-small, like a colophon. */
-
 .FOOTER {
-  border-top: var(--border-thickness) solid var(--color\=border);
-  color: var(--color\=text\|light);
-  font-size: var(--font-size\=sm);
+  border-top: var(--border-thickness) solid var(--color-border);
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
   margin-top: calc(var(--line-height) * 2);
   padding-top: var(--line-height);
 }
-
-/* Reset the owl-selector top margin so the copyright
-line hugs the rule. */
 
 .FOOTER > :first-child {
   margin-top: 0;
