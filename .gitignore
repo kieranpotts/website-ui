@@ -16,7 +16,7 @@ dist/*
 !dist/README.adoc
 
 # Standalone theme preview output (gulp preview).
-preview-output/
+www/
 
 # Throwaway git snapshot of preview content, so the working tree can be
 # previewed without committing (gulp previewSrc).

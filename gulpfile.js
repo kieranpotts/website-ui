@@ -4,7 +4,7 @@
 // Build pipeline for the Antora UI bundle.
 //
 //   gulp bundle   -> processes src/ and writes dist/ui-bundle.zip
-//   gulp preview  -> builds a sample site (preview/) into preview-output/
+//   gulp preview  -> builds a sample site (srv/) into www/
 //   gulp lint     -> lints the stylesheets
 //
 // The bundle layout mirrors what Antora expects at the root of a UI bundle:

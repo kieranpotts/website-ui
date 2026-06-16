@@ -24,7 +24,7 @@ Writer. It is built into `dist/ui-bundle.zip` and consumed by the separate
 ## Tools
 
 - `npm run bundle` to build `dist/ui-bundle.zip`.
-- `npm run preview` to build the standalone preview into `preview-output/`.
+- `npm run preview` to build the standalone preview into `www/`.
 - `npm run lint` to lint the stylesheets.
 
 ## Rules

@@ -17,8 +17,8 @@ npm run preview
 ```
 
 Builds the bundle, then renders a small sample site (`srv/`) into
-`preview-output/` using [`preview-site.yml`](../preview-site.yml). Open
-`preview-output/index.html`, or serve the directory, to review the theme in
+`www/` using [`preview-site.yml`](../preview-site.yml). Open
+`www/index.html`, or serve the directory, to review the theme in
 isolation.
 
 ## How the website consumes it

@@ -2,7 +2,7 @@
 # Standalone preview playbook. Builds a small sample site using this theme's
 # unzipped sources, so the UI can be developed without the website repo.
 #
-#   gulp preview   (bundles, then builds this into preview-output/)
+#   gulp preview   (bundles, then builds this into www/)
 #
 
 site:
@@ -35,7 +35,7 @@ ui:
 
 output:
   clean: true
-  dir: preview-output
+  dir: www
 
 runtime:
   fetch: false
