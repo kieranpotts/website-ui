@@ -2,10 +2,10 @@
  * TYPOGRAPHY
  *
  * This layer sets the base typographic styles, independent of the location
- * of text within the layout or within reusable components. For this reason,
- * this layer sets only bare element selectors: h1, p, ul, table...
+ * of text within the layout or within reusable components. This layer sets
+ * only bare element selectors: h1, p, ul, table...
  *
- * Both a vertical and horizontal rhythm is established based around font size:
+ * A vertical and horizontal rhythm is established around the base font size:
  *
  *   - VERTICAL RHYTHM: The `--line-height` property sets the box height for
  *     lines of text, nd every vertical margin is a multiple of it: 1x, 1.5x,
