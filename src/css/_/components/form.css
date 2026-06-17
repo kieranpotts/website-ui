@@ -150,6 +150,16 @@ label/control pairs align.
 }
 
 /*
+Separate stacked label rows (eg. lists of radios or checkboxes) by one
+grid line, so consecutive toggles aren't scrunched together. Adjacent-
+sibling only, so the first label in a group keeps its leading flush.
+*/
+
+.Form label + label {
+  margin-top: var(--line-height);
+}
+
+/*
 A control nested inside its label fills the
 label's width.
 */
