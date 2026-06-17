@@ -6,8 +6,8 @@ The trail is shown only when the page is one or more levels below a top-level
 page, ie. it has at least one ancestor. The home page and top-level pages
 do not show the breadcrumb trail, but deeper pages do. }}
 
-{{#if (gt page.breadcrumbs.length 1)}}
-  <nav class="BREADCRUMBS" aria-label="breadcrumbs">
+<nav class="BREADCRUMBS" aria-label="breadcrumbs">
+  {{#if (gt page.breadcrumbs.length 1)}}
     <div class="Breadcrumbs">
       <ul>
         {{! A persistent Home root on every trail. }}
@@ -25,5 +25,5 @@ do not show the breadcrumb trail, but deeper pages do. }}
         {{/each}}
       </ul>
     </div>
-  </nav>
-{{/if}}
+  {{/if}}
+</nav>
