@@ -1,0 +1,15 @@
+{{! Default navbar menu items.
+
+This theme keeps no knowledge of any particular site's structure. It renders one
+top-level link per Antora component (content source), derived from `site.components`.
+Each component exposes `name`, `title`, and `url` (an already root-relative URL
+to its start page), so `relativize` is all that's needed for the href.
+
+A consuming site that wants control over labels, order, or extra links,
+overrides this partial by shipping its own `partials/nav-menu.hbs`
+via the playbook's `supplemental_files`. A supplemental partial replaces
+the one baked into the UI bundle.}}
+
+{{#each site.components}}
+  <li><a href="{{{relativize this.url}}}">{{this.title}}</a></li>
+{{/each}}

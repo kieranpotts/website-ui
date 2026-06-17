@@ -5,4 +5,12 @@ Hello. This is a preview site, used to test the theme.
 
 The content for this preview site is in `./srv/`. It is compiled to `./www/`. To view the site, simply open `./www/index.html` in your web browser.
 
-Browse the other sections of this site to preview typography, form controls, and other components of the theme.
+The navigation bar shows only one section – Preview. By default the navbar renders Antora site components – and there is only one component for this preview site. It means the theme is not encoded with any knowledge of a site's structure, and instead the navigation is compiled dynamically based on the playbook's content sources.
+
+Downstream websites can customize the navbar by shipping their own `partials/nav-menu.hbs` via their `supplemental_files`. The supplemental navbar partial will replace the theme's default one.
+
+The following page demonstrate typography, form controls, and other components:
+
+* xref:asciidoc.adoc[AsciiDoc]
+* xref:forms.adoc[Forms]
+* xref:breadcrumbs.adoc[Breadcrumbs]
