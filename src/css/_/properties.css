@@ -10,14 +10,6 @@
  * trailing `-<bp>` denotes a breakpoint-specific value (eg. `--font-size-root-sm`).
  * Tokens are grouped by their leading segment (`--color-*`, `--font-size-*`)
  * and ordered alphabetically.
- *
- * COLOR & LIGHT/DARK MODE: Color is built in two tiers. A small set of base
- * palette tokens (`--base-*`) holds the only literal colors in the theme – an
- * ink, a muted ink, a page, and a muted-page tone. Light/dark mode is
- * implemented by flipping just those four values in a single
- * `@media (prefers-color-scheme: dark)` block. Every semantic color token
- * (`--color-*`) derives from the base palette. The two accent tokens –
- * selection and focus outline – are fixed hues that read on either background.
  */
 
 :root {
@@ -39,8 +31,17 @@
 
   /*
   BASE PALETTE - light mode.
-  The only literal colors in the theme. Flipped for dark mode
-  at the foot of this file.
+
+  Color is built in two tiers. A small set of base palette tokens (`--base-*`)
+  hold the only literal color definitions in the theme (with a few exceptions).
+  The main base colors are an ink, a muted ink, a faint ink, a page, and a 
+  muted page tone, and an accent color. Only the base colors are flipped between 
+  light and dark modes – nothing else. (Dark mode is defined at the bottom of 
+  this file).
+
+  Every semantic color token (`--color-*`) derives from the base palette. Only
+  these tokens are references elsewhere in the theme – the base colors are 
+  never referenced directly.
 
   The accent is a subtle signature color used for link underlines, footnote
   markers, and a few other things.
@@ -159,11 +160,20 @@
 
   /*
   GRID RHYTHM
-  All vertical spacing is based on the `--line-height` value.
-  It is expressed in rem so it scales with the root font size
-  ladder, keeping the vertical rhythm proportional to everything
-  else that scales with font size. Code blocks get their own,
-  tighter leading.
+
+  Vertical and horizontal rhythms are established around the base font size.
+
+  All vertical spacing is based on the `--line-height` value, which sets
+  the box height for lines of text. All vertical spacing is a multiple of
+  this value: 1x, 1.5x, 2x… The line height value is expressed in rem, so 
+  it scales with the root font size ladder, keeping the vertical rhythm 
+  proportional to everything else that scales with font size. Code blocks 
+  get their own, tighter leading.
+
+  Because all text is rendered in a monospace font, we can establish a
+  horizontal grid around the width of a single character – expressed by
+  the `ch` unit. Indents, padding, and other horizontal spacing align to
+  whole character units.
 
   The `--border-thickness` value is the grid's hairline, used for
   rulers, tables, and form controls.

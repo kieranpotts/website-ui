@@ -18,7 +18,8 @@ body {
 .MAIN {
   max-width: calc(min(80ch, round(down, 100%, 1ch)));
   overflow-x: hidden;
-  padding: calc(var(--line-height) / 2) 2ch var(--line-height) 2ch;
+  /* padding: calc(var(--line-height) / 2) 2ch var(--line-height) 2ch; */
+  padding: 0 2ch;
   position: relative;
   width: 100%;
 }
@@ -34,12 +35,12 @@ there is no nested Breadcrumb component to render.
 */
 
 .BREADCRUMBS {
-  margin-bottom: var(--line-height);
+  margin: 0;
   min-height: var(--line-height);
 }
 
 .FOOTER {
   border-top: var(--border-thickness) solid var(--color-border);
-  margin-top: calc(var(--line-height) * 2);
-  padding-top: var(--line-height);
+  margin: calc(var(--line-height) * 2) 0 0;
+  padding: var(--line-height) 0;
 }

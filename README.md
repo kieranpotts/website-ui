@@ -2,6 +2,11 @@
 
 **Custom Antora UI theme for my website.**
 
+> [!IMPORTANT]
+> This theme styles only a subset of HTML markup generated from
+> AsciiDoc source by the AsciiDoctor processor – just enough to
+> support my website. It is not, therefore, a complete Antora theme.
+
 I'd like to acknowledge Oskar Wickström's [The Monospace Web](https://owickstrom.github.io/the-monospace-web/), which provided a starting point for my current website UI.
 
 ## 📖 User Manual

@@ -5,6 +5,8 @@
 [.lead]
 This page demonstrates every major AsciiDoc element and feature. It serves as a comprehensive reference and testing ground for the theme. This opening paragraph has been given the "lead" role, which is typically used for introductory text.
 
+NOTE: Not all AsciiDoc syntax is supported at this time. Checklists, for example, is unsupported. Content MUST use only the subset of AsciiDoc supported by this theme, which is documented on this page.
+
 ---
 
 This is the default paragraph style. Consectetur esse do anim mollit quis occaecat aute consectetur veniam cillum ut reprehenderit. Ipsum enim ipsum veniam labore nostrud aliquip ea cillum minim commodo sint commodo cillum magna. Dolore tempor id occaecat tempor reprehenderit exercitation reprehenderit do incididunt enim magna cupidatat laboris.
@@ -127,15 +129,6 @@ An ordered list with longer paragraphs of text:
 * Unordered sub-item
 * Another unordered sub-item
 . Another ordered item
-
-=== Checklist
-
-* [*] Completed task
-* [x] Another completed task
-* [ ] Incomplete task
-* [*] Task with details
-+
-Additional information about this task.
 
 === Description lists
 
