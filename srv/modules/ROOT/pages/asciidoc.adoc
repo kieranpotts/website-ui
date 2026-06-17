@@ -105,8 +105,6 @@ An unordered list with continuation lines and multiple paragraphs:
   This line is a continuation of the prior one. Do occaecat pariatur reprehenderit laboris anim id tempor do irure.
 
 * This list item is composed of multiple paragraphs. Excepteur voluptate adipisicing pariatur voluptate ipsum est dolor ex mollit anim. Nostrud incididunt pariatur consectetur velit mollit amet et.
-+
-Minim enim exercitation nisi est consequat reprehenderit. Sit pariatur labore minim reprehenderit cillum amet commodo dolore consequat et eiusmod id. Culpa cupidatat laborum enim dolore.
 
 An ordered list:
 
