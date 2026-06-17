@@ -1,0 +1,43 @@
+/**
+ * BREADCRUMBS COMPONENT.
+ */
+
+.Breadcrumbs {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}
+
+.Breadcrumbs ul {
+  column-gap: 1ch;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Breadcrumbs li {
+  margin: 0;
+}
+
+.Breadcrumbs li + li::before,
+.Breadcrumbs li:last-child::after {
+  color: var(--color-text-light);
+  content: "›";
+}
+
+.Breadcrumbs li + li::before {
+  margin-right: 1ch;
+}
+
+.Breadcrumbs li:last-child::after {
+  margin-left: 1ch;
+}
+
+.Breadcrumbs a:hover,
+.Breadcrumbs a:focus {
+  text-decoration: underline;
+  text-decoration-color: var(--color-hyperlink-underline);
+  text-decoration-thickness: var(--border-thickness);
+  text-underline-offset: 0.3em;
+}

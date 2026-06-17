@@ -1,5 +1,0 @@
-= Part Three
-:page-description: Third top-level section, for testing navigation and breadcrumbs.
-
-This is the landing page for *Part Three*. Incididunt consectetur amet
-consequat cillum. Veniam magna quis dolor excepteur deserunt ea tempor laborum.

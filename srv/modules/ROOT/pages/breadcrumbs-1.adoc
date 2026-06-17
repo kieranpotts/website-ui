@@ -1,0 +1,6 @@
+= Level 1
+:page-description: A nested page, for testing a deep breadcrumb trail.
+
+This page sits one level below xref:breadcrumbs.adoc[Breadcrumbs]. The breadcrumb trail above should therefore read *Home › Breadcrumbs ›*, linking to the sections above.
+
+Go xref:breadcrumbs-2.adoc[one level deeper] to preview on more level of nesting.

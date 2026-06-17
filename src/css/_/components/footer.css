@@ -1,0 +1,8 @@
+/**
+ * FOOTER COMPONENT
+ */
+
+.Footer {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}

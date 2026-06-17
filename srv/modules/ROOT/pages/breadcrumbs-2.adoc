@@ -1,0 +1,4 @@
+= Level 2
+:page-description: A second nesting level, for testing a deep breadcrumb trail.
+
+This page sits two levels below xref:breadcrumbs.adoc[Breadcrumbs], and immediately beneath xref:breadcrumbs-1.adoc[Level 1]. The breadcrumb trail above should therefore read *Home › Breadcrumbs › Level 1 ›*.

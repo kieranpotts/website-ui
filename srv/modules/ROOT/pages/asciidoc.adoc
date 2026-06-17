@@ -1,0 +1,530 @@
+= AsciiDoc Reference Guide
+:page-description: A comprehensive page exercising AsciiDoc elements for theming the Antora UI.
+:experimental:
+
+[.lead]
+This page demonstrates every major AsciiDoc element and feature. It serves as a comprehensive reference and testing ground for the theme. This opening paragraph has been given the "lead" role, which is typically used for introductory text.
+
+---
+
+This is the default paragraph style. Consectetur esse do anim mollit quis occaecat aute consectetur veniam cillum ut reprehenderit. Ipsum enim ipsum veniam labore nostrud aliquip ea cillum minim commodo sint commodo cillum magna. Dolore tempor id occaecat tempor reprehenderit exercitation reprehenderit do incididunt enim magna cupidatat laboris.
+
+[.text-center]
+This demonstrates how to center a paragraph of text. Consectetur aute tempor aliquip dolor. Officia nostrud id laborum laborum exercitation enim labore culpa qui. Velit sint ipsum cupidatat veniam sunt culpa.
+
+== Inline text formatting
+
+This is *bold text*. This is _italic text_. This is `monospace text`. This is #highlighted text#. This is [.underline]#underlined text# and this is [.line-through]#strikethrough text#. This is http://example.com/[hyperlinked text]. This is ^superscript^ text and this is ~subscript~ text.
+
+[[links-cross-references-section]]
+=== Links and cross-references
+
+https://asciidoctor.org[Website link]
+
+mailto:support@example.com[Email link]
+
+Internal cross-reference: <<lists-section>>
+
+<<custom-anchor,Internal cross-reference with custom text>>
+
+=== Special characters and symbols
+
+Copyright (C), Registered (R), Trademark (TM)
+
+Arrows: -> <- => <=
+
+Em dash -- and ellipsis...
+
+== Quotes and citations
+
+"`Double curved quotes`" and '`single curved quotes`'.
+
+[%unbreakable]
+--
+[verse, William Blake, Songs of Innocence]
+____
+Tiger, tiger, burning bright
+In the forests of the night,
+What immortal hand or eye
+Could frame thy fearful symmetry?
+____
+--
+
+Cupidatat quis ex consequat nulla mollit. Veniam magna enim magna ipsum aliquip fugiat incididunt do nisi officia ipsum. Irure tempor mollit quis quis. Fugiat cupidatat cillum adipisicing exercitation qui esse ad sit nisi do proident enim nostrud.
+
+[quote, Winston Churchill]
+The best argument against democracy is a five-minute conversation with the average voter.
+
+Culpa ea mollit aliqua velit dolor proident. Enim deserunt pariatur in esse non id adipisicing elit culpa. Incididunt consectetur amet consequat cillum.
+
+== Headings and sections
+
+Cillum pariatur est occaecat sunt. Magna irure sunt cillum cillum do. Ea nulla deserunt qui est est qui commodo voluptate ad eu sint sunt Lorem ipsum. Et nisi ipsum proident ea pariatur. Reprehenderit officia anim est proident eu quis.
+
+=== Level 3 heading
+
+Commodo quis mollit laborum excepteur nisi ad laborum cillum duis dolor aliquip. Ad adipisicing pariatur aliqua eiusmod ea labore laborum labore culpa dolore. Eu minim nulla nostrud tempor ullamco sunt elit.
+
+==== Level 4 heading
+
+Veniam voluptate voluptate do ullamco deserunt reprehenderit consectetur ea sit eiusmod. Ipsum incididunt commodo sunt culpa deserunt quis dolore nulla do incididunt deserunt. Magna quis labore pariatur quis culpa occaecat reprehenderit.
+
+===== Level 5 heading
+
+Consequat nisi cupidatat cillum cillum voluptate eiusmod. Proident dolor in tempor nulla sunt eu anim officia. Eiusmod culpa enim reprehenderit dolor dolore sint aliquip velit dolor exercitation reprehenderit aliquip Lorem.
+
+[[custom-anchor]]
+=== Section with a custom anchor
+
+This section has a custom anchor that is referenced from the <<links-cross-references,links and cross-references>> section.
+
+[[lists-section]]
+== Lists
+
+An unordered list with multiple levels:
+
+* First level item
+** Second level item
+*** Third level item
+**** Fourth level item
+***** Fifth level item
+****** Sixth level item
+
+An unordered list with long paragraphs of text, and a title:
+
+.List title
+* Amet consectetur enim quis adipisicing tempor veniam ipsum nulla. Elit est enim eu do proident mollit quis elit et Lorem ex culpa irure pariatur. Tempor irure aliqua aute elit elit dolor ad deserunt fugiat eiusmod duis minim deserunt.
+* Enim eu enim est esse et eu ipsum non laborum est. Eiusmod adipisicing aute ullamco officia cupidatat elit sunt.
+* Nisi proident Lorem fugiat non nulla labore esse nisi consequat duis in. Officia eu aliquip ipsum tempor. Dolore excepteur et non aliqua dolor sunt magna.
+
+An unordered list with continuation lines and multiple paragraphs:
+
+* Ut esse tempor deserunt cillum veniam irure quis et commodo.
+  This line is a continuation of the prior one. Do occaecat pariatur reprehenderit laboris anim id tempor do irure.
+
+* This list item is composed of multiple paragraphs. Excepteur voluptate adipisicing pariatur voluptate ipsum est dolor ex mollit anim. Nostrud incididunt pariatur consectetur velit mollit amet et.
++
+Minim enim exercitation nisi est consequat reprehenderit. Sit pariatur labore minim reprehenderit cillum amet commodo dolore consequat et eiusmod id. Culpa cupidatat laborum enim dolore.
+
+An ordered list:
+
+. First item
+.. Nested item
+... Deeply nested item
+. Second item
+. Third item
+. Fourth item
+
+An ordered list with longer paragraphs of text:
+
+. Tempor irure aliqua aute elit elit dolor ad deserunt fugiat eiusmod duis minim deserunt.
+.. Nisi proident Lorem fugiat non nulla labore esse nisi consequat duis in. Officia eu aliquip ipsum tempor. Dolore excepteur et non aliqua dolor sunt magna.
+... Amet consectetur enim quis adipisicing tempor veniam ipsum nulla. Elit est enim eu do proident mollit quis elit et Lorem ex culpa irure pariatur. Tempor irure aliqua aute elit elit dolor ad deserunt fugiat eiusmod duis minim deserunt.
+. Minim enim exercitation nisi est consequat reprehenderit. Sit pariatur labore minim reprehenderit cillum amet commodo dolore consequat et eiusmod id. Culpa cupidatat laborum enim dolore.
+
+.A mixed list
+. Ordered item
+* Unordered sub-item
+* Another unordered sub-item
+. Another ordered item
+
+=== Checklist
+
+* [*] Completed task
+* [x] Another completed task
+* [ ] Incomplete task
+* [*] Task with details
++
+Additional information about this task.
+
+=== Description lists
+
+CPU:: Central Processing Unit
+RAM:: Random Access Memory
+SSD:: Solid State Drive
+
+=== Question and answer lists
+
+[qanda]
+What is AsciiDoc?::
+AsciiDoc is a lightweight markup language for authoring notes, documentation, articles, books, ebooks, slideshows, web pages, man pages and blogs.
+
+Why use AsciiDoc?::
+AsciiDoc is highly configurable and extensible, with excellent toolchain support and multiple output formats.
+
+== Tables
+
+=== Simple table
+
+|===
+|Name |Age |City
+
+|John Doe
+|30
+|New York
+
+|Jane Smith
+|25
+|London
+
+|Bob Johnson
+|35
+|Tokyo
+|===
+
+=== Advanced tables
+
+.Table with striped rows, column-width controls, and a footer
+[cols="1,2,1,2",options="footer",stripes=even]
+|===
+|Column 1 Header |Column 2 Header |Column 3 Header |Column 4 Header
+
+|Cell 1,1
+|Cell 1,2 with more content
+|Cell 1,3
+|Cell 1,4
+
+|Cell 2,1
+|Cell 2,2
+|Cell 2,3
+|Cell 2,4 with even more content that might wrap
+
+|Cell 3,1
+|Cell 3,2
+|Cell 3,3
+|Cell 3,4
+
+4+|Footer: Summary or totals go here
+|===
+
+.Table with cell-level formatting
+[cols="2,1,1,3", options="header"]
+|===
+|Product |Price |Stock |Description
+
+|*Laptop*
+|$999
+|15
+|High-performance laptop with _excellent_ specifications
+
+|`Keyboard`
+|$79
+|50
+|Mechanical keyboard with RGB lighting
+
+|[.line-through]#Mouse#
+|[.line-through]#$29#
+|0
+|Out of stock - wireless mouse
+|===
+
+.Table with merged cells
+|===
+|Name 2+|Details
+
+|John
+|Age: 30
+|City: NYC
+
+|Jane
+2+|Age: 25, City: London
+|===
+
+== Code and verbatim blocks
+
+=== Inline code
+
+Use the `print()` function to output text in Python.
+
+The configuration file is located at `/etc/nginx/nginx.conf`.
+
+=== Code blocks
+
+[source,python]
+----
+def fibonacci(n):
+    """Generate Fibonacci sequence up to n terms."""
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+
+    sequence = [0, 1]
+    for i in range(2, n):
+        sequence.append(sequence[i-1] + sequence[i-2])
+
+    return sequence
+
+# Example usage
+fib_sequence = fibonacci(10)
+print(f"First 10 Fibonacci numbers: {fib_sequence}")
+----
+
+A `[source]` block with callouts:
+
+[source,javascript]
+----
+function createUser(name, email) {
+  return {
+    name: name,           // <1>
+    email: email,         // <2>
+    id: generateId(),     // <3>
+    createdAt: new Date()
+  };
+}
+----
+<1> User's display name
+<2> User's email address
+<3> Generate unique identifier
+
+=== Listing blocks
+
+----
+This is a listing block.
+It preserves line breaks and spacing.
+Often used for code without syntax highlighting.
+----
+
+Listing blocks are useful for rendering illustrations using Unicode box-drawing characters:
+
+[listing]
+....
+/dev/nvme0n1p2
+  ├── usr
+  │   ├── local
+  │   ├── share
+  │   ├── libexec
+  │   ├── include
+  │   ├── sbin
+  │   ├── src
+  │   ├── lib64
+  │   ├── lib
+  │   ├── bin
+  │   ├── games
+  │   │   ├── solitaire
+  │   │   ├── snake
+  │   │   └── tic-tac-toe
+  │   └── media
+  ├── media
+  ├── run
+  └── tmp
+....
+
+=== Literal blocks
+
+....
+This is a literal block.
+Everything here is displayed exactly as typed.
+    Including    spacing    and
+        indentation.
+....
+
+Literal text written using the indentation style:
+
+    $ ls -la
+    total 64
+    drwxr-xr-x  8 user  staff   256 Jul  1 12:00 .
+    drwxr-xr-x 15 user  staff   480 Jul  1 11:45 ..
+    -rw-r--r--  1 user  staff  1024 Jul  1 12:00 document.adoc
+
+== Admonitions
+
+NOTE: This is a note admonition. It provides additional information that might be helpful.
+
+TIP: This is a tip admonition. It offers helpful suggestions or best practices.
+
+IMPORTANT: This is an important admonition. It highlights crucial information that shouldn't be missed.
+
+.Optional title
+[CAUTION]
+====
+This is a caution admonition with a title. It advises careful consideration or action.
+====
+
+[WARNING]
+====
+This is a complex warning admonition with multiple paragraphs and formatted text. Warning admonitions are used to alert readers to potential issues or risks.
+
+It can contain:
+
+* Lists
+* *Formatted text*
+* `Code snippets`
+* And other AsciiDoc elements
+====
+
+== Sidebars and special blocks
+
+.Sidebar title
+****
+This is a sidebar block. Sidebars are used to present information that supplements the main content but can be read independently.
+
+Sidebars can contain:
+
+* All standard AsciiDoc formatting
+* Tables, lists, and code blocks
+* Images and other media
+****
+
+.Single-paragraph sidebar
+[sidebar]
+Aute consequat et ullamco occaecat est sint mollit enim in. Sit dolore labore velit minim aliquip ullamco eu reprehenderit velit in sunt et aliqua commodo.
+
+=== Example blocks
+
+.Title
+====
+This is an https://docs.asciidoctor.org/asciidoc/latest/blocks/example-blocks/[example block]. It's used to showcase examples of concepts discussed in the main content. It may contain *complex formatting*.
+
+[source]
+----
+$ echo "Hello, World!"
+Hello, World!
+----
+====
+
+== Images and media
+
+=== Block images
+
+.Earthrise, photographed from lunar orbit
+image::earthrise.jpg[Earthrise over the lunar horizon]
+
+.Diagram that responds to light/dark mode preference
+image::diagram.svg[Build pipeline diagram, 600, 240]
+
+=== Inline images
+
+This paragraph contains an inline image image:picture.png[Picture, 16, 16] within the text, flowing with the words around it.
+
+=== Video
+
+A video with multiple sources (WebM with an MP4 fallback) and a poster image:
+
+++++
+<video controls loop muted poster="_images/apollo8-640x480.jpg">
+  <source src="_images/apollo8-320x240.webm" type="video/webm" />
+  <source src="_images/apollo8-320x240.mp4" type="video/mp4" />
+</video>
+++++
+
+== User interface elements
+
+Press kbd:[Ctrl+C] to copy and kbd:[Ctrl+V] to paste.
+
+Click the btn:[Save] button to save your changes.
+
+Navigate to menu:File[Save As] to save with a different name.
+
+Select menu:Edit[Find > Replace] to open the find and replace dialog.
+
+== Keyboard shortcuts
+
+|===
+|Action |Windows |macOS |Linux
+
+|Copy
+|kbd:[Ctrl+C]
+|kbd:[Cmd+C]
+|kbd:[Ctrl+C]
+
+|Paste
+|kbd:[Ctrl+V]
+|kbd:[Cmd+V]
+|kbd:[Ctrl+V]
+
+|Save
+|kbd:[Ctrl+S]
+|kbd:[Cmd+S]
+|kbd:[Ctrl+S]
+|===
+
+== Footnotes
+
+This sentence has a footnote.footnote:[This is the footnote text.]
+
+This sentence has a footnote with an ID.footnote:fn1[This footnote can be referenced again.]
+
+This sentence references the previous footnote again.footnote:fn1[]
+
+The footnotes are printed at the end of the page (ie. they are implemented as endnotes).
+
+== Interactive controls
+
+These are rendered in AsciiDoc using literal blocks.
+
+=== Buttons
+
+++++
+<nav>
+  <button>Reset</button>
+  <button>Save</button>
+</nav>
+++++
+
+=== Text inputs
+
+++++
+<form class="grid">
+  <label>First name <input type="text" placeholder="Placeholder..." /></label>
+  <label>Last name <input type="text" placeholder="Text goes here..." /></label>
+  <label>Age <input type="text" value="30" /></label>
+</form>
+++++
+
+=== Radio buttons
+
+++++
+<form class="grid">
+  <label><input name="radio-demo" type="radio" /> Option #1</label>
+  <label><input name="radio-demo" type="radio" /> Option #2</label>
+  <label><input name="radio-demo" type="radio" /> Option #3</label>
+</form>
+++++
+
+=== Checkboxes
+
+++++
+<form class="grid">
+  <label><input type="checkbox" checked /> Enabled</label>
+  <label><input type="checkbox" /> Disabled</label>
+  <label><input type="checkbox" /> Optional</label>
+</form>
+++++
+
+=== Select and textarea
+
+++++
+<form>
+  <label>Pick one
+    <select>
+      <option>First option</option>
+      <option>Second option</option>
+      <option>Third option</option>
+    </select>
+  </label>
+  <label>Comments
+    <textarea placeholder="Type your message..."></textarea>
+  </label>
+</form>
+++++
+
+=== Disclosure component (`details`/`summary`)
+
+++++
+<details>
+  <summary>A short summary of the contents</summary>
+  <p>Hidden gems. This content is revealed when the disclosure is opened.</p>
+</details>
+<details open>
+  <summary>This one starts open</summary>
+  <p>Its contents are visible until the reader collapses it.</p>
+</details>
+++++
+
+
+
+
+
+
+

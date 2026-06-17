@@ -1,9 +1,0 @@
-= Part One: Deeper Detail
-:page-description: A third-level page beneath Part One > Detail, for testing a deep breadcrumb trail.
-
-This page sits two levels below xref:part-one.adoc[Part One], beneath
-xref:part-one-detail.adoc[Part One: Detail]. The breadcrumb trail above should
-therefore read *Home › Part One › Part One: Detail › Part One: Deeper Detail*.
-
-Excepteur voluptate adipisicing pariatur voluptate ipsum est dolor ex mollit
-anim. Nostrud incididunt pariatur consectetur velit mollit amet et.

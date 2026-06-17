@@ -1,4 +1,3 @@
-
 /**
  * FLOATING TABLE OF CONTENTS
  *
@@ -11,13 +10,19 @@
   display: none;
 }
 
-/* Reveal the TOC only on screens where there is enough
+/*
+Reveal the TOC only on screens where there is enough
 empty space in the gutter – between the content and the
-right edge of the page. */
+right edge of the page.
+*/
+
 @media screen and (min-width: 1440px) {
 
-  /* Reveal only when the page actually has a contents list.
-  The JS leaves the TOC empty on pages with too few headings. */
+  /*
+  Reveal only when the page actually has a contents list.
+  The JS leaves the TOC empty on pages with too few headings.
+  */
+
   .TOC:not(:empty) {
     border-left: var(--border-thickness) solid var(--color-border);
     display: block;
@@ -25,22 +30,31 @@ right edge of the page. */
     line-height: var(--line-height);
     max-height: calc(100vh - var(--line-height) * 2);
 
-    /* Cap the width of the TOC. Entries longer than this
-    are clipped – see `.TOC__List a`. */
+    /*
+    Cap the width of the TOC. Entries longer than this
+    are clipped – see `.TOC__List a`.
+    */
+
     max-width: 36ch;
     overflow-y: auto;
     padding-left: 2ch;
     padding-bottom: 1ch;
 
-    /* Pinned to the far right of the viewport,
-    just inside the scrollbar. */
+    /*
+    Pinned to the far right of the viewport,
+    just inside the scrollbar.
+    */
+
     position: fixed;
     right: 2ch;
     top: calc(var(--line-height) * 2);
   }
 }
 
-/* The small-caps label above the list. */
+/*
+The small-caps label above the list.
+*/
+
 .TOC__Title {
   color: var(--color-text-light);
   font-weight: var(--font-weight-bold);
@@ -49,7 +63,10 @@ right edge of the page. */
   text-transform: uppercase;
 }
 
-/* The list is bullet-less. */
+/*
+The list is bullet-less.
+*/
+
 .TOC__List,
 .TOC__List ul {
   list-style: none;
@@ -57,19 +74,28 @@ right edge of the page. */
   padding: 0;
 }
 
-/* Nested (h3) entries indent two cells under
-their parent section. */
+/*
+Nested (h3) entries indent two cells under
+their parent section.
+*/
+
 .TOC__List ul {
   padding-left: 2ch;
 }
 
-/* Reset any inherited margins on list items. */
+/*
+Reset any inherited margins on list items.
+*/
+
 .TOC__List li {
   margin: 0;
 }
 
-/* At rest, entries are quiet, ink-light
-text with no underline. */
+/*
+At rest, entries are quiet, ink-light
+text with no underline.
+*/
+
 .TOC__List a {
   color: var(--color-text-light);
   display: block;
@@ -79,7 +105,10 @@ text with no underline. */
   white-space: nowrap;
 }
 
-/* On hover, reveal underline. */
+/*
+On hover, reveal underline.
+*/
+
 .TOC__List a:hover {
   text-decoration: underline;
   text-decoration-color: var(--color-accent);
@@ -87,7 +116,10 @@ text with no underline. */
   text-underline-offset: 0.3em;
 }
 
-/* Active item is full-ink text. */
+/*
+Active item is full-ink text.
+*/
+
 .TOC__List .is-active > a {
   color: var(--color-text-default);
 }

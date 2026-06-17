@@ -1,10 +1,6 @@
 #
 # UI bundle manifest.
+# `static_files` lists files that Antora copies to the site root verbatim.
 #
-# `static_files` lists files that Antora copies to the site root verbatim,
-# rather than under the UI output prefix (`_/`). This theme keeps that list
-# empty: the site's own control files (_redirects, _headers, robots.txt,
-# favicon.ico, feeds/*) are supplied by the website repo's overlay, since they
-# are site/content concerns rather than theme concerns.
-#
+
 static_files: []

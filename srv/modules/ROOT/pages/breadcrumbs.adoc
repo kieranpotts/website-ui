@@ -1,0 +1,4 @@
+= Breadcrumbs
+:page-description: For testing navigation via the breadcrumb trail.
+
+This section is used to test the breadcrumb trail. It won't show up yet. To see it, navigate to xref:breadcrumbs-1.adoc[the next page down] in the hierarchy.

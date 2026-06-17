@@ -3,25 +3,27 @@ path of ancestors leading to it. Antora lists the current page as the final
 entry of `page.breadcrumbs`, so that entry is skipped (matched by url).
 
 The trail is shown only when the page is one or more levels below a top-level
-page, i.e. it has at least one ancestor. `page.breadcrumbs` includes the current
-page, so one-plus ancestors means a length greater than 1. The home page and
-top-level pages get no trail. }}
+page, ie. it has at least one ancestor. The home page and top-level pages
+do not show the breadcrumb trail, but deeper pages do. }}
+
 {{#if (gt page.breadcrumbs.length 1)}}
   <nav class="BREADCRUMBS" aria-label="breadcrumbs">
-    <ul>
-      {{! A persistent Home root on every trail. }}
-      <li><a href="{{{relativize '/'}}}">Home</a></li>
-      {{#each page.breadcrumbs}}
-        {{#unless (eq ./url ../page.url)}}
-          <li>
-            {{~#if (and ./url (eq ./urlType 'internal'))~}}
-              <a href="{{{relativize ./url}}}">{{{./content}}}</a>
-            {{~else~}}
-              {{{./content}}}
-            {{~/if~}}
-          </li>
-        {{/unless}}
-      {{/each}}
-    </ul>
+    <div class="Breadcrumbs">
+      <ul>
+        {{! A persistent Home root on every trail. }}
+        <li><a href="{{{relativize '/'}}}">Home</a></li>
+        {{#each page.breadcrumbs}}
+          {{#unless (eq ./url ../page.url)}}
+            <li>
+              {{~#if (and ./url (eq ./urlType 'internal'))~}}
+                <a href="{{{relativize ./url}}}">{{{./content}}}</a>
+              {{~else~}}
+                {{{./content}}}
+              {{~/if~}}
+            </li>
+          {{/unless}}
+        {{/each}}
+      </ul>
+    </div>
   </nav>
 {{/if}}
