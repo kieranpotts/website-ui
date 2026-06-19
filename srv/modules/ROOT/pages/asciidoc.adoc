@@ -251,7 +251,7 @@ fib_sequence = fibonacci(10)
 print(f"First 10 Fibonacci numbers: {fib_sequence}")
 ----
 
-A `[source]` block with callouts:
+A `source` block with callouts:
 
 [source,javascript]
 ----

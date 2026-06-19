@@ -2,7 +2,10 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-06-19
+
 - fix: breadcrumbs spacing
+- feature: improvements to sidebar, exampleblock, etc.
 
 ## [0.2.0] - 2026-06-17
 

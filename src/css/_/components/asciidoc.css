@@ -6,16 +6,16 @@
  * and also classes applied by the `asciidoctor` processor.
  *
  * Only a subset of AsciiDoctor-generated markup is covered here – just enough
- * for styling the output generated for this website. The default Asciidoctor 
+ * for styling the output generated for this website. The default Asciidoctor
  * v2 style sheet is here – this is our reference:
  * https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css
  */
 
-/* 
+/*
 HEADINGS
 Uppercase, bold, and spaced in whole lines.
 h1 occupies a double line box, so it still lands on the
-grid at its larger size. 
+grid at its larger size.
 */
 
 .AsciiDoc h1,
@@ -42,32 +42,25 @@ grid at its larger size.
   text-transform: uppercase;
 }
 
-.AsciiDoc h3 { 
-  font-size: var(--font-size-lg); 
+.AsciiDoc h3 {
+  font-size: var(--font-size-lg);
   text-transform: uppercase;
 }
 
-/* 
-TITLES 
+/*
+TITLES
 Asciidoctor labels many blocks with a `.title`,
 which serves as a heading for images, listings, tables, etc.
 */
 
 .AsciiDoc .title {
-  color: var(--color-text-light);
+  color: var(--color-text-default);
   font-weight: var(--font-weight-bold);
+  margin: calc(var(--line-height) * 0.5) 0;
   text-transform: uppercase;
 }
 
-.AsciiDoc .title:first-child {
-  margin-bottom: calc(var(--line-height) * 0.5);
-}
-
-.AsciiDoc .title:last-child {
-  margin-top: calc(var(--line-height) * 0.5);
-}
-
-/* 
+/*
 PARAGRAPHS
 */
 
@@ -78,10 +71,10 @@ PARAGRAPHS
   word-wrap: break-word;
 }
 
-/* 
+/*
 LISTS - BASELINE STYLES
-Square bullets for ul. Dotted decimal counters for ol. 
-A hanging indent is applied: the markers sits flush with the 
+Square bullets for ul. Dotted decimal counters for ol.
+A hanging indent is applied: the markers sits flush with the
 left margin with the first line and wrapped lines of text indented
 at the same level.
 */
@@ -114,18 +107,18 @@ at the same level.
   text-indent: 0;
 }
 
-/* 
-The muted tone tints the number/bullet. 
+/*
+The muted tone tints the number/bullet.
 The item text stays ink.
 */
 
 .AsciiDoc li::marker {
-  color: var(--color-text-light);
+  color: var(--color-text-default);
   line-height: 0;
 }
 
 .AsciiDoc ol li::before {
-  color: var(--color-text-light);
+  color: var(--color-text-default);
   content: counters(item, ".") ". ";
   counter-increment: item;
   font-weight: var(--font-weight-medium);
@@ -135,10 +128,10 @@ The item text stays ink.
   color: var(--color-text-default);
 }
 
-/* 
+/*
 LISTS - EXTENDED MARKUP
-The Asciidoctor processor wraps every list item's text in a `<p>` 
-(always, even for a single line), and wraps each list in a 
+The Asciidoctor processor wraps every list item's text in a `<p>`
+(always, even for a single line), and wraps each list in a
 `<div class="ulist">` / `<div class="olist">`.
 */
 
@@ -148,9 +141,9 @@ The Asciidoctor processor wraps every list item's text in a `<p>`
   margin: 0;
 }
 
-/* 
+/*
 DESCRIPTION LISTS
-Bold the term and indent the description by whole character units. 
+Bold the term and indent the description by whole character units.
 */
 
 .AsciiDoc .dlist dl {
@@ -169,9 +162,9 @@ Bold the term and indent the description by whole character units.
   margin-top: 0;
 }
 
-/* 
+/*
 QUESTION & ANSWER
-Number the questions and keep answers flush under them. 
+Number the questions and keep answers flush under them.
 */
 
 .AsciiDoc .qlist.qanda ol {
@@ -194,12 +187,12 @@ Number the questions and keep answers flush under them.
   font-weight: var(--font-weight-bold);
 }
 
-/* 
+/*
 CALLOUT LISTS (colist) & CALLOUT NUMBERS (conum)
 A conum is an inline reference marker, shown as an inverted,
-bordered box holding its number. The colist below the 
-code pairs each number with its explanation in a 
-borderless table. 
+bordered box holding its number. The colist below the
+code pairs each number with its explanation in a
+borderless table.
 */
 
 .AsciiDoc .conum[data-value] {
@@ -239,8 +232,8 @@ borderless table.
 /*
 PREFORMATTED TEXT
 Baseline styles for preformatted text blocks, which
-are used in several contexts in `asciidoctor` rendering. 
-By default, preformatted text blocks have a tighter vertical 
+are used in several contexts in `asciidoctor` rendering.
+By default, preformatted text blocks have a tighter vertical
 grid rhythm than body text – this is sometimes overridden
 again, eg. for verse blocks.
 */
@@ -254,11 +247,11 @@ again, eg. for verse blocks.
   white-space: pre;
 }
 
-/* 
+/*
 INLINE CODE
 A tinted box with hairline border and grid-aligned padding, so
-a code span stands out within prose. Block code (inside `<pre>`) 
-opts back out – see blow. 
+a code span stands out within prose. Block code (inside `<pre>`)
+opts back out – see blow.
 */
 
 .AsciiDoc code {
@@ -276,7 +269,7 @@ opts back out – see blow.
   white-space: inherit;
 }
 
-/* 
+/*
 RULERS
 Applied through pseudo element in a way that does not disturb
 the vertical rhythm.
@@ -302,13 +295,13 @@ the vertical rhythm.
   width: 100%;
 }
 
-/* 
+/*
 IMAGES & FIGURES
-Videos and bare/figure images fill the content column. 
+Videos and bare/figure images fill the content column.
 Images are NOT given a blanket `width: 100%` here – that would
 override the HTML `width`/`height` attributes on inline images,
 forcing them to the intrinsic size. Inline images are left to set
-their own rendering via width/height attributes. 
+their own rendering via width/height attributes.
 */
 
 .AsciiDoc video {
@@ -318,16 +311,16 @@ their own rendering via width/height attributes.
   width: 100%;
 }
 
-/* 
+/*
 Text color is set on the images because, if an image fails
-to load, its alt text will be rendered in its place. 
+to load, its alt text will be rendered in its place.
 */
 
 .AsciiDoc img {
-  color: var(--color-text-light);
+  color: var(--color-text-default);
 }
 
-/* 
+/*
 FIGURES
 Images within <figure> elements are rendered as blocks
 filling the full width of their container.
@@ -351,11 +344,11 @@ filling the full width of their container.
   width: 100%;
 }
 
-/* 
+/*
 TABLES
 Full-width, snapped to whole cells, with the grid's
-border thickness on every edge and padding computed 
-so cell text stays on the line grid. 
+border thickness on every edge and padding computed
+so cell text stays on the line grid.
 */
 
 .AsciiDoc table {
@@ -393,9 +386,9 @@ the cell open beyond its padding.
   font-weight: var(--font-weight-bold);
 }
 
-/* 
+/*
 ADMONITIONS (note, tip, important, caution, warning)
-Rather than icons, we use a left rule plus the admonition's name as 
+Rather than icons, we use a left rule plus the admonition's name as
 an uppercase label — drawn from the icon's `title` attribute via `attr()`.
 */
 
@@ -434,20 +427,26 @@ an uppercase label — drawn from the icon's `title` attribute via `attr()`.
   padding-left: 2ch;
 }
 
-.AsciiDoc .admonitionblock td.content > :first-child {
+.AsciiDoc .admonitionblock td.content > :first-child,
+.AsciiDoc .admonitionblock td.content > :first-child > :first-child {
   margin-top: 0;
 }
 
-/* 
+.AsciiDoc .admonitionblock td.content > :last-child,
+.AsciiDoc .admonitionblock td.content > :last-child > :last-child {
+  margin-bottom: 0;
+}
+
+/*
 QUOTE & VERSE BLOCKS
-Quoteblock wraps a real `<blockquote>`. 
-Verseblock keeps line breaks in a `<pre class="content">`. 
+Quoteblock wraps a real `<blockquote>`.
+Verseblock keeps line breaks in a `<pre class="content">`.
 Both may carry an attribution.
 */
 
 .AsciiDoc .quoteblock,
 .AsciiDoc .verseblock {
-  border-left: var(--border-thickness) solid var(--color-text-light);
+  border-left: var(--border-thickness) solid var(--color-text-default);
   margin: var(--line-height) 0;
   padding-left: 2ch;
 }
@@ -457,7 +456,7 @@ Both may carry an attribution.
 }
 
 .AsciiDoc .attribution {
-  color: var(--color-text-light);
+  color: var(--color-text-default);
   margin-top: calc(var(--line-height) * 0.5);
 }
 
@@ -465,7 +464,7 @@ Both may carry an attribution.
   display: block;
 }
 
-/* 
+/*
 SIDEBAR & EXAMPLE BLOCKS
  */
 
@@ -473,38 +472,36 @@ SIDEBAR & EXAMPLE BLOCKS
 .AsciiDoc .exampleblock {
   border: var(--border-thickness) solid var(--color-border);
   margin: var(--line-height) 0;
-  padding: 0 2ch;
+  padding: calc(var(--line-height) * 0.5) 2ch;
 }
 
-.AsciiDoc .exampleblock > .title {
-  font-weight: var(--font-weight-bold);
+.AsciiDoc .sidebarblock .title,
+.AsciiDoc .exampleblock .title {
+  margin-top: 0;
 }
 
-.AsciiDoc .sidebarblock > .content > .title {
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
+.AsciiDoc .sidebarblock .content > :last-child,
+.AsciiDoc .sidebarblock .content > :last-child > :last-child,
+.AsciiDoc .sidebarblock .content > :last-child > :last-child > :last-child {
+    margin-bottom: 0;
 }
 
-.AsciiDoc .sidebarblock > .content > :first-child,
-.AsciiDoc .exampleblock > .content > :first-child {
-  margin-top: var(--line-height);
+.AsciiDoc .exampleblock .content > :last-child,
+.AsciiDoc .exampleblock .content > :last-child > :last-child,
+.AsciiDoc .exampleblock .content > :last-child > :last-child > :last-child {
+  margin-bottom: 0;
 }
 
-.AsciiDoc .sidebarblock > .content > :last-child,
-.AsciiDoc .exampleblock > .content > :last-child {
-  margin-bottom: var(--line-height);
-}
-
-/* 
+/*
 OPEN BLOCK
-A bare grouping block with no chrome of its own. 
+A bare grouping block with no chrome of its own.
 */
 
 .AsciiDoc .openblock {
   margin: var(--line-height) 0;
 }
 
-/* 
+/*
 CODE & LITERAL BLOCKS
 */
 
@@ -521,7 +518,7 @@ CODE & LITERAL BLOCKS
   margin: 0;
 }
 
-/* 
+/*
 IMAGE BLOCKS & INLINE IMAGES
 */
 
@@ -537,12 +534,11 @@ IMAGE BLOCKS & INLINE IMAGES
 
 .AsciiDoc .imageblock > .title {
   text-align: center;
-  font-weight: var(--font-weight-bold);
 }
 
-/* 
+/*
 An inline image flows within the text. No width/height is set, so its HTML
-`width`/`height` attributes size it. 
+`width`/`height` attributes size it.
 */
 
 .AsciiDoc .image {
@@ -555,8 +551,8 @@ An inline image flows within the text. No width/height is set, so its HTML
   vertical-align: baseline;
 }
 
-/* 
-LINKS 
+/*
+LINKS
 */
 
 .AsciiDoc a {
@@ -572,10 +568,10 @@ LINKS
 .AsciiDoc a:focus   { color: var(--color-hyperlink-focus); }
 .AsciiDoc a:active  { color: var(--color-hyperlink-active); }
 
-/* 
+/*
 FOOTNOTES
 In-text reference markers are rendered inline – required resetting
-`sup` defaults. Tint the marker link with the accent (the `[ ]` brackets 
+`sup` defaults. Tint the marker link with the accent (the `[ ]` brackets
 stay ink).
 */
 
@@ -590,9 +586,9 @@ stay ink).
   color: var(--color-accent);
 }
 
-/* 
+/*
 The endnote list at the page foot.
-Separated by a rule, normal body size. 
+Separated by a rule, normal body size.
 */
 
 .AsciiDoc #footnotes {
@@ -603,9 +599,9 @@ Separated by a rule, normal body size.
   margin-bottom: var(--line-height);
 }
 
-/* 
-UI MACROS 
-The experimental UI macros (`kbd:[]`, `btn:[]`, `menu:[]`) 
+/*
+UI MACROS
+The experimental UI macros (`kbd:[]`, `btn:[]`, `menu:[]`)
 need the document attribute `:experimental:` to be processed.
 */
 
@@ -652,10 +648,10 @@ need the document attribute `:experimental:` to be processed.
   margin: 0 0.5ch;
 }
 
-/* 
+/*
 INLINE TEXT ROLES
-Built-in Asciidoctor text roles: `[.underline]#...#`, 
-`[.line-through]#...#`, and alignment roles on paragraphs. 
+Built-in Asciidoctor text roles: `[.underline]#...#`,
+`[.line-through]#...#`, and alignment roles on paragraphs.
 */
 
 .AsciiDoc .underline {
@@ -670,8 +666,8 @@ Built-in Asciidoctor text roles: `[.underline]#...#`,
   text-align: center;
 }
 
-/* 
-The `[.lead]` role marks an introductory paragraph. 
+/*
+The `[.lead]` role marks an introductory paragraph.
 */
 
 .AsciiDoc .paragraph.lead > p {
