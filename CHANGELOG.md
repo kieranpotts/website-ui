@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - feature: make the logo bigger!
+- feature: remove opacity on logo hover
 
 ## [0.4.0] - 2026-06-19
 
