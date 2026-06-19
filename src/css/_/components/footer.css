@@ -1,8 +1,24 @@
 /**
  * FOOTER COMPONENT
+ *
+ * A single-row list of short notices (copyright, license, etc). Items run
+ * inline, separated by the same square bullet used for `.AsciiDoc ul`
+ * markers, and wrap onto their own lines on narrow viewports.
  */
 
 .Footer {
   color: var(--color-text-light);
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1ch;
   font-size: var(--font-size-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  row-gap: calc(var(--line-height) / 4);
+}
+
+.Footer li + li::before {
+  content: "\25aa";
+  margin-right: 1ch;
 }

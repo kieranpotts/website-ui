@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- feature: footer composed from unordered list
+
 ## [0.5.0] - 2025-06-19
 
 - feature: make the logo bigger!
