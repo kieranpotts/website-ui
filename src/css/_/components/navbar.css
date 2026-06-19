@@ -11,26 +11,53 @@
 Center-align so everything lines up.
 */
 
+/*
+No vertical padding here – the bar's height is set entirely by its tallest
+child. The toggle and menu carry their own vertical padding (below) to hold
+their normal line-height size and spacing from the bar's edges; the brand
+carries none, so it can stretch (via `align-self: stretch` below) to the
+bar's complete height.
+*/
+
 .NavBar {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   max-width: calc(min(80ch, round(down, 100%, 1ch)));
-  padding: calc(var(--line-height) / 2) 2ch;
+  padding: 0 2ch;
   row-gap: calc(var(--line-height) / 2);
   width: 100%;
 }
 
+/*
+A fixed height (matching the toggle/menu's own line-height + padding box,
+below) rather than `align-self: stretch` – stretch would resolve against
+the flex line's cross-size, which an oversized source image (eg. a 1000px
+square PNG dropped in as the logo) would otherwise inflate, growing the
+whole bar to match it. `overflow: hidden` then clips the image to this
+fixed box no matter its intrinsic size.
+*/
+
 .NavBar__Brand {
   display: inline-flex;
-  line-height: 0;
+  height: calc(var(--line-height) * 2);
+  overflow: hidden;
   text-decoration: none;
 }
 
+/*
+`object-fit: contain` scales the image down (never up) to fit within this
+fixed box, preserving its aspect ratio, however large or differently-shaped
+the source file is.
+*/
+
 .NavBar__BrandImage {
-  height: var(--line-height);
-  width: var(--line-height);
+  display: block;
+  height: calc(100% - 4px);
+  margin: 2px 0;
+  object-fit: contain;
+  width: auto;
 }
 
 /*
@@ -38,7 +65,9 @@ BURGER BUTTON
 Shown only on mobile (hidden at >=800px, below).
 Pin to the right edge of the bar. `margin-left: auto` keeps the
 button hard right whether the menu is hidden (closed) or wrapped
-onto its own full-width row (open).
+onto its own full-width row (open). Vertical padding holds it at its
+normal line-height size and spacing from the bar's top/bottom edges, now
+that `.NavBar` itself carries none.
 */
 
 .NavBar__Toggle {
@@ -50,7 +79,7 @@ onto its own full-width row (open).
   height: var(--line-height);
   justify-content: center;
   margin-left: auto;
-  padding: 0;
+  padding: calc(var(--line-height) / 2) 0;
   width: auto;
 }
 
@@ -87,7 +116,10 @@ vertically.
 }
 
 /*
-Right-align the stacked items, under the burger button.
+Right-align the stacked items, under the burger button. `.NavBar` no longer
+carries its own vertical padding (see above), so this wrapped second row
+supplies its own top spacing (margin-top, as before) and bottom spacing
+(padding-bottom) to match.
 */
 
 .NavBar__Menu.is-open {
@@ -95,6 +127,7 @@ Right-align the stacked items, under the burger button.
   display: flex;
   flex-direction: column;
   margin-top: calc(var(--line-height) / 2);
+  padding-bottom: calc(var(--line-height) / 2);
   row-gap: calc(var(--line-height) / 2);
 }
 
@@ -170,7 +203,11 @@ DESKTOP
 At >=800px the burger is hidden and the menu is always shown as an
 inline horizontal list on the right, regardless of the `is-open` state.
 Push the whole menu to the right edge of the bar (the brand stays left),
-and right-align the items within it.
+and right-align the items within it. Vertical padding holds it at its
+normal line-height size and spacing from the bar's top/bottom edges, now
+that `.NavBar` itself carries none – matching the toggle's mobile padding,
+so the bar is the same total height on both breakpoints, and the brand
+(stretched to fill it) doesn't jump size when the layout switches.
 */
 
 @media screen and (min-width: 800px) {
@@ -190,6 +227,7 @@ and right-align the items within it.
     justify-content: flex-end;
     margin-left: auto;
     margin-top: 0;
+    padding: calc(var(--line-height) / 2) 0;
     row-gap: 0;
   }
 

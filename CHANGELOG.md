@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- feature: make the logo bigger!
+
 ## [0.4.0] - 2026-06-19
 
 - feature: graphic for website brand
