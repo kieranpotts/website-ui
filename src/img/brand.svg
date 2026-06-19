@@ -1,5 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320" role="img" aria-hidden="true" focusable="false">
-  <circle cx="160" cy="160" r="150" fill="none" stroke="currentColor" stroke-width="20"/>
-  <circle cx="160" cy="130" r="50" fill="currentColor"/>
-  <path d="M55 265C70 210 110 180 160 180s90 30 105 85" fill="currentColor"/>
+  <style>
+
+    /* This brand image is referenced as an &lt;img&gt;, so it is an isolated
+    document and cannot inherit the page's colors. However, SVGs can define
+    their own light/dark palettes and be configured to respond to the
+    prefers-color-scheme switch. */
+
+    svg {
+      --ink: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --ink: #e6e6e6;
+      }
+    }
+
+    .stroke {
+      fill: none;
+      stroke: var(--ink);
+    }
+
+    .fill {
+      fill: var(--ink);
+      stroke: none;
+    }
+
+  </style>
+
+  <circle class="stroke" cx="160" cy="160" r="150" stroke-width="20"/>
+  <circle class="fill" cx="160" cy="130" r="50"/>
+  <path class="fill" d="M55 265C70 210 110 180 160 180s90 30 105 85"/>
 </svg>
