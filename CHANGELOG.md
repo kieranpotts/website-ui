@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.6.0] - 2025-06-19
+
 - feature: thinner default font
 - feature: footer composed from unordered list
 - feature: improved footer text/links rendering
