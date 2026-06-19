@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- fix: breadcrumbs spacing
+
 ## [0.2.0] - 2026-06-17
 
 - feature: decouple the theme from the website's structure

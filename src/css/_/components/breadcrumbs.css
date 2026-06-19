@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: calc(var(--line-height) / 2) 0;
 }
 
 .Breadcrumbs li {

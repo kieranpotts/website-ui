@@ -36,7 +36,7 @@ there is no nested Breadcrumb component to render.
 
 .BREADCRUMBS {
   margin: 0;
-  min-height: var(--line-height);
+  min-height: calc(var(--line-height) * 2);
 }
 
 .FOOTER {
