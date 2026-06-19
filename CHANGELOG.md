@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2025-06-19
+
 - feature: make the logo bigger!
 - feature: remove opacity on logo hover
 - feature: add prefers-color-scheme toggle to brand.svg
