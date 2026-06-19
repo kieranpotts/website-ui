@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-06-19
+
 - feature: graphic for website brand
 
 ## [0.3.0] - 2026-06-19
