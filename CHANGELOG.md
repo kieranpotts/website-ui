@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- feature: thinner default font
 - feature: footer composed from unordered list
 - feature: improved footer text/links rendering
 

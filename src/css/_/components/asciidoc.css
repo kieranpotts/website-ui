@@ -121,7 +121,7 @@ The item text stays ink.
   color: var(--color-text-default);
   content: counters(item, ".") ". ";
   counter-increment: item;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
 }
 
 .AsciiDoc ol > li {
@@ -258,7 +258,7 @@ opts back out – see blow.
   background: var(--color-text-code-background);
   border: var(--border-thickness) solid var(--color-border);
   color: var(--color-text-code-foreground);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
   padding: 0 0.5ch;
 }
 
@@ -644,7 +644,7 @@ need the document attribute `:experimental:` to be processed.
 
 .AsciiDoc .menuseq .caret::before {
   content: "›";
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-regular);
   margin: 0 0.5ch;
 }
 

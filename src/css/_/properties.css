@@ -6,7 +6,7 @@
  * equivalent literals.
  *
  * Naming convention: tokens read as `--<group>-<name>-<part>`, all parts
- * hyphen-separated (eg. `--color-text-light`, `--font-weight-medium`). A
+ * hyphen-separated (eg. `--color-text-light`, `--font-weight-regular`). A
  * trailing `-<bp>` denotes a breakpoint-specific value (eg. `--font-size-root-sm`).
  * Tokens are grouped by their leading segment (`--color-*`, `--font-size-*`)
  * and ordered alphabetically.
@@ -34,13 +34,13 @@
 
   Color is built in two tiers. A small set of base palette tokens (`--base-*`)
   hold the only literal color definitions in the theme (with a few exceptions).
-  The main base colors are an ink, a muted ink, a faint ink, a page, and a 
-  muted page tone, and an accent color. Only the base colors are flipped between 
-  light and dark modes – nothing else. (Dark mode is defined at the bottom of 
+  The main base colors are an ink, a muted ink, a faint ink, a page, and a
+  muted page tone, and an accent color. Only the base colors are flipped between
+  light and dark modes – nothing else. (Dark mode is defined at the bottom of
   this file).
 
   Every semantic color token (`--color-*`) derives from the base palette. Only
-  these tokens are references elsewhere in the theme – the base colors are 
+  these tokens are references elsewhere in the theme – the base colors are
   never referenced directly.
 
   The accent is a subtle signature color used for link underlines, footnote
@@ -124,7 +124,7 @@
 
   --font-weight-bold: 800;
   --font-weight-medium: 600;
-  --font-weight-normal: 500;
+  --font-weight-regular: 400;
 
   /*
   ROOT FONT SIZES
@@ -165,9 +165,9 @@
 
   All vertical spacing is based on the `--line-height` value, which sets
   the box height for lines of text. All vertical spacing is a multiple of
-  this value: 1x, 1.5x, 2x… The line height value is expressed in rem, so 
-  it scales with the root font size ladder, keeping the vertical rhythm 
-  proportional to everything else that scales with font size. Code blocks 
+  this value: 1x, 1.5x, 2x… The line height value is expressed in rem, so
+  it scales with the root font size ladder, keeping the vertical rhythm
+  proportional to everything else that scales with font size. Code blocks
   get their own, tighter leading.
 
   Because all text is rendered in a monospace font, we can establish a
