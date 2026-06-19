@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- feature: graphic for website brand
+
 ## [0.3.0] - 2026-06-19
 
 - fix: breadcrumbs spacing

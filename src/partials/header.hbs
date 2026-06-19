@@ -1,6 +1,8 @@
 <header class="HEADER">
   <nav class="NavBar" aria-label="primary">
-    <a class="NavBar__Brand" href="{{{relativize '/'}}}">{{site.title}}</a>
+    <a class="NavBar__Brand" href="{{{relativize '/'}}}" aria-label="{{site.title}}">
+      <img class="NavBar__BrandImage" src="{{{uiRootPath}}}/img/brand.svg" alt="">
+    </a>
     <button class="NavBar__Toggle" aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle menu">
       <svg class="NavBar__ToggleIcon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
         <line x1="3" y1="6" x2="21" y2="6" />

@@ -23,9 +23,14 @@ Center-align so everything lines up.
 }
 
 .NavBar__Brand {
-  font-weight: var(--font-weight-bold);
+  display: inline-flex;
+  line-height: 0;
   text-decoration: none;
-  text-transform: uppercase;
+}
+
+.NavBar__BrandImage {
+  height: var(--line-height);
+  width: var(--line-height);
 }
 
 /*
@@ -98,18 +103,22 @@ Right-align the stacked items, under the burger button.
 }
 
 /*
-On hover/focus, the brand and the text menu items show the same accent
-underline as links inside `.AsciiDoc`. (The social icon item is excluded.)
+On hover/focus, the text menu items show the same accent underline as
+links inside `.AsciiDoc`. (The social icon item is excluded, and the brand
+is an icon too — it dims instead, like the social icon below.)
 */
 
-.NavBar__Brand:hover,
-.NavBar__Brand:focus,
 .NavBar__Menu > li:not(.NavBar__Social) > a:hover,
 .NavBar__Menu > li:not(.NavBar__Social) > a:focus {
   text-decoration: underline;
   text-decoration-color: var(--color-hyperlink-underline);
   text-decoration-thickness: var(--border-thickness);
   text-underline-offset: 0.3em;
+}
+
+.NavBar__Brand:hover .NavBar__BrandImage,
+.NavBar__Brand:focus .NavBar__BrandImage {
+  opacity: 0.7;
 }
 
 /*
