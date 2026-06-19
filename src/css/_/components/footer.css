@@ -7,7 +7,7 @@
  */
 
 .Footer {
-  color: var(--color-text-light);
+  color: var(--color-text-default);
   display: flex;
   flex-wrap: wrap;
   column-gap: 1ch;
@@ -22,3 +22,21 @@
   content: "\25aa";
   margin-right: 1ch;
 }
+
+/*
+LINKS
+Same treatment as `.AsciiDoc a` – an accent-colored underline at rest.
+*/
+
+.Footer a {
+  color: var(--color-hyperlink-default);
+  text-decoration: underline;
+  text-decoration-color: var(--color-hyperlink-underline);
+  text-decoration-thickness: var(--border-thickness);
+  text-underline-offset: 0.3em;
+}
+
+.Footer a:visited { color: var(--color-hyperlink-visited); }
+.Footer a:hover   { color: var(--color-hyperlink-hover); }
+.Footer a:focus   { color: var(--color-hyperlink-focus); }
+.Footer a:active  { color: var(--color-hyperlink-active); }

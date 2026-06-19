@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - feature: footer composed from unordered list
+- feature: improved footer text/links rendering
 
 ## [0.5.0] - 2025-06-19
 
