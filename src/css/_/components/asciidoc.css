@@ -107,6 +107,11 @@ at the same level.
   text-indent: 0;
 }
 
+.AsciiDoc ul li,
+.AsciiDoc ol li {
+  margin: calc(var(--line-height) * 0.5) 0;
+}
+
 /*
 The muted tone tints the number/bullet.
 The item text stays ink.
@@ -135,8 +140,8 @@ The Asciidoctor processor wraps every list item's text in a `<p>`
 `<div class="ulist">` / `<div class="olist">`.
 */
 
-.AsciiDoc .ulist li > p:first-child,
-.AsciiDoc .olist li > p:first-child {
+.AsciiDoc .ulist li > p,
+.AsciiDoc .olist li > p {
   display: inline;
   margin: 0;
 }
@@ -158,8 +163,8 @@ Bold the term and indent the description by whole character units.
   margin: 0 0 var(--line-height) 2ch;
 }
 
-.AsciiDoc .dlist dd > p:first-child {
-  margin-top: 0;
+.AsciiDoc .dlist dd > p {
+  margin: 0;
 }
 
 /*

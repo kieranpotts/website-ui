@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- feature: improve spacing around list items
+
 ## [0.6.0] - 2025-06-19
 
 - feature: thinner default font
