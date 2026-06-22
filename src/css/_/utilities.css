@@ -2,6 +2,10 @@
  * UTILITIES
  */
 
+.small {
+  color: var(--color-text-light);
+}
+
 .left {
   float: left !important
 }

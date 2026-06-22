@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - feature: improve spacing around list items
+- feature: reintroduce small inline font style
 
 ## [0.6.0] - 2025-06-19
 

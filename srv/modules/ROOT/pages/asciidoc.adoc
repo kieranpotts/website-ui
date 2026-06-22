@@ -16,7 +16,7 @@ This demonstrates how to center a paragraph of text. Consectetur aute tempor ali
 
 == Inline text formatting
 
-This is *bold text*. This is _italic text_. This is `monospace text`. This is #highlighted text#. This is [.underline]#underlined text# and this is [.line-through]#strikethrough text#. This is http://example.com/[hyperlinked text]. This is ^superscript^ text and this is ~subscript~ text.
+This is *bold text*. This is _italic text_. This is `monospace text`. This is #highlighted text#. This is [.underline]#underlined text# and this is [.line-through]#strikethrough text#. This is http://example.com/[hyperlinked text]. This is ^superscript^ text and this is ~subscript~ text. And this is [.small]#small text#.
 
 [[links-cross-references-section]]
 === Links and cross-references
