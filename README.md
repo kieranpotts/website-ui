@@ -1,5 +1,7 @@
 # Website UI
 
+> **This repository is no longer maintained.** The theme is now maintained alongside the [website](https://github.com/kieranpotts). This repository is preserved as a reference implementation for a portable Antora UI theme.
+
 **Custom Antora UI theme for my website.**
 
 > [!IMPORTANT]
